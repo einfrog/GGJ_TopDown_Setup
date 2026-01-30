@@ -7,8 +7,8 @@ public partial class GasMask : Node2D
 {
 
     [Export]
-    public GasFilter GasFilter { get; set; }
+    public float Strength { get; set; }
 
-    public float Filter(float damage) => GasFilter.Filter(damage);
+    public float Filter(float damage) => damage * Mathf.Exp(-Strength);
 
 }
