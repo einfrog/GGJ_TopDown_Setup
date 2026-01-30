@@ -5,4 +5,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="GGJ_2026.csproj.old" />
+    <Content Include="scenes\ChimpPuzzle.tscn" />
+    <Content Include="scripts\ChimpPuzzle.cs.uid" />
+  </ItemGroup>
 </Project>
