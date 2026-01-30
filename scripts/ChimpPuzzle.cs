@@ -43,10 +43,10 @@ public partial class ChimpPuzzle : Control
     // NODE REFERENCES (ASSIGNED IN EDITOR)
     // ============================================================
 
-    [Export] public NodePath GridPath = "Center/Panel/VBox/Grid";
-    [Export] public NodePath StatusLabelPath = "Center/Panel/VBox/Status";
-    [Export] public NodePath RetryButtonPath = "Center/Panel/VBox/Buttons/RetryButton";
-    [Export] public NodePath CloseButtonPath = "Center/Panel/VBox/Buttons/CloseButton";
+    [Export] public NodePath GridPath ;
+    [Export] public NodePath StatusLabelPath ;
+    [Export] public NodePath RetryButtonPath ;
+    [Export] public NodePath CloseButtonPath ;
 
     protected GridContainer _grid;
     protected Label _statusLabel;
@@ -102,10 +102,23 @@ public partial class ChimpPuzzle : Control
 
     public override void _Ready()
     {
-        // Cache node references from NodePaths
-        // Connect button signals
-        // Initialize grid settings (columns, etc.)
-        // Start the puzzle from the beginning
+        _grid = GetNode<GridContainer>(GridPath);
+        _statusLabel = GetNode<Label>(StatusLabelPath);
+        _retryButton = GetNode<Button>(RetryButtonPath);
+        _closeButton = GetNode<Button>(CloseButtonPath);
+
+        // 2) Configure the grid visually.
+        _grid.Columns = Mathf.Max(1, GridColumns);
+
+        // 3) Wire up UI button presses to our functions.
+        _retryButton.Pressed += OnRetryPressed;
+        _closeButton.Pressed += OnClosePressed;
+
+        // Optional: hide retry until needed
+        _retryButton.Visible = false;
+
+        // 4) Start the puzzle immediately (or call StartFromBeginning() from outside instead).
+        StartFromBeginning();
     }
 
 

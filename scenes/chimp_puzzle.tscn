@@ -10,6 +10,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_murav")
+CellSize = 71
+GridPath = NodePath("Dimmer/Center/Panel/VBox/Grid")
+StatusLabelPath = NodePath("Dimmer/Center/Panel/VBox/Status")
+RetryButtonPath = NodePath("Dimmer/Center/Panel/VBox/Buttons/RetryButton")
+CloseButtonPath = NodePath("Dimmer/Center/Panel/VBox/Buttons/CloseButton")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=443342395]
 layout_mode = 0
