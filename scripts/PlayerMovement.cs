@@ -13,10 +13,9 @@ public partial class PlayerMovement : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        var direction = new Vector2(
-            Input.GetAxis("move_left", "move_right"),
-            Input.GetAxis("move_up", "move_down")
-        );
+        float x = Input.GetAxis("move_left", "move_right");
+        float y = Input.GetAxis("move_up", "move_down");
+        var direction = new Vector2(x, y).Normalized();
 
         if (direction.IsZeroApprox())
         {
@@ -26,7 +25,7 @@ public partial class PlayerMovement : CharacterBody2D
         else
         {
             Sprite.Animation = "Walking";
-            Velocity = direction * MovementSpeed; 
+            Velocity = direction * MovementSpeed;
         }
 
         Sprite.FlipH = direction.X < 0;
