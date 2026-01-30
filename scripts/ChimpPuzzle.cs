@@ -43,10 +43,10 @@ public partial class ChimpPuzzle : Control
     // NODE REFERENCES (ASSIGNED IN EDITOR)
     // ============================================================
 
-    [Export] public NodePath GridPath = "Center/Panel/VBox/Grid";
-    [Export] public NodePath StatusLabelPath = "Center/Panel/VBox/Status";
-    [Export] public NodePath RetryButtonPath = "Center/Panel/VBox/Buttons/RetryButton";
-    [Export] public NodePath CloseButtonPath = "Center/Panel/VBox/Buttons/CloseButton";
+    [Export] public NodePath GridPath ;
+    [Export] public NodePath StatusLabelPath ;
+    [Export] public NodePath RetryButtonPath ;
+    [Export] public NodePath CloseButtonPath ;
 
     protected GridContainer _grid;
     protected Label _statusLabel;
@@ -102,10 +102,23 @@ public partial class ChimpPuzzle : Control
 
     public override void _Ready()
     {
-        // Cache node references from NodePaths
-        // Connect button signals
-        // Initialize grid settings (columns, etc.)
-        // Start the puzzle from the beginning
+        _grid = GetNode<GridContainer>(GridPath);
+        _statusLabel = GetNode<Label>(StatusLabelPath);
+        _retryButton = GetNode<Button>(RetryButtonPath);
+        _closeButton = GetNode<Button>(CloseButtonPath);
+
+        // 2) Configure the grid visually.
+        _grid.Columns = Mathf.Max(1, GridColumns);
+
+        // 3) Wire up UI button presses to our functions.
+        _retryButton.Pressed += OnRetryPressed;
+        _closeButton.Pressed += OnClosePressed;
+
+        // Optional: hide retry until needed
+        _retryButton.Visible = false;
+
+        // 4) Start the puzzle immediately (or call StartFromBeginning() from outside instead).
+        StartFromBeginning();
     }
 
 
@@ -143,6 +156,24 @@ public partial class ChimpPuzzle : Control
         ClearGrid();
         // Build new randomized grid
         BuildGrid(_currentN);
+        // Build-and-validate: if something went wrong, rebuild a few times to avoid softlocks.
+        const int maxAttempts = 5;
+        for (int attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            if (ValidateRoundMapping(_currentN, out string err))
+                break;
+
+            GD.PushWarning($"ChimpPuzzle: invalid round mapping (attempt {attempt}/{maxAttempts}): {err}. Rebuilding...");
+
+            ClearGrid();
+            BuildGrid(_currentN);
+
+            if (attempt == maxAttempts)
+            {
+                FailRound("Internal error generating tiles. Please Retry.");
+                return;
+            }
+        }
         // Show numbers
         ShowNumbers(true);
         // Update state and UI text
@@ -165,8 +196,9 @@ public partial class ChimpPuzzle : Control
     {
         // Decide grid size (rows/columns)
         int cols = Mathf.Max(1, GridColumns);
-        int rows = Mathf.CeilToInt((float)n / cols);
 
+        // int rows = Mathf.CeilToInt((float)n * n / cols);
+        int rows = 5;
         int totalCells = rows * cols;
 
 
@@ -193,7 +225,7 @@ public partial class ChimpPuzzle : Control
         // Assign numbers 1..n to selected buttons
         List<int> indices = Enumerable.Range(0, totalCells).ToList();
         Shuffle(indices, rng);
-        for (int number = 1; number < n; number++)
+        for (int number = 1; number <= n; number++)
         {
             var cell = _cells[indices[number - 1]];
             _numberByButton[cell] = number;
@@ -201,7 +233,13 @@ public partial class ChimpPuzzle : Control
             // cell.Text = number.ToString();
 
         }
-
+        for (int i = 1; i <= n; i++)
+        {
+            bool exists = _numberByButton.Values.Contains(i);
+            GD.Print($"Number {i} exists: {exists}");
+        }
+        GD.Print($"BuildGrid: n={n}, cells={_cells.Count}, mapping={_numberByButton.Count}");
+        GD.Print("Numbers present: " + string.Join(",", _numberByButton.Values.OrderBy(v => v)));
     }
 
     /// <summary>
@@ -405,4 +443,27 @@ public partial class ChimpPuzzle : Control
             (list[i], list[j]) = (list[j], list[i]);
         }
     }
+    private bool ValidateRoundMapping(int n, out string error)
+    {
+        // Must have exactly n numbered buttons.
+        if (_numberByButton.Count != n)
+        {
+            error = $"Mapping count mismatch: expected {n}, got {_numberByButton.Count}.";
+            return false;
+        }
+
+        // Must contain all numbers 1..n.
+        for (int i = 1; i <= n; i++)
+        {
+            if (!_numberByButton.Values.Contains(i))
+            {
+                error = $"Missing number {i} in mapping.";
+                return false;
+            }
+        }
+
+        error = "";
+        return true;
+    }
+
 }
