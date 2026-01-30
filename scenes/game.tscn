@@ -5,11 +5,10 @@
 [ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bekiiuhduagg5" path="res://assets/sprites/walls.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
-[ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://Puzzles/Core/PuzzleHost.cs" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
-[ext_resource type="PackedScene" uid="uid://b2304ia2mrux1" path="res://scenes/chimp_puzzle.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
-[ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/contaminated.gdshader" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
+[ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -197,21 +196,19 @@ polygon = PackedVector2Array(-196.28455, 23.205719, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1596988900]
+[node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(565, 160)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1212999955]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
+
+[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1212999955]
 material = SubResource("ShaderMaterial_p57ef")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(565, 160)
-PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
-
-[node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 
 [node name="PuzzleLayer" type="Control" parent="UI" unique_id=1344310281]
 layout_mode = 3
@@ -225,6 +222,4 @@ grow_vertical = 2
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_lbhrr")
-ChimpPuzzleScene = ExtResource("5_iywne")
-PlayerPath = NodePath("../../../Player")
+script = ExtResource("9_0tnpc")
