@@ -1,0 +1,41 @@
+﻿[gd_scene format=3 uid="uid://2338s7jfyj2q"]
+
+[ext_resource type="Script" uid="uid://qsp7gr6ma1r7" path="res://scripts/ChimpPuzzle.cs" id="1_u1h6h"]
+
+[node name="ChimpPuzzle" type="Control" unique_id=1715079171]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_u1h6h")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1102169853]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Center" type="CenterContainer" parent="Dimmer" unique_id=1413457324]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="PanelContainer" parent="Dimmer/Center" unique_id=1914476456]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Dimmer/Center/Panel" unique_id=858768134]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="Dimmer/Center/Panel/VBox" unique_id=974898533]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Dimmer/Center/Panel/VBox" unique_id=930137156]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Dimmer/Center/Panel/VBox" unique_id=761222804]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=2002930616]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=1136613130]
+layout_mode = 2
