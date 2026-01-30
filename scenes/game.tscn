@@ -1,9 +1,13 @@
-[gd_scene format=4 uid="uid://ceqdt0gehucwl"]
+[gd_scene format=3 uid="uid://ceqdt0gehucwl"]
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteract2D.cs" id="2_u5sy4"]
 [ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bekiiuhduagg5" path="res://assets/sprites/walls.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://Puzzles/Core/PuzzleHost.cs" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b2304ia2mrux1" path="res://scenes/chimp_puzzle.tscn" id="5_iywne"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/contaminated.gdshader" id="6_u5sy4"]
 
@@ -108,9 +112,12 @@ shader = ExtResource("6_u5sy4")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Player" parent="." unique_id=1240282193 instance=ExtResource("1_80nbo")]
+[node name="Player" parent="." unique_id=1240282193 groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(7, -203)
 motion_mode = 1
+
+[node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
+script = ExtResource("2_u5sy4")
 
 [node name="GasMask" type="Node2D" parent="." unique_id=1749282028]
 script = ExtResource("2_p57ef")
@@ -199,3 +206,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(565, 160)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
+
+[node name="PuzzleLayer" type="Control" parent="UI" unique_id=1344310281]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PuzzleHost" type="Control" parent="UI/PuzzleLayer" unique_id=2094422790]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_lbhrr")
+ChimpPuzzleScene = ExtResource("5_iywne")
+PlayerPath = NodePath("../../../Player")
