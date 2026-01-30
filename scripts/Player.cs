@@ -2,14 +2,27 @@ using Godot;
 
 namespace GGJ_2026.scripts;
 
-public partial class PlayerMovement : CharacterBody2D
+public partial class Player : CharacterBody2D
 {
 
     [Export]
     private AnimatedSprite2D Sprite { get; set; }
 
     [Export]
+    public GasMask Mask { get; set; }
+    
+    [Export]
     public float MovementSpeed { get; set; } = 500;
+
+    [Export]
+    public float MaxHealth { get; set; } = 100;
+    
+    public float Health { get; set; }
+
+    public override void _Ready()
+    {
+        Health = MaxHealth;
+    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -30,6 +43,11 @@ public partial class PlayerMovement : CharacterBody2D
 
         Sprite.FlipH = direction.X < 0;
         MoveAndSlide();
+    }
+
+    public void Hurt(float damage)
+    {
+        Health -= Mask.Mitigate(damage);
     }
 
 }
