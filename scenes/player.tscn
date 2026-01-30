@@ -84,7 +84,7 @@ Sprite = NodePath("Sprite")
 sprite_frames = SubResource("SpriteFrames_rhr3r")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.88787323
+frame_progress = 0.38368997
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=495913309]
 position = Vector2(6, 5)
