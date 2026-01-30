@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b2304ia2mrux1"]
+
+[ext_resource type="Script" uid="uid://qsp7gr6ma1r7" path="res://scripts/ChimpPuzzle.cs" id="1_murav"]
+
+[node name="ChimpPuzzle" type="Control" unique_id=724518441]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_murav")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=443342395]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0.003921569)
+
+[node name="Center" type="CenterContainer" parent="Dimmer" unique_id=2109008]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Dimmer/Center" unique_id=1221567481]
+custom_minimum_size = Vector2(520, 520)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Dimmer/Center/Panel" unique_id=1466498655]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Status" type="Label" parent="Dimmer/Center/Panel/VBox" unique_id=413694161]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Dimmer/Center/Panel/VBox" unique_id=1853189016]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 5
+
+[node name="Buttons" type="HBoxContainer" parent="Dimmer/Center/Panel/VBox" unique_id=580827119]
+layout_mode = 2
+alignment = 2
+
+[node name="RetryButton" type="Button" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=283886900]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Retry"
+
+[node name="VSeparator" type="VSeparator" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=1741593894]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=967730851]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
