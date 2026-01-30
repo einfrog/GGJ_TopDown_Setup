@@ -1,8 +1,42 @@
 [gd_scene format=4 uid="uid://ceqdt0gehucwl"]
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bekiiuhduagg5" path="res://assets/sprites/walls.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
+[ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
+[ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/contaminated.gdshader" id="6_u5sy4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("3_lnu2h")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+2:0/size_in_atlas = Vector2i(2, 2)
+2:0/0 = 0
+4:0/size_in_atlas = Vector2i(2, 2)
+4:0/0 = 0
+6:0/size_in_atlas = Vector2i(2, 2)
+6:0/0 = 0
+0:2/size_in_atlas = Vector2i(2, 2)
+0:2/0 = 0
+2:2/size_in_atlas = Vector2i(2, 2)
+2:2/0 = 0
+4:2/size_in_atlas = Vector2i(2, 2)
+4:2/0 = 0
+6:2/size_in_atlas = Vector2i(2, 2)
+6:2/0 = 0
+0:4/size_in_atlas = Vector2i(2, 2)
+0:4/0 = 0
+2:4/size_in_atlas = Vector2i(2, 2)
+2:4/0 = 0
+4:4/size_in_atlas = Vector2i(2, 2)
+4:4/0 = 0
+6:4/size_in_atlas = Vector2i(2, 2)
+6:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_iywne"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("2_yqjtg")
@@ -64,53 +98,104 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
-texture = ExtResource("3_lnu2h")
-0:0/size_in_atlas = Vector2i(2, 2)
-0:0/0 = 0
-2:0/size_in_atlas = Vector2i(2, 2)
-2:0/0 = 0
-4:0/size_in_atlas = Vector2i(2, 2)
-4:0/0 = 0
-6:0/size_in_atlas = Vector2i(2, 2)
-6:0/0 = 0
-0:2/size_in_atlas = Vector2i(2, 2)
-0:2/0 = 0
-2:2/size_in_atlas = Vector2i(2, 2)
-2:2/0 = 0
-4:2/size_in_atlas = Vector2i(2, 2)
-4:2/0 = 0
-6:2/size_in_atlas = Vector2i(2, 2)
-6:2/0 = 0
-0:4/size_in_atlas = Vector2i(2, 2)
-0:4/0 = 0
-2:4/size_in_atlas = Vector2i(2, 2)
-2:4/0 = 0
-4:4/size_in_atlas = Vector2i(2, 2)
-4:4/0 = 0
-6:4/size_in_atlas = Vector2i(2, 2)
-6:4/0 = 0
+[sub_resource type="Curve" id="Curve_lbhrr"]
 
-[sub_resource type="TileSet" id="TileSet_iywne"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
+shader = ExtResource("6_u5sy4")
 
 [node name="Game" type="Node2D" unique_id=1014954538]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
+zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." unique_id=1240282193 instance=ExtResource("1_80nbo")]
 position = Vector2(7, -203)
 motion_mode = 1
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
-zoom = Vector2(0.5, 0.5)
-
-[node name="Walls" type="TileMapLayer" parent="." unique_id=2015548460]
-scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD8//v/AAACAAAAAAD9//v/AAACAAAAAAD+//v/AAACAAAAAAD///v/AAACAAAAAAAAAPv/AAACAAAAAAABAPv/AAACAAAAAAACAPv/AAACAAAAAAADAPv/AAACAAAAAAAEAPv/AAACAAAAAAAFAPv/AAACAAAAAAAGAPv/AAACAAAAAAAHAPv/AAACAAAAAAAIAPv/AAAEAAAAAAAIAPz/AAAEAAIAAAAIAP3/AAAEAAIAAAAIAP7/AAAEAAIAAAAIAP//AAAEAAIAAAAIAAAAAAAEAAIAAAAIAAMAAAAEAAIAAAAIAAIAAAAEAAIAAAAIAAEAAAAEAAIAAAAIAAQAAAAEAAQAAAD3/wQAAAAAAAQAAAD3/wMAAAAAAAIAAAD3/wIAAAAAAAIAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAACAAQAAAACAAQAAAACAAQAAAADAAQAAAACAAQAAAAEAAQAAAACAAQAAAAFAAQAAAACAAQAAAAGAAQAAAACAAQAAAAHAAQAAAACAAQAAAA=")
-tile_set = SubResource("TileSet_lnu2h")
+[node name="GasMask" type="Node2D" parent="." unique_id=1749282028]
+script = ExtResource("2_p57ef")
+metadata/_custom_type_script = "uid://d4hdeedtuc7dl"
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=792315830]
 z_index = -1
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAANABsAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_iywne")
+
+[node name="Walls" type="TileMapLayer" parent="." unique_id=2015548460]
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD8//v/AAACAAAAAAD9//v/AAACAAAAAAD+//v/AAACAAAAAAD///v/AAACAAAAAAAAAPv/AAACAAAAAAABAPv/AAACAAAAAAACAPv/AAACAAAAAAADAPv/AAACAAAAAAAEAPv/AAACAAAAAAAFAPv/AAACAAAAAAAGAPv/AAACAAAAAAAHAPv/AAACAAAAAAAIAPv/AAAEAAAAAAAIAPz/AAAEAAIAAAAIAP3/AAAEAAIAAAAIAP7/AAAEAAIAAAAIAP//AAAEAAIAAAAIAAAAAAAEAAIAAAAIAAMAAAAEAAIAAAAIAAIAAAAEAAIAAAAIAAEAAAAEAAIAAAAIAAQAAAAEAAQAAAD3/wQAAAAAAAQAAAD3/wMAAAAAAAIAAAD3/wIAAAAAAAIAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAACAAQAAAACAAQAAAACAAQAAAADAAQAAAACAAQAAAAEAAQAAAACAAQAAAAFAAQAAAACAAQAAAAGAAQAAAACAAQAAAAHAAQAAAACAAQAAAA=")
+tile_set = SubResource("TileSet_lnu2h")
+
+[node name="Zones" type="Node2D" parent="." unique_id=1256535488]
+
+[node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamageTimer = NodePath("Timer")
+DamageCurve = SubResource("Curve_lbhrr")
+metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone" unique_id=1303028849]
+position = Vector2(-415.99997, -1120)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(677.18176, 46.411377, 652.64624, -136.3335, -544.6897, -133.43274, -542.1201, 35.495087, -224.67987, 37.21173, -225.72726, 139.23419, 44.164032, 142.1349, 44.164032, 40.609985)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone" unique_id=1227960839]
+
+[node name="ContaminatedZone2" type="Area2D" parent="Zones" unique_id=675318557 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamageTimer = NodePath("Timer")
+metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone2" unique_id=1680150201]
+position = Vector2(1608, -1040.0001)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(-196.28455, 23.205719, -117.77075, -641.05725, -549.5968, -620.7523, -542.1201, 35.495087)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone2" unique_id=917791582]
+
+[node name="ContaminatedZone3" type="Area2D" parent="Zones" unique_id=1838403500 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamageTimer = NodePath("Timer")
+metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone3" unique_id=706735182]
+position = Vector2(-503.99997, -2736)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(-29.442719, 98.62421, -24.535583, -69.61713, 1197.3359, -55.113464, 1162.9861, -362.58905, -588.85376, -356.78754, -510.3399, 98.62421)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone3" unique_id=795097878]
+
+[node name="ContaminatedZone4" type="Area2D" parent="Zones" unique_id=942502928 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamageTimer = NodePath("Timer")
+metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone4" unique_id=1639985781]
+position = Vector2(-330.40002, -1919.1998)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(264.9842, 136.3335, 260.0771, -313.27692, -112.86365, -319.0783, -98.142334, -150.83698, -596.14575, -150.5794, -613.3893, 133.43274)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone4" unique_id=1792316255]
+
+[node name="ContaminatedZone5" type="Area2D" parent="Zones" unique_id=561408620 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamageTimer = NodePath("Timer")
+metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone5" unique_id=56053599]
+position = Vector2(1021.6, -1711.1998)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(-196.28455, 23.205719, -211.00595, -374.19183, -515.2471, -374.19183, -542.1201, 35.495087)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1596988900]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1212999955]
+material = SubResource("ShaderMaterial_p57ef")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
