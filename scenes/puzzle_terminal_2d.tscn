@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dwqyxwysjmsd0"]
+
+[ext_resource type="Script" uid="uid://4ny66r75xums" path="res://scripts/PuzzleTerminal2D.cs" id="1_bkg5w"]
+[ext_resource type="Texture2D" uid="uid://djl5gfymx22uf" path="res://assets/sprites/keycard_reader2png.png" id="2_bkg5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t6fd"]
+size = Vector2(144.5, 192)
+
+[node name="PuzzleTerminal2D" type="Area2D" unique_id=598227121]
+script = ExtResource("1_bkg5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840212345]
+position = Vector2(-30.75, 18)
+shape = SubResource("RectangleShape2D_6t6fd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631113298]
+position = Vector2(-31, 18.000008)
+scale = Vector2(0.089999996, 0.120000005)
+texture = ExtResource("2_bkg5w")
+
+[node name="HintLabel" type="Label" parent="." unique_id=1656059701]
+offset_left = -103.0
+offset_top = 74.0
+offset_right = 42.0
+offset_bottom = 114.0

@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://ceqdt0gehucwl"]
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteract2D.cs" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://bekiiuhduagg5" path="res://assets/sprites/walls.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://Puzzles/Core/PuzzleHost.cs" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b2304ia2mrux1" path="res://scenes/chimp_puzzle.tscn" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
@@ -86,9 +88,12 @@ sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
-[node name="Player" parent="." unique_id=1240282193 instance=ExtResource("1_80nbo")]
+[node name="Player" parent="." unique_id=1240282193 groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(7, -203)
 motion_mode = 1
+
+[node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
+script = ExtResource("2_u5sy4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
 zoom = Vector2(0.5, 0.5)
@@ -102,6 +107,10 @@ z_index = -1
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray(0, 0, 13, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_iywne")
+
+[node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(565, 160)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 

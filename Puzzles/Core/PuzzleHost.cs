@@ -15,7 +15,7 @@ public partial class PuzzleHost : Control
 	public override void _Ready()
 	{
 		_player = PlayerPath != null && !PlayerPath.IsEmpty ? GetNode(PlayerPath) : null;
-		Hide();
+		Visible = true;
 	}
 
 	public void OpenChimpPuzzle(Action<bool> onFinished)
