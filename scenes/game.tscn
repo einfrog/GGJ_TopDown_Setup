@@ -5,6 +5,7 @@
 [node name="Game" type="Node2D" unique_id=1014954538]
 
 [node name="Player" parent="." unique_id=1240282193 instance=ExtResource("1_80nbo")]
+position = Vector2(7, -203)
 motion_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
