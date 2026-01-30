@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chblpfl2b4kfl"
-path="res://.godot/imported/background-made-from-bricks.jpg-7a1e4140b93e7f19765aa21fe038af59.ctex"
+uid="uid://d0mwwfrd1d6wy"
+path="res://.godot/imported/FloorTiles.png-11718a9a9fb080056139564bafdd0752.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background-made-from-bricks.jpg"
-dest_files=["res://.godot/imported/background-made-from-bricks.jpg-7a1e4140b93e7f19765aa21fe038af59.ctex"]
+source_file="res://assets/sprites/FloorTiles.png"
+dest_files=["res://.godot/imported/FloorTiles.png-11718a9a9fb080056139564bafdd0752.ctex"]
 
 [params]
 
