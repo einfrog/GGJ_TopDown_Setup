@@ -1,15 +1,36 @@
 using Godot;
-using System;
 
-public partial class PlayerMovement : Node
+namespace GGJ_2026.scripts;
+
+public partial class PlayerMovement : CharacterBody2D
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    [Export]
+    private AnimatedSprite2D Sprite { get; set; }
+
+    [Export]
+    public float MovementSpeed { get; set; } = 500;
+
+    public override void _PhysicsProcess(double delta)
+    {
+        var direction = new Vector2(
+            Input.GetAxis("move_left", "move_right"),
+            Input.GetAxis("move_up", "move_down")
+        );
+
+        if (direction.IsZeroApprox())
+        {
+            Sprite.Animation = "Idle";
+            Velocity = Velocity.MoveToward(Vector2.Zero, MovementSpeed);
+        }
+        else
+        {
+            Sprite.Animation = "Walking";
+            Velocity = direction * MovementSpeed; 
+        }
+
+        Sprite.FlipH = direction.X < 0;
+        MoveAndSlide();
+    }
+
 }

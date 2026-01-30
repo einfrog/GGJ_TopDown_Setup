@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdpnattf4wp82"]
+[gd_scene format=3 uid="uid://cdpnattf4wp82"]
 
-[ext_resource type="Script" uid="uid://b2nx1qushfrer" path="res://scripts/player_movement.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://coxmyjcj36far" path="res://scripts/PlayerMovement.cs" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://j3qu246t3jw1" path="res://assets/sprites/rorySprites.png" id="1_lj8jo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2brh"]
@@ -72,35 +72,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_qhqgy"]
-script/source = "extends AnimatedSprite2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lj8jo"]
 radius = 75.0
 height = 370.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1973217353 node_paths=PackedStringArray("Sprite")]
 script = ExtResource("1_g2els")
+Sprite = NodePath("Sprite")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=56666243]
 sprite_frames = SubResource("SpriteFrames_rhr3r")
 animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.88787323
-script = SubResource("GDScript_qhqgy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=495913309]
 position = Vector2(6, 5)
 shape = SubResource("CapsuleShape2D_lj8jo")
