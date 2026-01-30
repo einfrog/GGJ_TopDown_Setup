@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdpnattf4wp82"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_g2els"]
+[ext_resource type="Script" uid="uid://coxmyjcj36far" path="res://scripts/Player.cs" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://j3qu246t3jw1" path="res://assets/sprites/rorySprites.png" id="1_lj8jo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2brh"]
