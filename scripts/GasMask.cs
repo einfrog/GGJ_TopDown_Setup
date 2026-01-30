@@ -2,15 +2,13 @@
 
 namespace GGJ_2026.scripts;
 
+[GlobalClass]
 public partial class GasMask : Node2D
 {
 
-    public GasMaskStrength Strength { get; set; }
+    [Export]
+    public GasFilter GasFilter { get; set; }
 
-    public float Mitigate(float damage)
-    {
-        // TODO: mitigate
-        return damage;
-    }
+    public float Filter(float damage) => GasFilter.Filter(damage);
 
 }
