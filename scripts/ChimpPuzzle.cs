@@ -43,10 +43,10 @@ public partial class ChimpPuzzle : Control
     // NODE REFERENCES (ASSIGNED IN EDITOR)
     // ============================================================
 
-    [Export] public NodePath GridPath;
-    [Export] public NodePath StatusLabelPath;
-    [Export] public NodePath RetryButtonPath;
-    [Export] public NodePath CloseButtonPath;
+    [Export] public NodePath GridPath = "Center/Panel/VBox/Grid";
+    [Export] public NodePath StatusLabelPath = "Center/Panel/VBox/Status";
+    [Export] public NodePath RetryButtonPath = "Center/Panel/VBox/Buttons/RetryButton";
+    [Export] public NodePath CloseButtonPath = "Center/Panel/VBox/Buttons/CloseButton";
 
     protected GridContainer _grid;
     protected Label _statusLabel;
