@@ -25,13 +25,13 @@ public partial class PuzzleHost : Control
 		_currentPuzzle = puzzle;
 		AddChild(puzzle);
 
-		// SetPlayerEnabled(false);
+		 SetPlayerEnabled(false);
 		puzzle.Connect("PuzzleFinished", Callable.From<bool>((success) =>
 		{
 			_currentPuzzle?.QueueFree();
 			_currentPuzzle = null;
 
-			// SetPlayerEnabled(true);
+			SetPlayerEnabled(true);
 
 			onFinished?.Invoke(success);
 		}));
@@ -43,7 +43,7 @@ public partial class PuzzleHost : Control
 		if (_player == null) return;
 
 		if (_player.HasMethod("SetInputEnabled"))
-			_player.Call("SetInputEnabled, enabled");
+			_player.Call("SetInputEnabled", enabled);
 	}
 }
 // Called every frame. 'delta' is the elapsed time since the previous frame.
