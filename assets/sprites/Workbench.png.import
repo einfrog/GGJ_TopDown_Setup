@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j3qu246t3jw1"
-path="res://.godot/imported/rorySprites.png-6ed198aaa5af0208c42137a0c227727c.ctex"
+uid="uid://duyp6cbcpx2d4"
+path="res://.godot/imported/Workbench.png-396de566f3073b3b928dda65653fa258.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/rorySprites.png"
-dest_files=["res://.godot/imported/rorySprites.png-6ed198aaa5af0208c42137a0c227727c.ctex"]
+source_file="res://assets/sprites/Workbench.png"
+dest_files=["res://.godot/imported/Workbench.png-396de566f3073b3b928dda65653fa258.ctex"]
 
 [params]
 
