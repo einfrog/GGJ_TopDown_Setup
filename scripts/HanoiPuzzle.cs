@@ -34,6 +34,12 @@ public partial class HanoiPuzzle : Control
 	[Export] public NodePath StackBPath;
 	[Export] public NodePath StackCPath;
 
+	[Export] public NodePath ResultOverlayPath;
+	[Export] public NodePath ResultTitlePath;
+	[Export] public NodePath ResultBodyPath;
+	[Export] public NodePath RestartButtonPath;
+	[Export] public NodePath ContinueButtonPath;
+
 	private Label _status;
 	private Button _resetButton;
 	private Button _closeButton;
@@ -47,6 +53,12 @@ public partial class HanoiPuzzle : Control
 	private Control _stackB;
 	private Control _stackC;
 	
+	private ColorRect _resultOverlay;
+	private Label _resultTitle;
+	private Label _resultBody;
+	private Button _restartButton;
+	private Button _continueButton;
+
 	private enum PuzzleState {Idle, Playing, Completed, Failed}
 
 	private PuzzleState _state = PuzzleState.Idle;
@@ -74,42 +86,69 @@ public partial class HanoiPuzzle : Control
 
 	public override void _Ready()
 	{
-		CacheNode();
+		GD.Print("HanoiPuzzle _Ready running: ", SceneFilePath, " node=", Name);
+
+		GD.Print("Calling CacheNodes...");
+		CacheNodes();
+		GD.Print("CacheNodes finished.");
+
+		GD.Print("Calling WireUi...");
 		WireUi();
+		GD.Print("WireUi finished.");
+
 		StartPuzzle();
-		UpdateUndoButton();
 	}
 
 	private void CacheNodes()
 	{
-		_status = GetNode<Label>(StatusLabelPath);
-		_resetButton = GetNode<Button>(ResetButtonPath);
-		_closeButton = GetNode<Button>(CloseButtonPath);
-		_undoButton = GetNode<Button>(UndoButtonPath);
+		GD.Print("CacheNodes START");
 
-		_pegA = GetNode<Control>(PegAPath);
-		_pegB = GetNode<Control>(PegBPath);
-		_pegC = GetNode<Control>(PegCPath);
+		try
+		{
+			// Helper to avoid passing empty NodePaths (common silent killer)
+			T GetSafe<T>(NodePath path, string name) where T : Node
+			{
+				if (path.IsEmpty)
+				{
+					GD.PushWarning($"CacheNodes: '{name}' NodePath is empty (not set in inspector).");
+					return null;
+				}
 
-		_stackA = GetNode<Control>(StackAPath);
-		_stackB = GetNode<Control>(StackBPath);
-		_stackC = GetNode<Control>(StackCPath);
+				var node = GetNodeOrNull<T>(path);
+				if (node == null)
+					GD.PushWarning($"CacheNodes: '{name}' not found at path: {path}");
+
+				return node;
+			}
+
+			_status = GetSafe<Label>(StatusLabelPath, nameof(StatusLabelPath));
+			_resetButton = GetSafe<Button>(ResetButtonPath, nameof(ResetButtonPath));
+			_closeButton = GetSafe<Button>(CloseButtonPath, nameof(CloseButtonPath));
+			_undoButton = GetSafe<Button>(UndoButtonPath, nameof(UndoButtonPath));
+
+			_pegA = GetSafe<Control>(PegAPath, nameof(PegAPath));
+			_pegB = GetSafe<Control>(PegBPath, nameof(PegBPath));
+			_pegC = GetSafe<Control>(PegCPath, nameof(PegCPath));
+
+			_stackA = GetSafe<Control>(StackAPath, nameof(StackAPath));
+			_stackB = GetSafe<Control>(StackBPath, nameof(StackBPath));
+			_stackC = GetSafe<Control>(StackCPath, nameof(StackCPath));
+
+			_resultOverlay = GetSafe<ColorRect>(ResultOverlayPath, nameof(ResultOverlayPath));
+			_resultTitle = GetSafe<Label>(ResultTitlePath, nameof(ResultTitlePath));
+			_resultBody = GetSafe<Label>(ResultBodyPath, nameof(ResultBodyPath));
+			_restartButton = GetSafe<Button>(RestartButtonPath, nameof(RestartButtonPath));
+			_continueButton = GetSafe<Button>(ContinueButtonPath, nameof(ContinueButtonPath));
+
+			GD.Print("CacheNodes END (no exception)");
+		}
+		catch (Exception ex)
+		{
+			GD.PushError("CacheNodes EXCEPTION: " + ex);
+			throw; // rethrow so you still see the stack trace
+		}
 	}
 
-	private void CacheNode()
-	{
-		_status = GetNode<Label>(StatusLabelPath);
-		_resetButton = GetNode<Button>(ResetButtonPath);
-		_closeButton = GetNode<Button>(CloseButtonPath);
-		_undoButton = GetNode <Button>(UndoButtonPath);
-		_pegA = GetNode<Control>(PegAPath);
-		_pegB = GetNode<Control>(PegBPath);
-		_pegC = GetNode<Control>(PegCPath);
-
-		_stackA = GetNode<Control>(StackAPath);
-		_stackB = GetNode<Control>(StackBPath);
-		_stackC = GetNode<Control>(StackCPath);
-	}
 
 	private void WireUi()
 	{
@@ -120,11 +159,54 @@ public partial class HanoiPuzzle : Control
 		_pegA.GuiInput += (e) => OnPegGuiInput(0, e);
 		_pegB.GuiInput += (e) => OnPegGuiInput(1, e);
 		_pegC.GuiInput += (e) => OnPegGuiInput(2, e);
+		
+		if (_restartButton != null)
+		{
+			_restartButton.Pressed += () =>
+			{
+				HideResultOverlay();
+				StartPuzzle();
+			};
+		}
+		else
+		{
+			GD.PushWarning("HanoiPuzzle: RestartButtonPath not set or node not found.");
+		}
+		if (_continueButton != null)
+		{
+			_continueButton.Pressed += () =>
+			{
+				CancelPuzzle();
+			};
+		}
+		else
+		{
+			GD.PushWarning("HanoiPuzzle: ContinueButtonPath not set or node not found.");
+		}
+
 	}
 
+	private void ShowResultOverlay(string title, string body)
+	{
+		_resultTitle.Text = title;
+		_resultBody.Text = body;
+		_resultOverlay.Visible = true;
+		_state = title == "Victory" ? PuzzleState.Completed : PuzzleState.Failed;
+		
+		UpdateUndoButton();
+	}
+	private void HideResultOverlay()
+	{
+		_resultOverlay.Visible = false;
+
+		// Back to playing state after restart
+		_state = PuzzleState.Playing;
+		UpdateUndoButton();
+	}
 
 	public void StartPuzzle()
 	{
+		_resultOverlay.Visible = false;
 		DiskCount = Mathf.Clamp(DiskCount, MinDiskCount, MaxDiskCount);
 		_state = PuzzleState.Playing;
 		_moveCount = 0;
@@ -219,11 +301,14 @@ public partial class HanoiPuzzle : Control
 		LayoutPeg(0);
 		LayoutPeg(1);
 		LayoutPeg(2);
-		if (IsSolved())
-		{
-			CompletePuzzle();
-			return;
-		}
+		// if (IsSolved())
+		// {
+		// 	CompletePuzzle();
+		// 	return;
+		// }
+		LayoutAllPegs();
+		UpdateStatus();
+		CheckEndConditionAfterMove();
 		UpdateStatus();
 	}
 
@@ -492,6 +577,28 @@ public partial class HanoiPuzzle : Control
 	private void ShowInfo(string message)
 	{
 		_status.Text = $"Moves: {_moveCount} / Target: {_minMoves}\n{message}";
+	}
+
+	private void CheckEndConditionAfterMove()
+	{
+		if(_pegs[2].Count != DiskCount)
+			return;
+		if (_moveCount == _minMoves)
+		{
+			ShowResultOverlay(
+				"Victory",
+				$"Perfect! You solved it in {_moveCount} moves (minimum for {DiskCount} disks." )
+				;
+			EmitSignal(SignalName.PuzzleFinished, true);
+		}
+		else
+		{
+			ShowResultOverlay(
+				"Game Over",
+				$"You solved it in {_moveCount}, but the minimum is {_minMoves}. \n"+
+				"Use Undo to optimize, or press Restart to try again.");
+		}
+		
 	}
 }
 
