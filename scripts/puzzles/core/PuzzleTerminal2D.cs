@@ -5,18 +5,16 @@ namespace GGJ_2026.scripts.puzzles.core;
 
 public partial class PuzzleTerminal2D : Area2D, IInteractable
 {
+    [Export] public NodePath PuzzleHostPath;
+    [Export] public string PuzzleId = "chimp";
+    [Export] public string HintText = "Press E";
+    [Export] public bool OneTime = true;
 
-    [Export]
-    public NodePath PuzzleHostPath;
+    // Visuals
+    [Export] public Texture2D TerminalTexture;
+    [Export] public Texture2D SolvedTexture;
 
-    [Export]
-    public string PuzzleId = "chimp"; // e.g. "chimp" or "hanoi"
-
-    [Export]
-    public string HintText = "Press E";
-
-    [Export]
-    public bool OneTime = true;
+    private Sprite2D _sprite;
 
     private PuzzleHost _host;
     private Label _hintLabel;
@@ -30,43 +28,50 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
     public override void _Ready()
     {
         _host = GetNodeOrNull<PuzzleHost>(PuzzleHostPath);
-
         if (_host == null)
             GD.PushError($"PuzzleTerminal2D: PuzzleHost not found at path '{PuzzleHostPath}'.");
 
         _hintLabel = GetNodeOrNull<Label>("HintLabel");
-        _hintLabel?.Text = HintText;
-        _hintLabel?.Visible = false;
+        if (_hintLabel != null)
+        {
+            _hintLabel.Text = HintText;
+            _hintLabel.Visible = false;
+        }
+
+        _sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
+        ApplyVisual(false);
 
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
     }
 
+    private void ApplyVisual(bool solved)
+    {
+        if (_sprite == null) return;
+
+        if (solved && SolvedTexture != null)
+            _sprite.Texture = SolvedTexture;
+        else if (!solved && TerminalTexture != null)
+            _sprite.Texture = TerminalTexture;
+    }
+
     private void OnBodyEntered(Node body)
     {
-        if (body is not Player player)
-            return;
+        if (body is not Player player) return;
 
         _playerInside = true;
-
-        // Don't show hint if already solved in one-time mode
         if (!(OneTime && _solved))
-        {
-            _hintLabel?.Visible = true;
-        }
+            _hintLabel?.Show();
 
         player.Interactor.SetCurrentInteractable(this);
     }
 
     private void OnBodyExited(Node body)
     {
-        if (body is not Player player)
-            return;
+        if (body is not Player player) return;
 
         _playerInside = false;
-        _hintLabel?.Visible = false;
-
-        // IMPORTANT: clear via Interactor (same pattern as OnBodyEntered)
+        _hintLabel?.Hide();
         player.Interactor.ClearCurrentInteractable(this);
     }
 
@@ -78,38 +83,35 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
         if (_host == null) return;
 
         _busy = true;
-        _hintLabel?.Visible = false;
+        _hintLabel?.Hide();
 
-        // Open puzzle by ID using the new host
         bool opened = _host.OpenPuzzle(PuzzleId, success =>
         {
             _busy = false;
 
             if (success)
-            {
                 SetSolvedState();
-            }
             else
             {
-                // If player still inside and not solved, show hint again
-                if (_playerInside && !(OneTime && _solved) && _hintLabel != null)
-                    _hintLabel.Visible = true;
+                if (_playerInside && !(OneTime && _solved))
+                    _hintLabel?.Show();
             }
         });
 
         if (!opened)
         {
             _busy = false;
-            // If it failed to open, restore hint if player is still inside
-            if (_playerInside && _hintLabel != null) _hintLabel.Visible = true;
+            if (_playerInside && !(OneTime && _solved))
+                _hintLabel?.Show();
         }
     }
 
     private void SetSolvedState()
     {
-        // Hide hint permanently and stop reacting to bodies if one-time
-        _hintLabel?.Visible = false;
         _solved = true;
+        _hintLabel?.Hide();
+        ApplyVisual(true);
+
         Solved?.Invoke();
 
         if (OneTime)
@@ -118,5 +120,4 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
             Monitorable = false;
         }
     }
-
 }

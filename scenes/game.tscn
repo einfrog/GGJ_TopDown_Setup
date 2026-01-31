@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/horiz_wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
+[ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cosp3jntag7wo" path="res://assets/sprites/MaskUpgradePart.png" id="9_1kice"]
+[ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="10_5newe"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
@@ -231,20 +234,15 @@ texture = ExtResource("12_kvuet")
 position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")
 
-[node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
-position = Vector2(56, 232)
-PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
-PuzzleId = "hanoi"
-
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-TerminalPath = NodePath("../PuzzleTerminal2D")
+TerminalPath = NodePath("../../Terminals/PuzzleTerminal2D")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
 position = Vector2(512, -1600)
-TerminalPath = NodePath("../PuzzleTerminal2D3")
+TerminalPath = NodePath("../../Terminals/PuzzleTerminal2D4")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
@@ -258,11 +256,23 @@ position = Vector2(512, -1600)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
 
-[node name="PuzzleTerminal2D" parent="Doors" unique_id=598227121 instance=ExtResource("4_p57ef")]
+[node name="Terminals" type="Node2D" parent="." unique_id=1823033798]
+
+[node name="PuzzleTerminal2D" parent="Terminals" unique_id=1923222968 instance=ExtResource("4_p57ef")]
 position = Vector2(136, -816)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("9_1kice")
+SolvedTexture = ExtResource("10_5newe")
 
-[node name="PuzzleTerminal2D3" parent="Doors" unique_id=557642453 instance=ExtResource("4_p57ef")]
+[node name="PuzzleTerminal2D2" parent="Terminals" unique_id=828141489 instance=ExtResource("4_p57ef")]
+position = Vector2(56, 232)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+PuzzleId = "hanoi"
+TerminalTexture = ExtResource("7_ssvqc")
+
+[node name="PuzzleTerminal2D3" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+
+[node name="PuzzleTerminal2D4" parent="Terminals" unique_id=557642453 instance=ExtResource("4_p57ef")]
 position = Vector2(648, -1488)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
