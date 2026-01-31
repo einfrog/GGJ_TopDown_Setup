@@ -23,7 +23,7 @@ public partial class ChimpPuzzle : Control
     // ============================================================
 
     [Export] public int StartN = 4;   // First round size
-    [Export] public int MaxN = 7;     // Final round size
+    [Export] public int MaxN = 4;     // Final round size
 
     // ============================================================
     // GRID / VISUAL SETTINGS

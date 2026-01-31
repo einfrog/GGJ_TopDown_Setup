@@ -188,50 +188,6 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
-region = Rect2(0, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
-region = Rect2(64, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
-region = Rect2(128, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
-region = Rect2(0, 96, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
-region = Rect2(64, 96, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
-region = Rect2(128, 96, 64, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_264po"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kvuet")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_trtic")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ir15t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ca42v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rysoc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ssvqc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
@@ -351,30 +307,19 @@ position = Vector2(-406, 210)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 PuzzleId = "hanoi"
 
+[node name="PuzzleTerminal2D3" parent="." unique_id=557642453 instance=ExtResource("4_p57ef")]
+position = Vector2(616, -1384)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
+TerminalPath = NodePath("../../PuzzleTerminal2D")
 
-[node name="Door3" type="AnimatedSprite2D" parent="Doors" unique_id=961376434]
-position = Vector2(-640, -1600)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door4" type="AnimatedSprite2D" parent="Doors" unique_id=1544599286]
-position = Vector2(514, -1600)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door5" type="AnimatedSprite2D" parent="Doors" unique_id=966359549]
-position = Vector2(-128, -2496)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door6" type="AnimatedSprite2D" parent="Doors" unique_id=1622030186]
-position = Vector2(1024, -2496)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
+[node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
+position = Vector2(512, -1600)
+TerminalPath = NodePath("../../PuzzleTerminal2D3")
 
 [node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
 
@@ -388,6 +333,7 @@ position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")
 
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
+position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
 MovementSpeed = 350.0
