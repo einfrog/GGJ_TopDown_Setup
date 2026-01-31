@@ -78,7 +78,17 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
-        Health -= Mask.Filter(damage);
+        if (Mask is not null)
+        {
+            damage = Mask.Filter(damage);
+        }
+
+        if (Health - damage <= 0 && Health > 0)
+        {
+            Died?.Invoke();
+        }
+
+        Health -= damage;
     }
 
     public void SetInputEnabled(bool enabled)
