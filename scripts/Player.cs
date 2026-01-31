@@ -75,7 +75,6 @@ public partial class Player : CharacterBody2D
 
         _wasMasked = Masked;
         UpdateBreathing(force: true);
-        Died += () => GD.Print("Player died");
     }
 
 
@@ -109,7 +108,6 @@ public partial class Player : CharacterBody2D
         }
 
         UpdateBreathing();
-        
         float x = Input.GetAxis("move_left", "move_right");
         float y = Input.GetAxis("move_up", "move_down");
         Velocity = MovementSpeed * new Vector2(x, y).Normalized();
@@ -166,8 +164,7 @@ public partial class Player : CharacterBody2D
             _breathingTween.TweenProperty(_breathing, "volume_db", -80f, BreathingFadeSeconds);
             _breathingTween.TweenCallback(Callable.From(() =>
             {
-                if (_breathing != null)
-                    _breathing.Stop();
+                _breathing?.Stop();
             }));
         }
     }
