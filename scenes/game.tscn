@@ -220,21 +220,25 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Terminals" type="Node2D" parent="." unique_id=881508662]
 
-[node name="PuzzleTerminal2D" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(112, -712)
+[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(128, -720)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 TerminalTexture = ExtResource("6_264po")
 SolvedTexture = ExtResource("7_1kice")
 
+[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
+position = Vector2(632, -1360)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
-[node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
+[node name="Door1" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-TerminalPath = NodePath("../../Terminals/PuzzleTerminal2D")
+TerminalPath = NodePath("../../Terminals/Terminal1")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
 position = Vector2(512, -1600)
-TerminalPath = NodePath("")
+TerminalPath = NodePath("../../Terminals/Terminal2")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
