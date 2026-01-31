@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chblpfl2b4kfl"
-path="res://.godot/imported/background-made-from-bricks.jpg-7a1e4140b93e7f19765aa21fe038af59.ctex"
+uid="uid://df0ohqmt76m35"
+path="res://.godot/imported/PlayerSpritesheet_Original.png-b43454ecfb9e8991295d808d28228048.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background-made-from-bricks.jpg"
-dest_files=["res://.godot/imported/background-made-from-bricks.jpg-7a1e4140b93e7f19765aa21fe038af59.ctex"]
+source_file="res://assets/sprites/PlayerSpritesheet_Original.png"
+dest_files=["res://.godot/imported/PlayerSpritesheet_Original.png-b43454ecfb9e8991295d808d28228048.ctex"]
 
 [params]
 
