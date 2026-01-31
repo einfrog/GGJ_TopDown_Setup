@@ -90,6 +90,8 @@ sources/0 = SubResource("TileSetAtlasSource_yqjtg")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
+shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
+shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
