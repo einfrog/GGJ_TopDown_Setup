@@ -10,10 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/wall tiles (3).png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
-[ext_resource type="Script" uid="uid://db0tr5q0wcouw" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
+[ext_resource type="Texture2D" uid="uid://b3ci5m8scphwn" path="res://assets/sprites/Door.png" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
-[ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -132,20 +130,58 @@ shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
 shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
 
-[sub_resource type="Resource" id="Resource_ca42v"]
-script = ExtResource("11_trtic")
-Id = "chimp"
-Scene = ExtResource("10_vtaks")
-metadata/_custom_type_script = "uid://dnba1ap70tp4e"
-
-[sub_resource type="Resource" id="Resource_rysoc"]
-script = ExtResource("11_trtic")
-Id = "hanoi"
-Scene = ExtResource("13_ir15t")
-metadata/_custom_type_script = "uid://dnba1ap70tp4e"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(64, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(128, 0, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(0, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(64, 96, 64, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
+atlas = ExtResource("12_dinhu")
+region = Rect2(128, 96, 64, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_264po"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvuet")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trtic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir15t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca42v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rysoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssvqc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
@@ -174,7 +210,7 @@ tile_set = SubResource("TileSet_iywne")
 [node name="Walls" type="TileMapLayer" parent="." unique_id=2015548460]
 z_index = -1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD6//z/AQABAAMAAAD5//z/AQABAAEAAAD4//z/AQABAAQAAAD7//z/AQAAAAIAAAD7//7/AQACAAQAAAD6//7/AQABAAIAAAD5//7/AQABAAIAAAD4//7/AQABAAIAAAD5//3/AQABAAEAACD6//3/AQAAAAIAAAD4//3/AQAAAAAAAAD7//3/AQACAAIAAAD8//3/AQACAAQAAAD8//z/AQACAAIAAAD8//7/AQABAAAAAAD9//r/AAAEAAIAAAD9//n/AAAEAAIAAAD9//j/AAAEAAIAAAD9//v/AAAGAAAAAGD8//v/AAACAAAAAAD9//f/AAACAAAAAAD8//f/AAACAAAAAAD5//f/AAAAAAAAAAD5//j/AAAAAAIAAAD5//n/AAAAAAIAAAD5//r/AAAAAAIAAAD3/wIAAAAAAAIAAAD3/wMAAAAAAAIAAAD3/wQAAAAAAAQAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAAEAAQAAAABAAMAAAAEAAIAAAABAAIAAAAEAAIAAAABAAEAAAAEAAIAAAABAAAAAAAEAAIAAAABAP//AAAEAAIAAAABAP7/AAAEAAIAAAABAP3/AAAEAAIAAAABAPz/AAAEAAIAAAABAPv/AAAEAAIAAAABAPr/AAAEAAIAAAABAPn/AAAEAAIAAAABAPj/AAAEAAIAAAABAPf/AAAIAAIAAGACAPf/AAACAAAAAAADAPf/AAACAAAAAAAEAPf/AAACAAAAAAAFAPf/AAACAAAAAAAGAPf/AAACAAAAAAAHAPf/AAACAAAAAAAIAPf/AAACAAAAAAAJAPf/AAAGAAIAADAJAPb/AAAEAAIAAAAJAPX/AAAEAAIAAAAJAPP/AAAEAAIAAAAJAPT/AAAEAAIAAAAJAPL/AAAEAAIAAAAJAPH/AAAEAAIAAAAJAPD/AAAEAAIAAAD+//f/AAACAAAAAAD9//z/AQACAAQAAAD9//3/AQACAAMAAAD9//7/AQACAAAAAAA=")
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD6//z/AQABAAMAAAD5//z/AQABAAEAAAD4//z/AQABAAQAAAD7//z/AQAAAAIAAAD7//7/AQACAAQAAAD6//7/AQABAAIAAAD5//7/AQABAAIAAAD4//7/AQABAAIAAAD5//3/AQABAAEAACD6//3/AQAAAAIAAAD4//3/AQAAAAAAAAD7//3/AQACAAIAAAD8//3/AQACAAQAAAD8//z/AQACAAIAAAD8//7/AQABAAAAAAD9//r/AAAEAAIAAAD9//n/AAAEAAIAAAD9//j/AAAEAAIAAAD9//v/AAAGAAAAAGD8//v/AAACAAAAAAD9//f/AAACAAAAAAD8//f/AAACAAAAAAD5//f/AAAAAAAAAAD5//j/AAAAAAIAAAD5//n/AAAAAAIAAAD5//r/AAAAAAIAAAD3/wIAAAAAAAIAAAD3/wMAAAAAAAIAAAD3/wQAAAAAAAQAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAAEAAQAAAABAAMAAAAEAAIAAAABAAIAAAAEAAIAAAABAAEAAAAEAAIAAAABAAAAAAAEAAIAAAABAP//AAAEAAIAAAABAP7/AAAEAAIAAAABAP3/AAAEAAIAAAABAPz/AAAEAAIAAAABAPv/AAAEAAIAAAABAPr/AAAEAAIAAAABAPn/AAAEAAIAAAABAPj/AAAEAAIAAAABAPf/AAAIAAIAAGACAPf/AAACAAAAAAADAPf/AAACAAAAAAAEAPf/AAACAAAAAAAFAPf/AAACAAAAAAAGAPf/AAACAAAAAAAHAPf/AAACAAAAAAAIAPf/AAACAAAAAAAJAPf/AAAGAAIAADAJAPb/AAAEAAIAAAAJAPX/AAAEAAIAAAAJAPP/AAAEAAIAAAAJAPT/AAAEAAIAAAAJAPL/AAAEAAIAAAAJAPH/AAAEAAIAAAAJAPD/AAAEAAIAAAD+//f/AAACAAAAAAD9//z/AQACAAQAAAD9//3/AQACAAMAAAD9//7/AQACAAAAAAD+//r/AQABAAEAACD+//n/AQABAAEAAAD+//j/AQABAAQAAAA=")
 tile_set = SubResource("TileSet_lnu2h")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
@@ -263,8 +299,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
-PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ca42v"), SubResource("Resource_rysoc")])
-PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1446716266]
@@ -282,4 +316,8 @@ shape = SubResource("RectangleShape2D_dinhu")
 [node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
 position = Vector2(-406, 210)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
-PuzzleId = "hanoi"
+
+[node name="Door" type="AnimatedSprite2D" parent="." unique_id=1453519083]
+position = Vector2(0, -832)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_264po")
