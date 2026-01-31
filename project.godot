@@ -15,13 +15,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="TopDownSetup"
-run/main_scene="uid://ceqdt0gehucwl"
+run/main_scene="uid://chnh2csf5ixqd"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="GGJ_2026"
+
+[gui]
+
+theme/custom_font="uid://bpc7e768fcvkr"
 
 [input]
 
@@ -58,4 +62,4 @@ interact={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.19388539, 0.3259247, 0.35764503, 1)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

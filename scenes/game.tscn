@@ -93,6 +93,7 @@ texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:4/0 = 0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
@@ -101,69 +102,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_trtic")
 sources/2 = SubResource("TileSetAtlasSource_ir15t")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dinhu"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvuet"]
-texture = SubResource("CompressedTexture2D_dinhu")
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -10, 16, -10, 16, 16, -16, 16)
-4:0/0 = 0
-4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -11, -11, -16, 11, -16, 16, -11, 16, 11, 11, 16, -16, 16)
-0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -16, 16, -16, 16, 16, -10, 16)
-4:2/0 = 0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(10, 16, -16, 16, -16, -16, 10, -16)
-0:4/0 = 0
-0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -11, -11, -16, 16, -16, 16, 11, 11, 16, -11, 16, -16, 11)
-2:4/0 = 0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 10, 16, 10, 16, -16, -16, -16)
-4:4/0 = 0
-4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 11, -16, 16, -11, 16, 11, 11, 16, -11, 16, -16, 11)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(11, -16, 16, -11, 16, 16, -11, 16, -16, 11, -16, -11, -11, -16)
-6:0/0 = 0
-6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, -10, 16, 16, 16, 16, -10)
-8:0/0 = 0
-8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -10, 10, -10, 10, 16, -16, 16)
-6:2/0 = 0
-6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 9, -10, 9, -10, -16)
-8:2/0 = 0
-8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 10, -16, 10, 9, -16, 9)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ca42v"]
-texture = ExtResource("6_dinhu")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:3/0 = 0
-1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:3/0 = 0
-2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:4/0 = 0
-0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:4/0 = 0
-1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:4/0 = 0
-2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rysoc"]
 texture = ExtResource("7_kvuet")
@@ -177,8 +115,6 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_ssvqc"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_kvuet")
-sources/1 = SubResource("TileSetAtlasSource_ca42v")
 sources/2 = SubResource("TileSetAtlasSource_rysoc")
 
 [sub_resource type="Curve" id="Curve_lbhrr"]
@@ -304,10 +240,20 @@ position = Vector2(-406, 210)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 PuzzleId = "hanoi"
 
+[node name="PuzzleTerminal2D3" parent="." unique_id=557642453 instance=ExtResource("4_p57ef")]
+position = Vector2(616, -1384)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
+
+TerminalPath = NodePath("../../PuzzleTerminal2D")
+
+[node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
+position = Vector2(512, -1600)
+TerminalPath = NodePath("../../PuzzleTerminal2D3")
 
 [node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
 
@@ -324,6 +270,7 @@ shape = SubResource("RectangleShape2D_dinhu")
 position = Vector2(-737, 312)
 
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
+position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
 MovementSpeed = 350.0

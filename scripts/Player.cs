@@ -22,7 +22,7 @@ public partial class Player : CharacterBody2D
 
     public float Health { get; set; }
 
-    public bool InputEnabled { get; set; } = true;
+    public bool InputDisabled { get; set; }
 
     public GasMask Mask { get; set; }
 
@@ -54,7 +54,7 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         // If input is disabled (puzzle open), stop movement
-        if (!InputEnabled)
+        if (InputDisabled)
         {
             Velocity = Vector2.Zero;
             MoveAndSlide();

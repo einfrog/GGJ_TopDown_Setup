@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://chnh2csf5ixqd"]
+
+[ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://d1agek5e3sehh" path="res://assets/sprites/PlayerSpritesheet.png" id="1_yqeox"]
+[ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="2_con2f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_con2f"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(0, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhnvy"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(48, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ytvr"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(96, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3eks"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(144, 256, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v86rl"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(0, 320, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13sgg"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(48, 320, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6lef"]
+atlas = ExtResource("1_yqeox")
+region = Rect2(96, 320, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4h3mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_con2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhnvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ytvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3eks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v86rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13sgg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6lef")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("PlayButton", "QuitButton", "CreditsButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjb58")
+PlayButton = NodePath("VBoxContainer/Button")
+QuitButton = NodePath("VBoxContainer/Button2")
+CreditsButton = NodePath("VBoxContainer/Button3")
+GameScene = ExtResource("2_con2f")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=318595503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1554760714]
+position = Vector2(265, 308)
+scale = Vector2(8.5, 8.5)
+sprite_frames = SubResource("SpriteFrames_4h3mk")
+autoplay = "default"
+frame_progress = 0.37230554
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=686536614]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4435764
+anchor_top = -0.06635802
+anchor_right = 0.8776042
+anchor_bottom = 0.9212963
+offset_right = -299.99994
+offset_bottom = -384.0
+scale = Vector2(3, 3)
+size_flags_horizontal = 3
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=1691959057]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Play"
+
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=2686264]
+layout_mode = 2
+text = "Quit"
+
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1041141328]
+layout_mode = 2
+text = "Credits"
