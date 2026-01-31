@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dudx1hn30x0qa" path="res://assets/sprites/DorrTerminalUnsolved.png" id="6_264po"]
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/horiz_wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_1kice"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
 [ext_resource type="PackedScene" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
@@ -18,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
+[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -250,20 +253,27 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
-[node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
-position = Vector2(56, 232)
-PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
-PuzzleId = "hanoi"
+[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
+
+[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(128, -720)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_264po")
+SolvedTexture = ExtResource("7_1kice")
+
+[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
+position = Vector2(632, -1360)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
-[node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
+[node name="Door1" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-TerminalPath = NodePath("../PuzzleTerminal2D")
+TerminalPath = NodePath("../../Terminals/Terminal1")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
-position = Vector2(512, -1984)
-TerminalPath = NodePath("../PuzzleTerminal2D3")
+position = Vector2(512, -1600)
+TerminalPath = NodePath("../../Terminals/Terminal2")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
@@ -276,14 +286,6 @@ z_index = 1
 position = Vector2(512, -1984)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
-
-[node name="PuzzleTerminal2D" parent="Doors" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(136, -760)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-
-[node name="PuzzleTerminal2D3" parent="Doors" unique_id=557642453 instance=ExtResource("4_p57ef")]
-position = Vector2(648, -1808)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
 [node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
