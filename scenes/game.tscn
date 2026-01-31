@@ -9,13 +9,14 @@
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
+[ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
-[ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
-[ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
-[ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 
@@ -253,18 +254,6 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1446716266]
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=313759922]
-z_index = -1
-position = Vector2(-726, -153)
-scale = Vector2(4, 4)
-texture = ExtResource("12_kvuet")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=411975384]
-position = Vector2(-726, -109)
-shape = SubResource("RectangleShape2D_dinhu")
-
 [node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
 position = Vector2(56, 232)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
@@ -293,26 +282,18 @@ scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
 
 [node name="PuzzleTerminal2D" parent="Doors" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(136, -816)
+position = Vector2(136, -760)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
 [node name="PuzzleTerminal2D3" parent="Doors" unique_id=557642453 instance=ExtResource("4_p57ef")]
-position = Vector2(648, -1488)
+position = Vector2(648, -1424)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
-[node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
-
-[node name="Sprite2D" type="Sprite2D" parent="CraftingTable" unique_id=295216946]
-position = Vector2(-726, -153)
-scale = Vector2(4, 4)
-texture = ExtResource("12_kvuet")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingTable" unique_id=193445280]
-position = Vector2(-726, -109)
-shape = SubResource("RectangleShape2D_dinhu")
+[node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
-position = Vector2(-737, 312)
+position = Vector2(-344, -760)
+Strength = 1.0
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
 scale = Vector2(4, 4)
