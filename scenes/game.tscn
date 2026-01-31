@@ -7,9 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
+[ext_resource type="Texture2D" uid="uid://lejqb3ncbceh" path="res://assets/sprites/wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
+[ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -81,15 +83,49 @@ texture = ExtResource("2_yqjtg")
 8:2/0 = 0
 8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 10, -16, 10, 9, -16, 9)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trtic"]
+texture = ExtResource("6_dinhu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
 [sub_resource type="TileSet" id="TileSet_lnu2h"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_yqjtg")
+sources/1 = SubResource("TileSetAtlasSource_trtic")
 
 [sub_resource type="Curve" id="Curve_lbhrr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
+size = Vector2(256, 168)
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
@@ -110,12 +146,13 @@ metadata/_custom_type_script = "uid://d4hdeedtuc7dl"
 [node name="Floor" type="TileMapLayer" parent="." unique_id=792315830]
 z_index = -1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAANABsAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAANABsAAAAAAAAAAAD4////AAAEAAAAAAD5////AAAEAAAAAAD6////AAAEAAAAAAD7////AAAEAAAAAAD8////AAAEAAAAAAD4/wAAAAACAAAAAAD6/wAAAAACAAAAAAD7/wAAAAACAAAAAAD8/wAAAAAAAAIAAAD5/wAAAAAAAAIAAAD9/wAAAAAGAAIAAAD9////AAAGAAAAAAA=")
 tile_set = SubResource("TileSet_iywne")
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=2015548460]
+z_index = -1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD8//v/AAACAAAAAAD9//v/AAACAAAAAAD+//v/AAACAAAAAAD///v/AAACAAAAAAAAAPv/AAACAAAAAAABAPv/AAACAAAAAAACAPv/AAACAAAAAAADAPv/AAACAAAAAAAEAPv/AAACAAAAAAAFAPv/AAACAAAAAAAGAPv/AAACAAAAAAAHAPv/AAACAAAAAAAIAPv/AAAEAAAAAAAIAPz/AAAEAAIAAAAIAP3/AAAEAAIAAAAIAP7/AAAEAAIAAAAIAP//AAAEAAIAAAAIAAAAAAAEAAIAAAAIAAMAAAAEAAIAAAAIAAIAAAAEAAIAAAAIAAEAAAAEAAIAAAAIAAQAAAAEAAQAAAD3/wQAAAAAAAQAAAD3/wMAAAAAAAIAAAD3/wIAAAAAAAIAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAACAAQAAAACAAQAAAACAAQAAAADAAQAAAACAAQAAAAEAAQAAAACAAQAAAAFAAQAAAACAAQAAAAGAAQAAAACAAQAAAAHAAQAAAACAAQAAAA=")
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAACAAAAAAD5//v/AAACAAAAAAD6//v/AAACAAAAAAD7//v/AAACAAAAAAD8//v/AAACAAAAAAD9//v/AAACAAAAAAD+//v/AAACAAAAAAD///v/AAACAAAAAAAAAPv/AAACAAAAAAABAPv/AAACAAAAAAACAPv/AAACAAAAAAADAPv/AAACAAAAAAAEAPv/AAACAAAAAAAFAPv/AAACAAAAAAAGAPv/AAACAAAAAAAHAPv/AAACAAAAAAAIAPv/AAAEAAAAAAAIAPz/AAAEAAIAAAAIAP3/AAAEAAIAAAAIAP7/AAAEAAIAAAAIAP//AAAEAAIAAAAIAAAAAAAEAAIAAAAIAAMAAAAEAAIAAAAIAAIAAAAEAAIAAAAIAAEAAAAEAAIAAAAIAAQAAAAEAAQAAAD3/wQAAAAAAAQAAAD3/wMAAAAAAAIAAAD3/wIAAAAAAAIAAAD3/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAD3////AAAAAAIAAAD3//7/AAAAAAIAAAD3//3/AAAAAAIAAAD3//z/AAAAAAIAAAD4/wQAAAACAAQAAAD5/wQAAAACAAQAAAD6/wQAAAACAAQAAAD7/wQAAAACAAQAAAD8/wQAAAACAAQAAAD9/wQAAAACAAQAAAD+/wQAAAACAAQAAAD//wQAAAACAAQAAAAAAAQAAAACAAQAAAABAAQAAAACAAQAAAACAAQAAAACAAQAAAADAAQAAAACAAQAAAAEAAQAAAACAAQAAAAFAAQAAAACAAQAAAAGAAQAAAACAAQAAAAHAAQAAAACAAQAAAD6//z/AQACAAEAAAD5//z/AQACAAEAABD4//z/AQAAAAQAAAD7//z/AQACAAMAADD7//3/AQACAAMAADD7//7/AQAAAAIAAGD6//7/AQABAAIAAAD5//7/AQABAAIAAAD4//7/AQABAAIAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAABD4//3/AQABAAQAAAA=")
 tile_set = SubResource("TileSet_lnu2h")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
@@ -124,7 +161,6 @@ tile_set = SubResource("TileSet_lnu2h")
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
 DamageCurve = SubResource("Curve_lbhrr")
-metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone" unique_id=1303028849]
 position = Vector2(-415.99997, -1120)
@@ -136,7 +172,6 @@ polygon = PackedVector2Array(677.18176, 46.411377, 652.64624, -136.3335, -544.68
 [node name="ContaminatedZone2" type="Area2D" parent="Zones" unique_id=675318557 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
-metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone2" unique_id=1680150201]
 position = Vector2(1608, -1040.0001)
@@ -148,7 +183,6 @@ polygon = PackedVector2Array(-196.28455, 23.205719, -117.77075, -641.05725, -549
 [node name="ContaminatedZone3" type="Area2D" parent="Zones" unique_id=1838403500 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
-metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone3" unique_id=706735182]
 position = Vector2(-503.99997, -2736)
@@ -160,7 +194,6 @@ polygon = PackedVector2Array(-29.442719, 98.62421, -24.535583, -69.61713, 1197.3
 [node name="ContaminatedZone4" type="Area2D" parent="Zones" unique_id=942502928 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
-metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone4" unique_id=1639985781]
 position = Vector2(-330.40002, -1919.1998)
@@ -172,7 +205,6 @@ polygon = PackedVector2Array(264.9842, 136.3335, 260.0771, -313.27692, -112.8636
 [node name="ContaminatedZone5" type="Area2D" parent="Zones" unique_id=561408620 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
-metadata/_custom_type_script = "uid://cxtwoq6eigwt1"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone5" unique_id=56053599]
 position = Vector2(1021.6, -1711.1998)
@@ -188,6 +220,7 @@ PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 
 [node name="ColorRect" type="ColorRect" parent="UI" unique_id=1212999955]
+visible = false
 material = SubResource("ShaderMaterial_p57ef")
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,3 +243,15 @@ offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
 ChimpPuzzleScene = ExtResource("10_vtaks")
 PlayerPath = NodePath("../../../Player")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1446716266]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=313759922]
+z_index = -1
+position = Vector2(-726, -153)
+scale = Vector2(4, 4)
+texture = ExtResource("12_kvuet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=411975384]
+position = Vector2(-726, -109)
+shape = SubResource("RectangleShape2D_dinhu")
