@@ -10,7 +10,7 @@ public partial class HanoiPuzzle : Control
 	[Signal]
 	public delegate void PuzzleFinishedEventHandler(bool success);
 	// Called when the node enters the scene tree for the first time.
-	[Export] public int DiskCount = 5;
+	[Export] public int DiskCount = 6;
 	[Export] public int MinDiskCount = 5;
 	[Export] public int MaxDiskCount = 8;
 
