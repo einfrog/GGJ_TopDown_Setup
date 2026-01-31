@@ -15,6 +15,7 @@ DiskScene = ExtResource("2_0hni5")
 StatusLabelPath = NodePath("Center/Panel/VBox/Status")
 ResetButtonPath = NodePath("Center/Panel/VBox/Buttons/ResetButton")
 CloseButtonPath = NodePath("Center/Panel/VBox/Buttons/CloseButton")
+UndoButtonPath = NodePath("Center/Panel/VBox/Buttons/UndoButton")
 PegAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA")
 PegBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB")
 PegCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC")
@@ -137,3 +138,7 @@ text = "Reset"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Close"
+
+[node name="UndoButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=248484814]
+layout_mode = 2
+text = "Undo"

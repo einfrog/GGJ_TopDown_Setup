@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,6 +23,7 @@ public partial class HanoiPuzzle : Control
 	[Export] public NodePath StatusLabelPath;
 	[Export] public NodePath ResetButtonPath;
 	[Export] public NodePath CloseButtonPath;
+	[Export] public NodePath UndoButtonPath;
 
 	[Export] public NodePath PegAPath;
 	[Export] public NodePath PegBPath;
@@ -35,6 +36,7 @@ public partial class HanoiPuzzle : Control
 	private Label _status;
 	private Button _resetButton;
 	private Button _closeButton;
+	private Button _undoButton;
 
 	private Control _pegA;
 	private Control _pegB;
@@ -55,7 +57,14 @@ public partial class HanoiPuzzle : Control
 	{
 		new Stack<int>(), new Stack<int>(), new Stack<int>()
 	};
+	private struct MoveRecord
+	{
+		public int From;
+		public int To;
+		public int Disk;
+	}
 
+	private readonly Stack<MoveRecord> _history = new();
 	private readonly Dictionary<int, Control> _diskNodeBySize = new();
 
 	private bool _hasPickedDisk;
@@ -67,6 +76,7 @@ public partial class HanoiPuzzle : Control
 		CacheNode();
 		WireUi();
 		StartPuzzle();
+		UpdateUndoButton();
 	}
 
 	private void CacheNodes()
@@ -74,6 +84,7 @@ public partial class HanoiPuzzle : Control
 		_status = GetNode<Label>(StatusLabelPath);
 		_resetButton = GetNode<Button>(ResetButtonPath);
 		_closeButton = GetNode<Button>(CloseButtonPath);
+		_undoButton = GetNode<Button>(UndoButtonPath);
 
 		_pegA = GetNode<Control>(PegAPath);
 		_pegB = GetNode<Control>(PegBPath);
@@ -89,7 +100,7 @@ public partial class HanoiPuzzle : Control
 		_status = GetNode<Label>(StatusLabelPath);
 		_resetButton = GetNode<Button>(ResetButtonPath);
 		_closeButton = GetNode<Button>(CloseButtonPath);
-
+		_undoButton = GetNode <Button>(UndoButtonPath);
 		_pegA = GetNode<Control>(PegAPath);
 		_pegB = GetNode<Control>(PegBPath);
 		_pegC = GetNode<Control>(PegCPath);
@@ -103,11 +114,13 @@ public partial class HanoiPuzzle : Control
 	{
 		_resetButton.Pressed += ResetPuzzle;
 		_closeButton.Pressed += CancelPuzzle;
+		_undoButton.Pressed += UndoLastMove;
 
 		_pegA.GuiInput += (e) => OnPegGuiInput(0, e);
 		_pegB.GuiInput += (e) => OnPegGuiInput(1, e);
 		_pegC.GuiInput += (e) => OnPegGuiInput(2, e);
 	}
+
 
 	public void StartPuzzle()
 	{
@@ -256,6 +269,7 @@ public partial class HanoiPuzzle : Control
 		_pegs[fromPeg].Pop();
 		_pegs[toPeg].Push(movingDisk);
 		_moveCount++;
+		_history.Push(new MoveRecord{From = fromPeg, To = toPeg, Disk = movingDisk});
 		if(_diskNodeBySize.TryGetValue(movingDisk, out var diskNode))
 		{
 			var newRoot = GetStackRoot(toPeg);
@@ -266,6 +280,7 @@ public partial class HanoiPuzzle : Control
 			}
 		}
 		ShowInfo($"Moved disk {movingDisk} to peg {PegName(toPeg)}.");
+		UpdateUndoButton();
 		return true;
 	}
 
@@ -396,12 +411,65 @@ public partial class HanoiPuzzle : Control
 		_pegs[0].Clear();
 		_pegs[1].Clear();
 		_pegs[2].Clear();
-
+		_history.Clear();
 		foreach (var kv in _diskNodeBySize)
 			kv.Value.QueueFree();
 		_diskNodeBySize.Clear();
 	}
 
+	private void UndoLastMove()
+	{
+		if (_state != PuzzleState.Playing)
+			return;
+		if (_history.Count == 0)
+		{
+			ShowInfo("Nothing to undo.");
+			return;
+		}
+
+		if (_hasPickedDisk)
+		{
+			SetDiskPickedVisual(_pickedDiskSize, false);
+			_hasPickedDisk = false;
+			_pickedDiskSize = 0;
+			_pickedFromPegIndex = -1;
+		}
+
+		var last = _history.Pop();
+
+		if (_pegs[last.To].Count == 0 || _pegs[last.To].Peek() != last.Disk)
+		{
+			ShowInfo("Undo failed (state mismatch). Reset recommended.");
+			_history.Clear();
+			UpdateUndoButton();
+			return;
+		}
+
+		_pegs[last.To].Pop();
+		_pegs[last.From].Push(last.Disk);
+
+		_moveCount = Mathf.Max(0, _moveCount - 1);
+
+		if (_diskNodeBySize.TryGetValue(last.Disk, out var diskNode))
+		{
+			var root = GetStackRoot(last.From);
+			if (diskNode.GetParent() != root)
+			{
+				diskNode.GetParent()?.RemoveChild(diskNode);
+				root.AddChild(diskNode);
+			}
+		}
+		LayoutAllPegs();
+		ShowInfo($"Undid move: disk {last.Disk} back to {PegName(last.From)}.");
+		UpdateUndoButton();
+	}
+	private void UpdateUndoButton()
+	{
+		if (_undoButton != null)
+		{
+			_undoButton.Disabled = _history.Count == 0 || _state != PuzzleState.Playing;
+		}
+	}
 	private void UpdateStatus()
 	{
 		string extra = _hasPickedDisk
@@ -409,6 +477,7 @@ public partial class HanoiPuzzle : Control
 			: "Click a peg to pick the top disk.";
 
 		_status.Text = $"Moves: {_moveCount} / Target: {_minMoves}\n{extra}";
+		UpdateUndoButton();
 	}
 
 	private void SetDiskPickedVisual(int diskSize, bool picked)
