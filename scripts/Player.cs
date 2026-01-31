@@ -6,10 +6,13 @@ namespace GGJ_2026.scripts;
 public partial class Player : CharacterBody2D
 {
 
-    private bool _inputEnabled = true;
+    private Vector2 _previousPosition;
 
     [Export]
     public AnimatedSprite2D Sprite { get; set; }
+
+    [Export]
+    public PlayerInteractor Interactor { get; set; }
 
     [Export]
     public float MovementSpeed { get; set; } = 500;
@@ -18,6 +21,8 @@ public partial class Player : CharacterBody2D
     public float MaxHealth { get; set; } = 100;
 
     public float Health { get; set; }
+
+    public bool InputEnabled { get; set; } = true;
 
     public GasMask Mask { get; set; }
 
@@ -38,13 +43,14 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        _previousPosition = Position;
         Health = MaxHealth;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         // If input is disabled (puzzle open), stop movement
-        if (!_inputEnabled)
+        if (!InputEnabled)
         {
             Velocity = Vector2.Zero;
             MoveAndSlide();
@@ -89,11 +95,6 @@ public partial class Player : CharacterBody2D
         }
 
         Health -= damage;
-    }
-
-    public void SetInputEnabled(bool enabled)
-    {
-        _inputEnabled = enabled;
     }
 
 }

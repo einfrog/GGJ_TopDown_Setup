@@ -1,5 +1,4 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
 namespace GGJ_2026.scripts;
 
@@ -26,7 +25,7 @@ public partial class ContaminatedZone : Area2D
 
     private void OnBodyEntered(Node body)
     {
-        if (body == Player.Instance)
+        if (body is Player)
         {
             DamageTimer.Paused = false;
         }
@@ -34,7 +33,7 @@ public partial class ContaminatedZone : Area2D
 
     private void OnBodyExited(Node body)
     {
-        if (body == Player.Instance)
+        if (body is Player)
         {
             DamageTimer.Paused = true;
         }

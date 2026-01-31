@@ -1,89 +1,86 @@
+using System;
 using Godot;
 
 namespace GGJ_2026.scripts.puzzles.core;
 
-public partial class PuzzleTerminal2D : Area2D
+public partial class PuzzleTerminal2D : Area2D, IInteractable
 {
-	// Called when the node enters the scene tree for the first time.
-	[Export] public NodePath PuzzleHostPath;
-	[Export] public string HintText = "Press E";
 
-	[Export] public bool OneTime = true;
+    private bool _busy;
 
-	private PuzzleHost _host;
-	private Label _hintLabel;
+    private bool _playerInside;
 
-	private bool _playerInside;
-	private bool _busy;
-	private bool _solved;
+    private bool _solved;
 
-	public override void _Ready()
-	{
-		_host = GetNode<PuzzleHost>(PuzzleHostPath);
-		_hintLabel = GetNodeOrNull<Label>("HintLabel");
-		if (_hintLabel != null)
-		{
-			_hintLabel.Text = HintText;
-			_hintLabel.Visible = false;
-		}
+    [Export]
+    public PuzzleHost PuzzleHost;
 
-		BodyEntered += OnBodyEntered;
-		BodyExited += OnBodyExited;
-	}
+    [Export]
+    public Label HintLabel;
 
-	private void OnBodyEntered(Node body)
-	{
-		if (!body.IsInGroup("player"))
-			return;
+    [Export]
+    public string HintText = "Press E";
 
-		_playerInside = true;
-		if (_hintLabel != null) _hintLabel.Visible = true;
+    [Export]
+    public bool OneTime = true;
+    
+    public event Action Solved;
 
-		var interactor = body.GetNodeOrNull<Node>("Interactor");
-		if (interactor != null && interactor.HasMethod("SetCurrentInteractable"))
-		{
-			interactor.Call("SetCurrentInteractable", this);
-		}
-		GD.Print(body.Name, " is player: ", body.IsInGroup("player"));
+    public void Interact()
+    {
+        if (!_playerInside) return;
+        if (_busy) return;
+        if (OneTime && _solved) return;
 
-	}
+        _busy = true;
+        HintLabel?.Visible = false;
 
-	private void OnBodyExited(Node body)
-	{
-		if (!body.IsInGroup("player"))
-			return;
+        PuzzleHost.OpenChimpPuzzle(success =>
+        {
+            _busy = false;
 
-		_playerInside = false;
-		if (_hintLabel != null) _hintLabel.Visible = false;
+            if (success)
+            {
+                _solved = true;
+                Solved?.Invoke();
+            }
+            else if (_playerInside)
+            {
+                HintLabel?.Visible = true;
+            }
+        });
+    }
 
-		if (body.HasMethod("ClearCurrentInteractable"))
-			body.Call("ClearCurrentInteractable", this);
-	}
-	public void Interact()
-	{
-		if (!_playerInside) return;
-		if (_busy) return;
-		if (OneTime && _solved) return;
-		GD.Print("interacted with the terminal");
-		_busy = true;
-		if (_hintLabel != null) _hintLabel.Visible = false;
-		_host.OpenChimpPuzzle(success =>
-		{
-			_busy = false;
-			if (success)
-			{
-				_solved = true;
-				GD.Print("Puzzle solved!");
-				EmitSignal(SignalName.Solved);
-			}
-			else
-			{
-				if (_playerInside && _hintLabel != null)
-					_hintLabel.Visible = true;
-			}
-		});
-	}
-	[Signal]
-	public delegate void SolvedEventHandler();
+    public override void _Ready()
+    {
+        HintLabel?.Visible = false;
+        HintLabel?.Text = HintText;
+        BodyEntered += OnBodyEntered;
+        BodyExited += OnBodyExited;
+    }
+
+    private void OnBodyEntered(Node body)
+    {
+        if (body is not Player player)
+        {
+            return;
+        }
+
+        _playerInside = true;
+        HintLabel?.Visible = true;
+        player.Interactor.SetCurrentInteractable(this);
+    }
+
+    private void OnBodyExited(Node body)
+    {
+        if (body is not Player player)
+        {
+            return;
+        }
+
+        _playerInside = false;
+        HintLabel?.Visible = false;
+        player.Interactor.ClearCurrentInteractable(this);
+    }
 
 }

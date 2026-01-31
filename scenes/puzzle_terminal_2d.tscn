@@ -6,8 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t6fd"]
 size = Vector2(144.5, 192)
 
-[node name="PuzzleTerminal2D" type="Area2D" unique_id=598227121]
+[node name="PuzzleTerminal2D" type="Area2D" unique_id=598227121 node_paths=PackedStringArray("HintLabel")]
 script = ExtResource("1_bkg5w")
+HintLabel = NodePath("HintLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840212345]
 position = Vector2(-30.75, 18)

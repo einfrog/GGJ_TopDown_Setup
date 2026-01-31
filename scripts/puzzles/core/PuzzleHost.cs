@@ -5,47 +5,39 @@ namespace GGJ_2026.scripts.puzzles.core;
 
 public partial class PuzzleHost : Control
 {
-	// Called when the node enters the scene tree for the first time.
-	[Export] public PackedScene ChimpPuzzleScene;
 
-	[Export] public NodePath PlayerPath;
+    private Node _currentPuzzle;
 
-	private Node _player;
-	private Node _currentPuzzle;
+    private Node _player;
 
-	public override void _Ready()
-	{
-		_player = PlayerPath != null && !PlayerPath.IsEmpty ? GetNode(PlayerPath) : null;
-		Visible = true;
-	}
+    // Called when the node enters the scene tree for the first time.
+    [Export]
+    public PackedScene ChimpPuzzleScene;
 
-	public void OpenChimpPuzzle(Action<bool> onFinished)
-	{
-		if (_currentPuzzle != null) return;
-		var puzzle = ChimpPuzzleScene.Instantiate();
-		_currentPuzzle = puzzle;
-		AddChild(puzzle);
+    [Export]
+    public NodePath PlayerPath;
 
-		 SetPlayerEnabled(false);
-		puzzle.Connect("PuzzleFinished", Callable.From<bool>((success) =>
-		{
-			_currentPuzzle?.QueueFree();
-			_currentPuzzle = null;
+    public void OpenChimpPuzzle(Action<bool> onFinished)
+    {
+        if (_currentPuzzle != null)
+        {
+            return;
+        }
 
-			SetPlayerEnabled(true);
+        Player.Instance.InputEnabled = false;
+        var puzzle = ChimpPuzzleScene.Instantiate();
+        _currentPuzzle = puzzle;
+        AddChild(puzzle);
 
-			onFinished?.Invoke(success);
-		}));
-		GD.Print("Puzzle scene is null? ", ChimpPuzzleScene == null);
-	}
+        puzzle.Connect("PuzzleFinished", Callable.From<bool>(success =>
+        {
+            Player.Instance.InputEnabled = true;
+            _currentPuzzle?.QueueFree();
+            _currentPuzzle = null;
+            onFinished?.Invoke(success);
+        }));
 
-	private void SetPlayerEnabled(bool enabled)
-	{
-		if (_player == null) return;
+        GD.Print("Puzzle scene is null? ", ChimpPuzzleScene == null);
+    }
 
-		if (_player.HasMethod("SetInputEnabled"))
-			_player.Call("SetInputEnabled", enabled);
-	}
 }
-// Called every frame. 'delta' is the elapsed time since the previous frame.
-
