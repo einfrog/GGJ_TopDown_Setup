@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bl0a6sheyrfig"]
+
+[node name="SkillCheckPuzzle" type="Control" unique_id=551880434]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1359771792]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Center" type="CenterContainer" parent="." unique_id=1820370494]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1506014114]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=342010286]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Center/Panel/VBox" unique_id=145384678]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="Center/Panel/VBox" unique_id=594335888]
+layout_mode = 2
+
+[node name="DialContainer" type="Control" parent="Center/Panel/VBox" unique_id=1057565984]
+layout_mode = 2
+
+[node name="Dial" type="Control" parent="Center/Panel/VBox/DialContainer" unique_id=723371074]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Buttons" type="HBoxContainer" parent="Center/Panel/VBox" unique_id=852034380]
+layout_mode = 2
+
+[node name="RetryButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=1657627483]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=137213416]
+layout_mode = 2

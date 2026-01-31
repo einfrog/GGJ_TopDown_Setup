@@ -14,5 +14,4 @@ public partial class DiskUi : Panel
         label?.Text = SizeValue.ToString();
     }
 
-
 }

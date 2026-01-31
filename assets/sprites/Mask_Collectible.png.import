@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lejqb3ncbceh"
-path="res://.godot/imported/wall_tiles.png-0c044834e068ea5902d3ad689e97df0f.ctex"
+uid="uid://cmooc7bq8cuk7"
+path="res://.godot/imported/Mask_Collectible.png-c017c448deed823fa54922212e5c6c7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/wall_tiles.png"
-dest_files=["res://.godot/imported/wall_tiles.png-0c044834e068ea5902d3ad689e97df0f.ctex"]
+source_file="res://assets/sprites/Mask_Collectible.png"
+dest_files=["res://.godot/imported/Mask_Collectible.png-c017c448deed823fa54922212e5c6c7b.ctex"]
 
 [params]
 
