@@ -10,8 +10,8 @@ public partial class HanoiPuzzle : Control
 	[Signal]
 	public delegate void PuzzleFinishedEventHandler(bool success);
 	// Called when the node enters the scene tree for the first time.
-	[Export] public int DiskCount = 5;
-	[Export] public int MinDiskCount = 5;
+	[Export] public int DiskCount = 3;
+	[Export] public int MinDiskCount = 3;
 	[Export] public int MaxDiskCount = 8;
 
 	[Export] public int DiskHeight = 22;
@@ -585,6 +585,7 @@ public partial class HanoiPuzzle : Control
 			return;
 		if (_moveCount == _minMoves)
 		{
+			GD.Print("game won, with minmoves");
 			ShowResultOverlay(
 				"Victory",
 				$"Perfect! You solved it in {_moveCount} moves (minimum for {DiskCount} disks." )
@@ -593,6 +594,7 @@ public partial class HanoiPuzzle : Control
 		}
 		else
 		{
+			GD.Print("game won, witout minmoves");
 			ShowResultOverlay(
 				"Game Over",
 				$"You solved it in {_moveCount}, but the minimum is {_minMoves}. \n"+

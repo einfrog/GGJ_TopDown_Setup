@@ -43,6 +43,7 @@ layout_mode = 2
 [node name="VBox" type="VBoxContainer" parent="Dimmer/Center/Panel" unique_id=1466498655]
 layout_mode = 2
 theme_override_constants/separation = 10
+alignment = 1
 
 [node name="Status" type="Label" parent="Dimmer/Center/Panel/VBox" unique_id=413694161]
 custom_minimum_size = Vector2(50, 50)
@@ -67,6 +68,7 @@ size_flags_horizontal = 3
 text = "Retry"
 
 [node name="VSeparator" type="VSeparator" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=1741593894]
+visible = false
 layout_mode = 2
 
 [node name="CloseButton" type="Button" parent="Dimmer/Center/Panel/VBox/Buttons" unique_id=967730851]
