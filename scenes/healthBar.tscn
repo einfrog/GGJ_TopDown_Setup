@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0owa7rdltofs"]
+
+[ext_resource type="Script" uid="uid://cmkjd557r586y" path="res://scripts/HealthBar.cs" id="1_spvli"]
+[ext_resource type="Texture2D" uid="uid://b0n73umx3yqhm" path="res://assets/sprites/HealthBarUnder.png" id="1_xpa3b"]
+[ext_resource type="Texture2D" uid="uid://cjvyhq3i4saas" path="res://assets/sprites/HealthBarProgress.png" id="2_spvli"]
+
+[node name="HealthBar" type="Control" unique_id=1075518257 node_paths=PackedStringArray("Bar")]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_spvli")
+Bar = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=872727368]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 100.0
+offset_bottom = 41.0
+value = 50.0
+texture_under = ExtResource("1_xpa3b")
+texture_progress = ExtResource("2_spvli")
