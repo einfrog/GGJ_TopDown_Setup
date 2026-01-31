@@ -4,16 +4,36 @@ namespace GGJ_2026.scripts;
 
 public partial class Player : CharacterBody2D
 {
+
     private bool _inputEnabled = true;
-    [Export] private AnimatedSprite2D Sprite { get; set; }
 
-    [Export] public float MovementSpeed { get; set; } = 500;
+    [Export]
+    public AnimatedSprite2D Sprite { get; set; }
 
-    [Export] public float MaxHealth { get; set; } = 100;
+    [Export]
+    public float MovementSpeed { get; set; } = 500;
+
+    [Export]
+    public float MaxHealth { get; set; } = 100;
 
     public float Health { get; set; }
 
     public GasMask Mask { get; set; }
+
+    public static Player Instance { get; private set; }
+
+    public event Action Died;
+
+    public override void _EnterTree()
+    {
+        if (Instance is not null)
+        {
+            GD.PushError("There can only be one player");
+            return;
+        }
+
+        Instance = this;
+    }
 
     public override void _Ready()
     {
