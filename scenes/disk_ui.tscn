@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2bk8pr1ncur1"]
 
-[ext_resource type="Script" uid="uid://6y3hnbc7cusd" path="res://scripts/DiskUi.cs" id="1_kxiyw"]
+[ext_resource type="Script" uid="uid://bfpdf6fiqfooq" path="res://scripts/DiskUi.cs" id="1_kxiyw"]
 
 [node name="DiskUI" type="Panel" unique_id=308686218]
 offset_right = 40.0
