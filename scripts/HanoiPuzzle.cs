@@ -149,7 +149,69 @@ public partial class HanoiPuzzle : Control
 
 	private void OnPegGuiInput(int pegIndex, InputEvent e)
 	{
+		if (_state != PuzzleState.Playing)
+			return;
+
+		// ONLY react to left mouse button PRESS
+		if (e is not InputEventMouseButton mb)
+			return;
+
+		if (mb.ButtonIndex != MouseButton.Left)
+			return;
+
+		if (!mb.Pressed)
+			return;
+
+		GD.Print($"Peg {pegIndex} CLICKED");
+		if (!_hasPickedDisk)
+		{
+			if (_pegs[pegIndex].Count == 0)
+			{
+				ShowInfo("That peg is empty.");
+				return;
+			}
+
+			int topDisk = _pegs[pegIndex].Peek();
+
+			_hasPickedDisk = true;
+			_pickedDiskSize = topDisk;
+			_pickedFromPegIndex = pegIndex;
+			
+			SetDiskPickedVisual(_pickedDiskSize, true);
+			ShowInfo($"Picked disk {_pickedDiskSize}. Choose a peg go place it.");
+			return;
+		}
+
+		if (pegIndex == _pickedFromPegIndex)
+		{
+			SetDiskPickedVisual(_pickedDiskSize, false);
+			_hasPickedDisk = false;
+			_pickedDiskSize = 0;
+			_pickedFromPegIndex = -1;
+			
+			UpdateStatus();
+			return;
+		}
+		bool moved = TryMove(_pickedFromPegIndex, pegIndex);
 		
+		SetDiskPickedVisual(_pickedDiskSize, false);
+		_hasPickedDisk = false;
+		_pickedDiskSize = 0;
+		_pickedFromPegIndex = -1;
+
+		if (!moved)
+		{
+			return;
+		}
+		LayoutPeg(0);
+		LayoutPeg(1);
+		LayoutPeg(2);
+		if (IsSolved())
+		{
+			CompletePuzzle();
+			return;
+		}
+		UpdateStatus();
 	}
 
 	private void BuildInitialState()
@@ -171,13 +233,70 @@ public partial class HanoiPuzzle : Control
 		// - increment move count
 		// - return true
 		// else return false
-		return false;
+		
+		if(fromPeg < 0 || fromPeg > 2 || toPeg < 0 || toPeg >2)
+			return false;
+		if (_pegs[fromPeg].Count == 0)
+		{
+			ShowInfo("No disk to move.");
+			return false;
+		}
+
+		int movingDisk = _pegs[fromPeg].Peek();
+
+		if (_pegs[toPeg].Count > 0)
+		{
+			int destTop = _pegs[toPeg].Peek();
+			if (destTop < movingDisk)
+			{
+				ShowInfo($"Illegal move: disk {movingDisk} can't go on disk {destTop}.");
+				return false;
+			}
+		}
+
+		_pegs[fromPeg].Pop();
+		_pegs[toPeg].Push(movingDisk);
+		_moveCount++;
+		if(_diskNodeBySize.TryGetValue(movingDisk, out var diskNode))
+		{
+			var newRoot = GetStackRoot(toPeg);
+			if (diskNode.GetParent() != newRoot)
+			{
+				diskNode.GetParent()?.RemoveChild(diskNode);
+				newRoot.AddChild(diskNode);
+			}
+		}
+		ShowInfo($"Moved disk {movingDisk} to peg {PegName(toPeg)}.");
+		return true;
 	}
 
+	private string PegName(int pegIndex) => pegIndex switch
+	{
+		0 => "A",
+		1 => "B",
+		2 => "C",
+		_ => "?"
+	};
 	private bool IsSolved()
 	{
-		// Solved means all disks moved to peg C (index 2)
-		// AND moveCount == minMoves (your win condition)
+		if (_pegs[2].Count != DiskCount)
+			return false;
+
+		// Optional extra validation: peg C must be correctly ordered (top smallest)
+		// Stack enumerates top->bottom; we want strictly increasing sizes as we go down.
+		int prev = 0;
+		foreach (int size in _pegs[2]) // top -> bottom
+		{
+			if (size <= prev) return false;
+			prev = size;
+		}
+
+		// "Perfect-only" rule:
+		if (_moveCount == _minMoves)
+			return true;
+
+		// Not perfect: give feedback but do not complete
+		ShowInfo($"All disks reached C, but moves = {_moveCount}. Minimum is {_minMoves}. Undo/Reset to try again.");
 		return false;
 	}
 
@@ -286,7 +405,24 @@ public partial class HanoiPuzzle : Control
 
 	private void UpdateStatus()
 	{
-		_status.Text = $"Movex: {_moveCount} / Target: {_minMoves}";
+		string extra = _hasPickedDisk
+			? $"Picked: {_pickedDiskSize} (from {PegName(_pickedFromPegIndex)})"
+			: "Click a peg to pick the top disk.";
+
+		_status.Text = $"Moves: {_moveCount} / Target: {_minMoves}\n{extra}";
+	}
+
+	private void SetDiskPickedVisual(int diskSize, bool picked)
+	{
+		if (_diskNodeBySize.TryGetValue(diskSize, out var node) && node is CanvasItem ci)
+		{
+			ci.Modulate = picked ? new Color(1f, 1f, 0.75f, 1f) : new Color(1f, 1f, 1f, 1f);
+		}
+	}
+
+	private void ShowInfo(string message)
+	{
+		_status.Text = $"Moves: {_moveCount} / Target: {_minMoves}\n{message}";
 	}
 }
 
