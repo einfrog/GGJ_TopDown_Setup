@@ -221,6 +221,11 @@ position = Vector2(56, 232)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 PuzzleId = "hanoi"
 
+[node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
+position = Vector2(56, 232)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+PuzzleId = "hanoi"
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
@@ -243,13 +248,27 @@ position = Vector2(512, -1600)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
 
-[node name="PuzzleTerminal2D" parent="Doors" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(136, -760)
+[node name="Terminals" type="Node2D" parent="." unique_id=1823033798]
+
+[node name="PuzzleTerminal2D" parent="Terminals" unique_id=1923222968 instance=ExtResource("4_p57ef")]
+position = Vector2(136, -816)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("9_1kice")
+SolvedTexture = ExtResource("10_5newe")
+
+[node name="PuzzleTerminal2D2" parent="Terminals" unique_id=828141489 instance=ExtResource("4_p57ef")]
+position = Vector2(56, 232)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+PuzzleId = "hanoi"
+TerminalTexture = ExtResource("7_ssvqc")
+
+[node name="PuzzleTerminal2D3" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+
+[node name="PuzzleTerminal2D4" parent="Terminals" unique_id=557642453 instance=ExtResource("4_p57ef")]
+position = Vector2(648, -1488)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
-[node name="PuzzleTerminal2D3" parent="Doors" unique_id=557642453 instance=ExtResource("4_p57ef")]
-position = Vector2(648, -1424)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+[node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
 
 [node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
