@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://brqksdxt4tt8l"]
+[gd_scene format=3 uid="uid://6x2qs6uko7jn"]
 
 [ext_resource type="Texture2D" uid="uid://b3ci5m8scphwn" path="res://assets/sprites/Door.png" id="1_hpvv5"]
 
@@ -56,7 +56,6 @@ animations = [{
 size = Vector2(64, 96)
 
 [node name="Door" type="StaticBody2D" unique_id=890238121]
-position = Vector2(128, 192)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1538560516]
 scale = Vector2(4, 4)

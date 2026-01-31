@@ -29,7 +29,7 @@ public partial class Player : CharacterBody2D
     public static Player Instance { get; private set; }
 
     public event Action Died;
-    
+
     public event Action<float> HealthChanged;
 
     public override void _EnterTree()
@@ -91,17 +91,13 @@ public partial class Player : CharacterBody2D
             damage = Mask.Filter(damage);
         }
 
-        Health -= damage;
-        Health = Mathf.Max(Health, 0);
-
-        HealthChanged?.Invoke(Health);
-
-        if (Health <= 0)
+        if (Health - damage <= 0 && Health > 0)
         {
             Died?.Invoke();
         }
 
+        Health = Mathf.Max(0, Health - damage);
+        HealthChanged?.Invoke(Health);
     }
-    
 
 }
