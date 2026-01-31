@@ -29,15 +29,18 @@ RestartButtonPath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVB
 ContinueButtonPath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons/ContinueButton")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=236129223]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.003921569)
 
 [node name="Center" type="CenterContainer" parent="." unique_id=396037965]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="Panel" type="PanelContainer" parent="Center" unique_id=1415206758]
 custom_minimum_size = Vector2(700, 520)
@@ -150,7 +153,6 @@ size_flags_horizontal = 3
 text = "Undo"
 
 [node name="ResultOverlay" type="ColorRect" parent="." unique_id=1403701601]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,11 +163,11 @@ color = Color(0, 0, 0, 0.003921569)
 
 [node name="OverlayCenter" type="CenterContainer" parent="ResultOverlay" unique_id=487702520]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="OverlayPanel" type="PanelContainer" parent="ResultOverlay/OverlayCenter" unique_id=554250997]
-custom_minimum_size = Vector2(420, 200)
+custom_minimum_size = Vector2(700, 520)
 layout_mode = 2
 
 [node name="OverlayVBox" type="VBoxContainer" parent="ResultOverlay/OverlayCenter/OverlayPanel" unique_id=1659383977]
@@ -189,8 +191,10 @@ layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=87478576]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Restart"
 
 [node name="ContinueButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=2111303403]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Continue"
