@@ -1,13 +1,22 @@
+using System;
 using Godot;
 
 namespace GGJ_2026.scripts.puzzles.core;
 
-public partial class PuzzleTerminal2D : Area2D
+public partial class PuzzleTerminal2D : Area2D, IInteractable
 {
-    [Export] public NodePath PuzzleHostPath;
-    [Export] public string PuzzleId = "chimp"; // e.g. "chimp" or "hanoi"
-    [Export] public string HintText = "Press E";
-    [Export] public bool OneTime = true;
+
+    [Export]
+    public NodePath PuzzleHostPath;
+
+    [Export]
+    public string PuzzleId = "chimp"; // e.g. "chimp" or "hanoi"
+
+    [Export]
+    public string HintText = "Press E";
+
+    [Export]
+    public bool OneTime = true;
 
     private PuzzleHost _host;
     private Label _hintLabel;
@@ -16,18 +25,18 @@ public partial class PuzzleTerminal2D : Area2D
     private bool _busy;
     private bool _solved;
 
+    public event Action Solved;
+
     public override void _Ready()
     {
         _host = GetNodeOrNull<PuzzleHost>(PuzzleHostPath);
+
         if (_host == null)
             GD.PushError($"PuzzleTerminal2D: PuzzleHost not found at path '{PuzzleHostPath}'.");
 
         _hintLabel = GetNodeOrNull<Label>("HintLabel");
-        if (_hintLabel != null)
-        {
-            _hintLabel.Text = HintText;
-            _hintLabel.Visible = false;
-        }
+        _hintLabel?.Text = HintText;
+        _hintLabel?.Visible = false;
 
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
@@ -35,35 +44,30 @@ public partial class PuzzleTerminal2D : Area2D
 
     private void OnBodyEntered(Node body)
     {
-        if (!body.IsInGroup("player"))
+        if (body is not Player player)
             return;
 
         _playerInside = true;
 
         // Don't show hint if already solved in one-time mode
-        if (! (OneTime && _solved))
+        if (!(OneTime && _solved))
         {
-            if (_hintLabel != null) _hintLabel.Visible = true;
+            _hintLabel?.Visible = true;
         }
 
-        // Tell the player's Interactor child that this is the current interactable
-        var interactor = body.GetNodeOrNull<Node>("Interactor");
-        if (interactor != null && interactor.HasMethod("SetCurrentInteractable"))
-            interactor.Call("SetCurrentInteractable", this);
+        player.Interactor.SetCurrentInteractable(this);
     }
 
     private void OnBodyExited(Node body)
     {
-        if (!body.IsInGroup("player"))
+        if (body is not Player player)
             return;
 
         _playerInside = false;
-        if (_hintLabel != null) _hintLabel.Visible = false;
+        _hintLabel?.Visible = false;
 
         // IMPORTANT: clear via Interactor (same pattern as OnBodyEntered)
-        var interactor = body.GetNodeOrNull<Node>("Interactor");
-        if (interactor != null && interactor.HasMethod("ClearCurrentInteractable"))
-            interactor.Call("ClearCurrentInteractable", this);
+        player.Interactor.ClearCurrentInteractable(this);
     }
 
     public void Interact()
@@ -74,7 +78,7 @@ public partial class PuzzleTerminal2D : Area2D
         if (_host == null) return;
 
         _busy = true;
-        if (_hintLabel != null) _hintLabel.Visible = false;
+        _hintLabel?.Visible = false;
 
         // Open puzzle by ID using the new host
         bool opened = _host.OpenPuzzle(PuzzleId, success =>
@@ -83,9 +87,7 @@ public partial class PuzzleTerminal2D : Area2D
 
             if (success)
             {
-                _solved = true;
                 SetSolvedState();
-                EmitSignal(SignalName.Solved);
             }
             else
             {
@@ -106,8 +108,9 @@ public partial class PuzzleTerminal2D : Area2D
     private void SetSolvedState()
     {
         // Hide hint permanently and stop reacting to bodies if one-time
-        if (_hintLabel != null)
-            _hintLabel.Visible = false;
+        _hintLabel?.Visible = false;
+        _solved = true;
+        Solved?.Invoke();
 
         if (OneTime)
         {
@@ -116,6 +119,4 @@ public partial class PuzzleTerminal2D : Area2D
         }
     }
 
-    [Signal]
-    public delegate void SolvedEventHandler();
 }
