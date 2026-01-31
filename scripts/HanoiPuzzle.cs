@@ -154,7 +154,10 @@ public partial class HanoiPuzzle : Control
 
 	private void BuildInitialState()
 	{
-		
+		for (int size = DiskCount; size >= 1; size--)
+		{
+			_pegs[0].Push(size);
+		}
 	}
 
 	private bool TryMove(int fromPeg, int toPeg)
@@ -185,10 +188,42 @@ public partial class HanoiPuzzle : Control
 
 	private void BuildVisuals()
 	{
-			// Instantiate DiskScene for each size 1..DiskCount
-			// Set width based on size, set height, store in _diskNodeBySize
-			// Parent all initially under stack A
+		if (DiskScene == null)
+		{
+			GD.PushError("HanoiPuzzle: DiskScene is not assigned. Drag DiskUI.tscn into DiskScene export.");
+			return;
+		}
+
+		for (int size = 1; size <= DiskCount; size++)
+		{
+			var disk = DiskScene.Instantiate<Control>();
+
+			// Set disk size label/value BEFORE adding to the tree
+			if (disk is DiskUi diskUi)
+				diskUi.SizeValue = size;
+
+			// Size it
+			int width = DiskMinWidth + (size - 1) * DiskWidthStep;
+			disk.CustomMinimumSize = new Vector2(width, DiskHeight);
+			disk.Size = disk.CustomMinimumSize;
+
+			// Make it visible (style)
+			if (disk is Panel panel)
+			{
+				var style = new StyleBoxFlat();
+				style.BgColor = new Color(0.8f, 0.8f, 0.8f, 1f);
+				style.CornerRadiusTopLeft = 6;
+				style.CornerRadiusTopRight = 6;
+				style.CornerRadiusBottomLeft = 6;
+				style.CornerRadiusBottomRight = 6;
+				panel.AddThemeStyleboxOverride("panel", style);
+			}
+
+			_stackA.AddChild(disk);
+			_diskNodeBySize[size] = disk;
+		}
 	}
+
 
 	private void LayoutAllPegs()
 	{
@@ -201,6 +236,30 @@ public partial class HanoiPuzzle : Control
 	{
 		// Position disk nodes inside the peg's StackRoot so they stack from bottom
 		// Use DiskHeight and DiskGap, center horizontally
+		var stackRoot = GetStackRoot(pegIndex);
+
+		var sizes = _pegs[pegIndex].ToArray();
+		Array.Reverse(sizes);
+
+		float bottomY = stackRoot.Size.Y;
+
+		for (int i = 0; i < sizes.Length; i++)
+		{
+			int size = sizes[i];
+			if(!_diskNodeBySize.TryGetValue(size, out var diskNode))
+				continue;
+			if (diskNode.GetParent() != stackRoot)
+			{
+				diskNode.GetParent()?.RemoveChild(diskNode);
+				stackRoot.AddChild(diskNode);
+			}
+
+			float x = (stackRoot.Size.X - diskNode.Size.X) * 0.5f;
+
+			float y = bottomY - (i + 1) * DiskHeight - i * DiskGap;
+
+			diskNode.Position = new Vector2(x, y);
+		}
 	}
 
 	private Control GetStackRoot(int pegIndex)
