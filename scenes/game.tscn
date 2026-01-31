@@ -10,8 +10,11 @@
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
-[ext_resource type="Texture2D" uid="uid://b3ci5m8scphwn" path="res://assets/sprites/Door.png" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
+[ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -197,28 +200,34 @@ shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
 shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
 
+[sub_resource type="Resource" id="Resource_ir15t"]
+script = ExtResource("11_trtic")
+Id = "chimp"
+Scene = ExtResource("10_vtaks")
+metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
+
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("11_trtic")
+Id = "hanoi"
+Scene = ExtResource("13_ir15t")
+metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(0, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(64, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(128, 0, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(0, 96, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(64, 96, 64, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
-atlas = ExtResource("12_dinhu")
 region = Rect2(128, 96, 64, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_264po"]
@@ -269,7 +278,7 @@ tile_set = SubResource("TileSet_lnu2h")
 [node name="Door_Walls" type="TileMapLayer" parent="." unique_id=1875493551]
 z_index = 1
 scale = Vector2(4, 4)
-tile_map_data = PackedByteArray("AAD3/+f/AgAAAAMAADD3/+j/AgAAAAMAADD3/+n/AgAAAAMAADD3/+r/AgAAAAMAADD3/+v/AgAAAAEAADD3/+z/AgAAAAMAADD3/+3/AgAAAAMAADD3/+7/AgAAAAMAADD3/+//AgAAAAMAADD3//D/AgAAAAMAADD3//H/AgAAAAEAADD3//L/AgAAAAMAADD3//P/AgAAAAMAADD3//T/AgAAAAMAADD3//X/AgAAAAMAADD3//b/AgAAAAMAADD4/+v/AgAAAAMAAFD4//H/AgAAAAMAAFD4//b/AgAAAAMAAFD5/+v/AgAAAAMAAFD5//H/AgAAAAQAAFD5//b/AgAAAAQAAFD6/+v/AgAAAAMAAFD6//H/AgAAAAQAAGD7/+r/AgAAAAIAADD7/+v/AgAAAAIAAAD7//H/AgAAAAQAAFD7//b/AgAAAAQAAGD8/+r/AgAAAAMAAFD8//H/AgAAAAQAAGD8//b/AgAAAAMAAFD9/+r/AgAAAAQAAFD9//H/AgAAAAMAAGD9//b/AgAAAAMAAFD+/+r/AgAAAAQAAGD+//H/AgAAAAMAAGD+//b/AgAAAAIAAGD//+r/AgAAAAQAAFD///H/AgAAAAMAAGD///b/AgAAAAQAAGAAAOr/AgAAAAQAAGAAAPH/AgAAAAMAAGAAAPb/AgAAAAQAAFABAOr/AgAAAAEAAGABAO7/AgAAAAMAADABAO//AgAAAAMAADABAPD/AgAAAAMAADABAPH/AgAAAAEAAFABAPb/AgAAAAIAADACAOr/AgAAAAMAAGACAPH/AgAAAAQAAFACAPb/AgAAAAMAAGADAOr/AgAAAAMAAGADAPH/AgAAAAQAAGADAPb/AgAAAAMAAGAEAOr/AgAAAAMAAGAEAPH/AgAAAAQAAFAEAPb/AgAAAAMAAGAFAOr/AgAAAAEAAGAFAO7/AgAAAAMAAAAFAO//AgAAAAMAAAAFAPD/AgAAAAMAAAAFAPH/AgAAAAMAAAAFAPX/AgAAAAMAAAAFAPb/AgAAAAEAAFAGAOr/AgAAAAQAAFAGAPb/AgAAAAMAAGAHAOr/AgAAAAQAAGAHAPb/AgAAAAMAAGAIAOr/AgAAAAQAAFAIAPb/AgAAAAMAAGAJAOr/AgAAAAQAAGAJAPb/AgAAAAMAAGAKAOf/AgAAAAMAAAAKAOj/AgAAAAMAAAAKAOn/AgAAAAMAAAAKAOr/AgAAAAEAAAAKAO7/AgAAAAMAAAAKAO//AgAAAAMAAAAKAPD/AgAAAAMAAAAKAPH/AgAAAAMAAAAKAPL/AgAAAAMAAAAKAPP/AgAAAAMAAAAKAPT/AgAAAAMAAAAKAPX/AgAAAAMAAAAKAPb/AgAAAAIAAAABAOv/AgAAAAMAADABAOz/AgAAAAMAADABAO3/AgAAAAMAADAFAOv/AgAAAAMAAAAFAOz/AgAAAAMAAAAFAO3/AgAAAAMAAAAKAOv/AgAAAAMAAAAKAOz/AgAAAAMAAAAKAO3/AgAAAAMAAAAFAPL/AgAAAAMAAAAFAPP/AgAAAAMAAAAFAPT/AgAAAAMAAAD3/+P/AgAAAAIAADD3/+T/AgAAAAMAADD3/+X/AgAAAAMAADD3/+b/AgAAAAMAADD4/+P/AgAAAAMAAFD5/+P/AgAAAAMAAFD6/+P/AgAAAAMAAFD7/+P/AgAAAAMAAFD8/+P/AgAAAAMAAFD9/+P/AgAAAAMAAFD+/+P/AgAAAAMAAFD//+P/AgAAAAMAAFAAAOP/AgAAAAMAAFABAOP/AgAAAAMAAFACAOP/AgAAAAMAAFADAOP/AgAAAAMAAFAEAOP/AgAAAAMAAFAFAOP/AgAAAAMAAFAGAOP/AgAAAAMAAFAHAOP/AgAAAAMAAFAIAOP/AgAAAAMAAFAJAOP/AgAAAAMAAFAKAOP/AgAAAAIAAGAKAOT/AgAAAAMAAAAKAOX/AgAAAAMAAAAKAOb/AgAAAAMAAAD3//f/AgAAAAMAADD3//j/AgAAAAMAADD3//n/AgAAAAMAADD3//r/AgAAAAMAADD3//v/AgAAAAEAADD3//z/AgAAAAMAADD3//3/AgAAAAMAADD3//7/AgAAAAMAADD3////AgAAAAMAADD3/wAAAgAAAAMAADD3/wEAAgAAAAMAADD3/wIAAgAAAAMAADD3/wMAAgAAAAMAADD3/wQAAgAAAAIAAFD4//v/AgAAAAMAAFD4/wQAAgAAAAMAAFD5//v/AgAAAAMAAFD5/wQAAgAAAAMAAFD6//v/AgAAAAMAAFD6/wQAAgAAAAMAAFD7//v/AgAAAAMAAFD7/wQAAgAAAAMAAFD8//v/AgAAAAMAAFD8/wQAAgAAAAMAAFD9//v/AgAAAAMAAFD9/wQAAgAAAAMAAFD+//f/AgAAAAMAAAD+//j/AgAAAAMAAAD+//n/AgAAAAMAAAD+//r/AgAAAAMAAAD+//v/AgAAAAIAAAD+/wQAAgAAAAMAAFD//wQAAgAAAAMAAFAAAAQAAgAAAAMAAFABAPf/AgAAAAMAADABAPj/AgAAAAMAADABAPn/AgAAAAMAADABAPr/AgAAAAMAADABAPv/AgAAAAMAADABAPz/AgAAAAMAADABAP3/AgAAAAMAADABAP7/AgAAAAMAADABAP//AgAAAAMAADABAAAAAgAAAAMAADABAAEAAgAAAAMAADABAAIAAgAAAAMAADABAAMAAgAAAAMAADABAAQAAgAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAD3/+f/AgAAAAMAADD3/+j/AgAAAAMAADD3/+n/AgAAAAMAADD3/+r/AgAAAAMAADD3/+v/AgAAAAEAADD3/+z/AgAAAAMAADD3/+3/AgAAAAMAADD3/+7/AgAAAAMAADD3/+//AgAAAAMAADD3//D/AgAAAAMAADD3//H/AgAAAAEAADD3//L/AgAAAAMAADD3//P/AgAAAAMAADD3//T/AgAAAAMAADD3//X/AgAAAAMAADD3//b/AgAAAAMAADD4/+v/AgAAAAMAAFD4//H/AgAAAAMAAFD4//b/AgAAAAMAAFD5/+v/AgAAAAMAAFD5//H/AgAAAAQAAFD5//b/AgAAAAQAAFD6/+v/AgAAAAMAAFD6//H/AgAAAAQAAGD7/+r/AgAAAAIAADD7/+v/AgAAAAIAAAD7//H/AgAAAAQAAFD7//b/AgAAAAQAAGD8/+r/AgAAAAMAAFD8//H/AgAAAAQAAGD8//b/AgAAAAMAAFD9/+r/AgAAAAQAAFD9//H/AgAAAAMAAGD9//b/AgAAAAMAAFD+/+r/AgAAAAQAAGD+//H/AgAAAAMAAGD+//b/AgAAAAIAAGD//+r/AgAAAAQAAFD///H/AgAAAAMAAGD///b/AgAAAAQAAGAAAOr/AgAAAAQAAGAAAPH/AgAAAAMAAGAAAPb/AgAAAAQAAFABAOr/AgAAAAEAAGABAO7/AgAAAAMAADABAO//AgAAAAMAADABAPD/AgAAAAMAADABAPH/AgAAAAEAAFABAPb/AgAAAAIAADACAOr/AgAAAAMAAGACAPH/AgAAAAQAAFACAPb/AgAAAAMAAGADAOr/AgAAAAMAAGADAPH/AgAAAAQAAGADAPb/AgAAAAMAAGAEAOr/AgAAAAMAAGAEAPH/AgAAAAQAAFAEAPb/AgAAAAMAAGAFAOr/AgAAAAEAAGAFAO7/AgAAAAMAAAAFAO//AgAAAAMAAAAFAPD/AgAAAAMAAAAFAPH/AgAAAAMAAAAFAPX/AgAAAAMAAAAFAPb/AgAAAAEAAFAGAOr/AgAAAAQAAFAGAPb/AgAAAAMAAGAHAOr/AgAAAAQAAGAHAPb/AgAAAAMAAGAIAOr/AgAAAAQAAFAIAPb/AgAAAAMAAGAJAOr/AgAAAAQAAGAJAPb/AgAAAAMAAGAKAOf/AgAAAAMAAAAKAOj/AgAAAAMAAAAKAOn/AgAAAAMAAAAKAOr/AgAAAAEAAAAKAO7/AgAAAAMAAAAKAO//AgAAAAMAAAAKAPD/AgAAAAMAAAAKAPH/AgAAAAMAAAAKAPL/AgAAAAMAAAAKAPP/AgAAAAMAAAAKAPT/AgAAAAMAAAAKAPX/AgAAAAMAAAAKAPb/AgAAAAIAAAABAOv/AgAAAAMAADABAOz/AgAAAAMAADABAO3/AgAAAAMAADAFAOv/AgAAAAMAAAAFAOz/AgAAAAMAAAAFAO3/AgAAAAMAAAAKAOv/AgAAAAMAAAAKAOz/AgAAAAMAAAAKAO3/AgAAAAMAAAAFAPL/AgAAAAMAAAAFAPP/AgAAAAMAAAAFAPT/AgAAAAMAAAD3/+P/AgAAAAIAADD3/+T/AgAAAAMAADD3/+X/AgAAAAMAADD3/+b/AgAAAAMAADD4/+P/AgAAAAMAAFD5/+P/AgAAAAMAAFD6/+P/AgAAAAMAAFD7/+P/AgAAAAMAAFD8/+P/AgAAAAMAAFD9/+P/AgAAAAMAAFD+/+P/AgAAAAMAAFD//+P/AgAAAAMAAFAAAOP/AgAAAAMAAFABAOP/AgAAAAMAAFACAOP/AgAAAAMAAFADAOP/AgAAAAMAAFAEAOP/AgAAAAMAAFAFAOP/AgAAAAMAAFAGAOP/AgAAAAMAAFAHAOP/AgAAAAMAAFAIAOP/AgAAAAMAAFAJAOP/AgAAAAMAAFAKAOP/AgAAAAIAAGAKAOT/AgAAAAMAAAAKAOX/AgAAAAMAAAAKAOb/AgAAAAMAAAD3//f/AgAAAAMAADD3//j/AgAAAAMAADD3//n/AgAAAAMAADD3//r/AgAAAAMAADD3//v/AgAAAAEAADD3//z/AgAAAAMAADD3//3/AgAAAAMAADD3//7/AgAAAAMAADD3////AgAAAAMAADD3/wAAAgAAAAMAADD3/wEAAgAAAAMAADD3/wIAAgAAAAMAADD3/wMAAgAAAAMAADD3/wQAAgAAAAIAAFD4//v/AgAAAAMAAFD4/wQAAgAAAAMAAFD5//v/AgAAAAMAAFD5/wQAAgAAAAMAAFD6//v/AgAAAAMAAFD6/wQAAgAAAAMAAFD7//v/AgAAAAMAAFD7/wQAAgAAAAMAAFD8//v/AgAAAAMAAFD8/wQAAgAAAAMAAFD9//v/AgAAAAMAAFD9/wQAAgAAAAMAAFD+//f/AgAAAAMAAAD+//j/AgAAAAMAAAD+//n/AgAAAAMAAAD+//r/AgAAAAMAAAD+//v/AgAAAAIAAAD+/wQAAgAAAAMAAFD//wQAAgAAAAMAAFAAAAQAAgAAAAMAAFABAPf/AgAAAAMAADABAPj/AgAAAAMAADABAPr/AgAAAAMAADABAPv/AgAAAAMAADABAPz/AgAAAAMAADABAP3/AgAAAAMAADABAP7/AgAAAAMAADABAP//AgAAAAMAADABAAAAAgAAAAMAADABAAEAAgAAAAMAADABAAIAAgAAAAMAADABAAMAAgAAAAMAADABAAQAAgAAAAIAAAA=")
 tile_set = SubResource("TileSet_ssvqc")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
@@ -332,7 +341,7 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
 [node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(-137, 294)
+position = Vector2(40, -480)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
@@ -359,33 +368,34 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
+PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
+PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
 
 [node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
 position = Vector2(-406, 210)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+PuzzleId = "hanoi"
 
-[node name="Door" type="AnimatedSprite2D" parent="." unique_id=1453519083]
+[node name="Door" parent="." unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
 
-[node name="Door2" type="AnimatedSprite2D" parent="." unique_id=961376434]
+[node name="Door3" type="AnimatedSprite2D" parent="." unique_id=961376434]
 position = Vector2(-640, -1600)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_264po")
 
-[node name="Door3" type="AnimatedSprite2D" parent="." unique_id=1544599286]
+[node name="Door4" type="AnimatedSprite2D" parent="." unique_id=1544599286]
 position = Vector2(514, -1600)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_264po")
 
-[node name="Door4" type="AnimatedSprite2D" parent="." unique_id=966359549]
+[node name="Door5" type="AnimatedSprite2D" parent="." unique_id=966359549]
 position = Vector2(-128, -2496)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_264po")
 
-[node name="Door5" type="AnimatedSprite2D" parent="." unique_id=1622030186]
+[node name="Door6" type="AnimatedSprite2D" parent="." unique_id=1622030186]
 position = Vector2(1024, -2496)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_264po")
@@ -407,7 +417,7 @@ motion_mode = 1
 MovementSpeed = 350.0
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1913619694]
-position = Vector2(-7, 203)
+position = Vector2(-7, 211)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
