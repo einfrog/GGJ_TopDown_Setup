@@ -22,6 +22,11 @@ PegCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC")
 StackAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA/StackRoot")
 StackBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB/StackRoot")
 StackCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC/StackRoot")
+ResultOverlayPath = NodePath("ResultOverlay")
+ResultTitlePath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultTitle")
+ResultBodyPath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultBody")
+RestartButtonPath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons/RestartButton")
+ContinueButtonPath = NodePath("ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons/ContinueButton")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=236129223]
 layout_mode = 0
@@ -141,4 +146,51 @@ text = "Close"
 
 [node name="UndoButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=248484814]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Undo"
+
+[node name="ResultOverlay" type="ColorRect" parent="." unique_id=1403701601]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="OverlayCenter" type="CenterContainer" parent="ResultOverlay" unique_id=487702520]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="OverlayPanel" type="PanelContainer" parent="ResultOverlay/OverlayCenter" unique_id=554250997]
+custom_minimum_size = Vector2(420, 200)
+layout_mode = 2
+
+[node name="OverlayVBox" type="VBoxContainer" parent="ResultOverlay/OverlayCenter/OverlayPanel" unique_id=1659383977]
+layout_mode = 2
+
+[node name="ResultTitle" type="Label" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=369953634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultBody" type="Label" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=1570380792]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ResultButtons" type="HBoxContainer" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=653772175]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=87478576]
+layout_mode = 2
+text = "Restart"
+
+[node name="ContinueButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=2111303403]
+layout_mode = 2
+text = "Continue"

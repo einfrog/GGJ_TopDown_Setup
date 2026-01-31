@@ -7,8 +7,6 @@ namespace GGJ_2026.scripts;
 public partial class ContaminatedZone : Area2D
 {
 
-    private Action _playerHurtAction;
-
     private int _playerHurtCount;
 
     [Export]
@@ -19,27 +17,26 @@ public partial class ContaminatedZone : Area2D
 
     public override void _Ready()
     {
+        DamageTimer.Timeout += () => Player.Instance.Hurt(DamageCurve.Sample(++_playerHurtCount));
+        DamageTimer.Paused = true;
+        DamageTimer.Start();
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
     }
 
     private void OnBodyEntered(Node body)
     {
-        if (body is Player player)
+        if (body == Player.Instance)
         {
-            _playerHurtAction = () => player.Hurt(DamageCurve.Sample(_playerHurtCount++));
-            DamageTimer.Timeout += _playerHurtAction;
-            DamageTimer.Start();
+            DamageTimer.Paused = false;
         }
     }
 
     private void OnBodyExited(Node body)
     {
-        if (body is Player player)
+        if (body == Player.Instance)
         {
-            DamageTimer.Stop();
-            DamageTimer.Timeout -= _playerHurtAction;
-            _playerHurtAction = null;
+            DamageTimer.Paused = true;
         }
     }
 

@@ -127,6 +127,8 @@ sources/1 = SubResource("TileSetAtlasSource_trtic")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
+shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
+shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)

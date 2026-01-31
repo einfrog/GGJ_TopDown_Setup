@@ -17,16 +17,24 @@ RetryButtonPath = NodePath("Dimmer/Center/Panel/VBox/Buttons/RetryButton")
 CloseButtonPath = NodePath("Dimmer/Center/Panel/VBox/Buttons/CloseButton")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=443342395]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 1, 1, 0.003921569)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.14901961)
+metadata/_edit_use_anchors_ = true
 
 [node name="Center" type="CenterContainer" parent="Dimmer" unique_id=2109008]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="Dimmer/Center" unique_id=1221567481]
 custom_minimum_size = Vector2(520, 520)

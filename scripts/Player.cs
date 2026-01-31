@@ -1,19 +1,40 @@
+using System;
 using Godot;
 
 namespace GGJ_2026.scripts;
 
 public partial class Player : CharacterBody2D
 {
+
     private bool _inputEnabled = true;
-    [Export] private AnimatedSprite2D Sprite { get; set; }
 
-    [Export] public float MovementSpeed { get; set; } = 500;
+    [Export]
+    public AnimatedSprite2D Sprite { get; set; }
 
-    [Export] public float MaxHealth { get; set; } = 100;
+    [Export]
+    public float MovementSpeed { get; set; } = 500;
+
+    [Export]
+    public float MaxHealth { get; set; } = 100;
 
     public float Health { get; set; }
 
     public GasMask Mask { get; set; }
+
+    public static Player Instance { get; private set; }
+
+    public event Action Died;
+
+    public override void _EnterTree()
+    {
+        if (Instance is not null)
+        {
+            GD.PushError("There can only be one player");
+            return;
+        }
+
+        Instance = this;
+    }
 
     public override void _Ready()
     {
@@ -36,25 +57,19 @@ public partial class Player : CharacterBody2D
 
         if (direction.IsZeroApprox())
         {
+            Velocity = Vector2.Zero;
             Sprite.Animation = "Maks_Idle";
-            Velocity = Velocity.MoveToward(Vector2.Zero, MovementSpeed);
         }
         else
         {
             Velocity = direction * MovementSpeed;
 
-            if (direction.Y < 0)
+            Sprite.Animation = direction.Y switch
             {
-                Sprite.Animation = "Maks_Backward";
-            }
-            else if (direction.Y > 0)
-            {
-                Sprite.Animation = "Maks_Forward";
-            }
-            else
-            {
-                Sprite.Animation = "Maks_Walk_Left_Right";
-            }
+                < 0 => "Maks_Backward",
+                > 0 => "Maks_Forward",
+                _ => "Maks_Walk_Left_Right"
+            };
         }
 
         Sprite.FlipH = direction.X > 0;
@@ -63,11 +78,22 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
-        Health -= Mask.Filter(damage);
+        if (Mask is not null)
+        {
+            damage = Mask.Filter(damage);
+        }
+
+        if (Health - damage <= 0 && Health > 0)
+        {
+            Died?.Invoke();
+        }
+
+        Health -= damage;
     }
 
     public void SetInputEnabled(bool enabled)
     {
         _inputEnabled = enabled;
     }
+
 }
