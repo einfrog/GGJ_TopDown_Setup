@@ -23,7 +23,7 @@ public partial class ChimpPuzzle : Control
     // ============================================================
 
     [Export] public int StartN = 4;   // First round size
-    [Export] public int MaxN = 4;     // Final round size
+    [Export] public int MaxN = 7;     // Final round size
 
     // ============================================================
     // GRID / VISUAL SETTINGS
@@ -206,7 +206,8 @@ public partial class ChimpPuzzle : Control
                 CustomMinimumSize = new Vector2(CellSize, CellSize),
                 FocusMode = FocusModeEnum.None,
                 Text = "",
-                Disabled = true
+                Disabled = true,
+
             };
 
             Button captured = btn;
@@ -262,8 +263,16 @@ public partial class ChimpPuzzle : Control
                 FailRound("Wrong start! You must click 1.");
                 return;
             }
-
-            pressedButton.Disabled = true;
+            //this commented code makes the revealed buttons state 
+            // pressedButton.Disabled = true;
+            // _expectedNext = 2;
+            //
+            // foreach (var kv in _numberByButton)
+            // {
+            //     if (kv.Key != pressedButton)
+            //         kv.Key.Text = "";
+            // }
+            ConsumeCell(pressedButton);
             _expectedNext = 2;
 
             foreach (var kv in _numberByButton)
@@ -271,6 +280,13 @@ public partial class ChimpPuzzle : Control
                 if (kv.Key != pressedButton)
                     kv.Key.Text = "";
             }
+            foreach (var kv in _numberByButton)
+            {
+                if (kv.Key != pressedButton)
+                    kv.Key.Text = "";
+            }
+
+
 
             _state = PuzzleState.InSequence;
             _statusLabel.Text = $"Good. Now click {_expectedNext}.";
@@ -284,9 +300,11 @@ public partial class ChimpPuzzle : Control
                 FailRound($"Wrong! Expected {_expectedNext}.");
                 return;
             }
-
-            pressedButton.Disabled = true;
-            pressedButton.Text = value.ToString();
+            //old code to reveal buttons
+            // pressedButton.Disabled = true;
+            // pressedButton.Text = value.ToString();
+  
+            ConsumeCell(pressedButton);
 
             _expectedNext++;
             if (_expectedNext > _currentN)
@@ -295,7 +313,18 @@ public partial class ChimpPuzzle : Control
                 _statusLabel.Text = $"Nice. Now click {_expectedNext}.";
         }
     }
+    private void ConsumeCell(Button btn)
+    {
+        // Make it behave like an empty/non-playable cell:
+        btn.Text = "";
+        btn.Disabled = true;
 
+        // Ensure we didn't tint it earlier
+        btn.Modulate = Colors.White;
+
+        // Optional: avoid focus outline
+        btn.FocusMode = FocusModeEnum.None;
+    }
     // ============================================================
     // VISUAL HELPERS
     // ============================================================
