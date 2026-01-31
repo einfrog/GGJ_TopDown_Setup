@@ -20,6 +20,13 @@ public partial class Player : CharacterBody2D
     [Export]
     public float MaxHealth { get; set; } = 100;
 
+    [Export] public NodePath BreathingPlayerPath = "Breathing";
+    [Export] public AudioStream MaskBreathingLoop;
+    [Export] public float BreathingFadeSeconds = 0.15f;
+    
+    private AudioStreamPlayer2D _breathing;
+    private Tween _breathingTween;
+    private bool _wasMasked;
     public float Health { get; set; }
 
     public bool InputDisabled { get; set; }
@@ -49,7 +56,25 @@ public partial class Player : CharacterBody2D
     {
         _previousPosition = Position;
         Health = MaxHealth;
+
+        _breathing = GetNodeOrNull<AudioStreamPlayer2D>(BreathingPlayerPath);
+        if (_breathing == null)
+        {
+            GD.PushWarning("Player: Breathing AudioStreamPlayer not found. Add a child node named 'Breathing' or set BreathingPlayerPath.");
+        }
+        else
+        {
+            if (MaskBreathingLoop != null)
+                _breathing.Stream = MaskBreathingLoop;
+            _breathing.Autoplay = false;
+            _breathing.VolumeDb = -80f;
+            _breathing.ProcessMode = ProcessModeEnum.Inherit;
+        }
+
+        _wasMasked = Masked;
+        UpdateBreathing(force: true);
     }
+
 
     public override void _PhysicsProcess(double delta)
     {
@@ -61,6 +86,7 @@ public partial class Player : CharacterBody2D
             return;
         }
 
+        UpdateBreathing();
         float x = Input.GetAxis("move_left", "move_right");
         float y = Input.GetAxis("move_up", "move_down");
         var direction = new Vector2(x, y).Normalized();
@@ -101,5 +127,46 @@ public partial class Player : CharacterBody2D
         Health = Mathf.Max(0, Health - damage);
         HealthChanged?.Invoke(Health);
     }
+    private void UpdateBreathing(bool force = false)
+    {
+        if (_breathing == null)
+            return;
+
+        bool nowMasked = Masked;
+
+        if (!force && nowMasked == _wasMasked)
+            return;
+
+        _wasMasked = nowMasked;
+
+        if (MaskBreathingLoop != null && _breathing.Stream != MaskBreathingLoop)
+            _breathing.Stream = MaskBreathingLoop;
+
+        // Kill previous tween to avoid fighting fades
+        _breathingTween?.Kill();
+        _breathingTween = null;
+
+        if (nowMasked)
+        {
+            // Start loop and fade in
+            if (!_breathing.Playing)
+                _breathing.Play();
+
+            _breathingTween = CreateTween();
+            _breathingTween.TweenProperty(_breathing, "volume_db", 0f, BreathingFadeSeconds);
+        }
+        else
+        {
+            // Fade out then stop
+            _breathingTween = CreateTween();
+            _breathingTween.TweenProperty(_breathing, "volume_db", -80f, BreathingFadeSeconds);
+            _breathingTween.TweenCallback(Callable.From(() =>
+            {
+                if (_breathing != null)
+                    _breathing.Stop();
+            }));
+        }
+    }
+
 
 }
