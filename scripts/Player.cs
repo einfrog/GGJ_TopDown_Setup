@@ -5,14 +5,11 @@ namespace GGJ_2026.scripts;
 public partial class Player : CharacterBody2D
 {
     private bool _inputEnabled = true;
-    [Export]
-    private AnimatedSprite2D Sprite { get; set; }
+    [Export] private AnimatedSprite2D Sprite { get; set; }
 
-    [Export]
-    public float MovementSpeed { get; set; } = 500;
+    [Export] public float MovementSpeed { get; set; } = 500;
 
-    [Export]
-    public float MaxHealth { get; set; } = 100;
+    [Export] public float MaxHealth { get; set; } = 100;
 
     public float Health { get; set; }
 
@@ -39,16 +36,28 @@ public partial class Player : CharacterBody2D
 
         if (direction.IsZeroApprox())
         {
-            Sprite.Animation = "Idle";
+            Sprite.Animation = "Maks_Idle";
             Velocity = Velocity.MoveToward(Vector2.Zero, MovementSpeed);
         }
         else
         {
-            Sprite.Animation = "Walking";
             Velocity = direction * MovementSpeed;
+
+            if (direction.Y < 0)
+            {
+                Sprite.Animation = "Maks_Backward";
+            }
+            else if (direction.Y > 0)
+            {
+                Sprite.Animation = "Maks_Forward";
+            }
+            else
+            {
+                Sprite.Animation = "Maks_Walk_Left_Right";
+            }
         }
 
-        Sprite.FlipH = direction.X < 0;
+        Sprite.FlipH = direction.X > 0;
         MoveAndSlide();
     }
 
@@ -61,5 +70,4 @@ public partial class Player : CharacterBody2D
     {
         _inputEnabled = enabled;
     }
-
 }
