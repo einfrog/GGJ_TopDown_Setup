@@ -102,44 +102,31 @@ sources/1 = SubResource("TileSetAtlasSource_trtic")
 sources/2 = SubResource("TileSetAtlasSource_ir15t")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dinhu"]
-load_path = "res://.godot/imported/walls.png-14d7c61a1c757b66fb36f63b20901dee.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvuet"]
 texture = SubResource("CompressedTexture2D_dinhu")
-2:0/size_in_atlas = Vector2i(2, 2)
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -10, 16, -10, 16, 16, -16, 16)
-4:0/size_in_atlas = Vector2i(2, 2)
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -11, -11, -16, 11, -16, 16, -11, 16, 11, 11, 16, -16, 16)
-0:2/size_in_atlas = Vector2i(2, 2)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -16, 16, -16, 16, 16, -10, 16)
-4:2/size_in_atlas = Vector2i(2, 2)
 4:2/0 = 0
 4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(10, 16, -16, 16, -16, -16, 10, -16)
-0:4/size_in_atlas = Vector2i(2, 2)
 0:4/0 = 0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -11, -11, -16, 16, -16, 16, 11, 11, 16, -11, 16, -16, 11)
-2:4/size_in_atlas = Vector2i(2, 2)
 2:4/0 = 0
 2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 10, 16, 10, 16, -16, -16, -16)
-4:4/size_in_atlas = Vector2i(2, 2)
 4:4/0 = 0
 4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 11, -16, 16, -11, 16, 11, 11, 16, -11, 16, -16, 11)
-0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(11, -16, 16, -11, 16, 16, -11, 16, -16, 11, -16, -11, -11, -16)
-6:0/size_in_atlas = Vector2i(2, 2)
 6:0/0 = 0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10, -10, -10, 16, 16, 16, 16, -10)
-8:0/size_in_atlas = Vector2i(2, 2)
 8:0/0 = 0
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -10, 10, -10, 10, 16, -16, 16)
-6:2/size_in_atlas = Vector2i(2, 2)
 6:2/0 = 0
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 9, -10, 9, -10, -16)
-8:2/size_in_atlas = Vector2i(2, 2)
 8:2/0 = 0
 8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 10, -16, 10, 9, -16, 9)
 
@@ -437,6 +424,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
-PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
+PuzzleCatalog = [SubResource("Resource_ir15t"), SubResource("Resource_ca42v")]
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")

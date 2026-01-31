@@ -179,16 +179,17 @@ public partial class HanoiPuzzle : Control
 		{
 			_continueButton.Pressed += () =>
 			{
-				// If victory, emit true; if game over, emit false (or prevent close)
-				if (_pendingResult.HasValue)
-					EmitSignal(SignalName.PuzzleFinished, _pendingResult.Value);
-				else
-					EmitSignal(SignalName.PuzzleFinished, false); // or just Hide overlay / do nothing
+				// If pendingResult is null, we are in a "forced restart" Game Over.
+				// Decide behavior:
+				// Option A: do nothing (force Restart)
+				if (_pendingResult == null)
+					return;
 
-				EmitSignal(SignalName.PuzzleFinished, true);
-
+				// Emit exactly once; PuzzleHost will close the scene.
+				EmitSignal(SignalName.PuzzleFinished, _pendingResult.Value);
 			};
 		}
+
 		else
 		{
 			GD.PushWarning("HanoiPuzzle: ContinueButtonPath not set or node not found.");
@@ -220,6 +221,8 @@ public partial class HanoiPuzzle : Control
 
 	public void StartPuzzle()
 	{
+		_pendingResult = null;
+
 		_resultOverlay.Visible = false;
 		DiskCount = Mathf.Clamp(DiskCount, MinDiskCount, MaxDiskCount);
 		_state = PuzzleState.Playing;
@@ -246,15 +249,10 @@ public partial class HanoiPuzzle : Control
 	private void CancelPuzzle()
 	{
 		EmitSignal(SignalName.PuzzleFinished, false);
-		QueueFree();
+		// Don't QueueFree here — PuzzleHost will close the puzzle on the signal
 	}
 
-	private void CompletePuzzle()
-	{
-		_state = PuzzleState.Completed;
-		EmitSignal(SignalName.PuzzleFinished, true);
-		QueueFree();
-	}
+
 
 	private void OnPegGuiInput(int pegIndex, InputEvent e)
 	{
@@ -595,29 +593,35 @@ public partial class HanoiPuzzle : Control
 
 	private void CheckEndConditionAfterMove()
 	{
-		if(_pegs[2].Count != DiskCount)
+		if (_pegs[2].Count != DiskCount)
 			return;
+
 		if (_moveCount == _minMoves)
 		{
 			GD.Print("game won, with minmoves");
+
 			ShowResultOverlay(
 				"Victory",
 				$"Perfect! You solved it in {_moveCount} moves (minimum for {DiskCount} disks).",
 				pendingResult: true
 			);
-			EmitSignal(SignalName.PuzzleFinished, true);
+
+			// IMPORTANT: do NOT emit PuzzleFinished here
+			// Wait for Continue button.
 		}
 		else
 		{
-			GD.Print("game won, witout minmoves");
+			GD.Print("game won, without minmoves");
+
 			ShowResultOverlay(
 				"Game Over",
 				$"You solved it in {_moveCount} moves, but the minimum is {_minMoves}.",
-				pendingResult: null // restart required
+				pendingResult: null // forces Restart (Continue does nothing)
+				// If you'd rather allow Continue to close as fail, use: pendingResult: false
 			);
 
+			// No emit here either
 		}
-		
 	}
-}
 
+}
