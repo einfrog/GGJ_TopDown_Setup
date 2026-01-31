@@ -3,7 +3,7 @@ using Godot;
 
 namespace GGJ_2026.scripts.puzzles.core;
 
-public partial class PuzzleTerminal2D : Area2D, IInteractable
+public partial class PuzzleTerminal2D : Interactable
 {
 
     [Export]
@@ -29,6 +29,7 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
 
     public override void _Ready()
     {
+        base._Ready();
         _host = GetNodeOrNull<PuzzleHost>(PuzzleHostPath);
 
         if (_host == null)
@@ -37,16 +38,11 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
         _hintLabel = GetNodeOrNull<Label>("HintLabel");
         _hintLabel?.Text = HintText;
         _hintLabel?.Visible = false;
-
-        BodyEntered += OnBodyEntered;
-        BodyExited += OnBodyExited;
     }
 
-    private void OnBodyEntered(Node body)
+    protected override void OnPlayerEntered()
     {
-        if (body is not Player player)
-            return;
-
+        base.OnPlayerEntered();
         _playerInside = true;
 
         // Don't show hint if already solved in one-time mode
@@ -54,23 +50,16 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
         {
             _hintLabel?.Visible = true;
         }
-
-        player.Interactor.SetCurrentInteractable(this);
     }
 
-    private void OnBodyExited(Node body)
+    protected override void OnPlayerExited()
     {
-        if (body is not Player player)
-            return;
-
+        base.OnPlayerExited();
         _playerInside = false;
         _hintLabel?.Visible = false;
-
-        // IMPORTANT: clear via Interactor (same pattern as OnBodyEntered)
-        player.Interactor.ClearCurrentInteractable(this);
     }
 
-    public void Interact()
+    public override void Interact()
     {
         if (!_playerInside) return;
         if (_busy) return;

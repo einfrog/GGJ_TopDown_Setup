@@ -6,17 +6,15 @@ namespace GGJ_2026.scripts;
 public partial class ContaminatedZone : Area2D
 {
 
-    private int _playerHurtCount;
+    [Export]
+    public float DamagePerHit { get; set; }
 
     [Export]
     public Timer DamageTimer { get; set; }
 
-    [Export]
-    public Curve DamageCurve { get; set; }
-
     public override void _Ready()
     {
-        DamageTimer.Timeout += () => Player.Instance.Hurt(DamageCurve.Sample(++_playerHurtCount));
+        DamageTimer.Timeout += () => Player.Instance.Hurt(DamagePerHit);
         DamageTimer.Paused = true;
         DamageTimer.Start();
         BodyEntered += OnBodyEntered;
