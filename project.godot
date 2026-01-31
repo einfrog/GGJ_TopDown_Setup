@@ -23,10 +23,6 @@ config/icon="res://icon.svg"
 
 project/assembly_name="GGJ_2026"
 
-[gui]
-
-theme/custom_font="uid://bpc7e768fcvkr"
-
 [input]
 
 move_up={
