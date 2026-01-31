@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dvrg2mquj2afg"]
 
-[ext_resource type="Script" uid="uid://bceqytjcwddhq" path="res://scripts/HanoiPuzzle.cs" id="1_h3y0y"]
+[ext_resource type="Script" uid="uid://cvkq7bc21ssne" path="res://scripts/HanoiPuzzle.cs" id="1_h3y0y"]
 [ext_resource type="PackedScene" uid="uid://2bk8pr1ncur1" path="res://scenes/disk_ui.tscn" id="2_0hni5"]
 
 [node name="HanoiPuzzle" type="Control" unique_id=366759373]
