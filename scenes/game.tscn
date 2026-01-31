@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_1kice"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
-[ext_resource type="PackedScene" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -262,8 +261,10 @@ TerminalTexture = ExtResource("6_264po")
 SolvedTexture = ExtResource("7_1kice")
 
 [node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
-position = Vector2(632, -1360)
+position = Vector2(640, -1696)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_264po")
+SolvedTexture = ExtResource("7_1kice")
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
@@ -272,7 +273,7 @@ position = Vector2(0, -960)
 TerminalPath = NodePath("../../Terminals/Terminal1")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
-position = Vector2(512, -1600)
+position = Vector2(512, -1936)
 TerminalPath = NodePath("../../Terminals/Terminal2")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
