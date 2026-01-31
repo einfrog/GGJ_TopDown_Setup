@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteractor.cs" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/horiz_wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
@@ -216,20 +215,17 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
-[node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
-position = Vector2(56, 232)
-PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
-PuzzleId = "hanoi"
+[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-TerminalPath = NodePath("../PuzzleTerminal2D")
+TerminalPath = NodePath("")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
 position = Vector2(512, -1600)
-TerminalPath = NodePath("../PuzzleTerminal2D3")
+TerminalPath = NodePath("")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
@@ -242,14 +238,6 @@ z_index = 1
 position = Vector2(512, -1600)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
-
-[node name="PuzzleTerminal2D" parent="Doors" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(136, -760)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-
-[node name="PuzzleTerminal2D3" parent="Doors" unique_id=557642453 instance=ExtResource("4_p57ef")]
-position = Vector2(648, -1424)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 
 [node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
