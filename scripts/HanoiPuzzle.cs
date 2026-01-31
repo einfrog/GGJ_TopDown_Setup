@@ -1,7 +1,8 @@
-using Godot;
 using System;
 using System.Collections.Generic;
-using System.Data;
+using Godot;
+
+namespace GGJ_2026.scripts;
 
 public partial class HanoiPuzzle : Control
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace GGJ_2026.scripts;
+
 public partial class PlayerInteract2D : Node2D
 {
     [Export] public string InteractAction = "interact";

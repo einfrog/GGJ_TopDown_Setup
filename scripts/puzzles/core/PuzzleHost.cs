@@ -1,6 +1,7 @@
-using Godot;
 using System;
-using GGJ_2026.scripts;
+using Godot;
+
+namespace GGJ_2026.scripts.puzzles.core;
 
 public partial class PuzzleHost : Control
 {
