@@ -76,6 +76,7 @@ public partial class HanoiPuzzle : Control
 		public int To;
 		public int Disk;
 	}
+	private bool? _pendingResult = null; // null = no result pending, true/false = result to emit on Continue
 
 	private readonly Stack<MoveRecord> _history = new();
 	private readonly Dictionary<int, Control> _diskNodeBySize = new();
@@ -164,7 +165,9 @@ public partial class HanoiPuzzle : Control
 		{
 			_restartButton.Pressed += () =>
 			{
-				HideResultOverlay();
+				_pendingResult = null;
+				_resultOverlay.Visible = false;
+				_state = PuzzleState.Playing;
 				StartPuzzle();
 			};
 		}
@@ -176,7 +179,14 @@ public partial class HanoiPuzzle : Control
 		{
 			_continueButton.Pressed += () =>
 			{
-				CancelPuzzle();
+				// If victory, emit true; if game over, emit false (or prevent close)
+				if (_pendingResult.HasValue)
+					EmitSignal(SignalName.PuzzleFinished, _pendingResult.Value);
+				else
+					EmitSignal(SignalName.PuzzleFinished, false); // or just Hide overlay / do nothing
+
+				EmitSignal(SignalName.PuzzleFinished, true);
+
 			};
 		}
 		else
@@ -186,13 +196,17 @@ public partial class HanoiPuzzle : Control
 
 	}
 
-	private void ShowResultOverlay(string title, string body)
+	private void ShowResultOverlay(string title, string body, bool? pendingResult)
 	{
 		_resultTitle.Text = title;
 		_resultBody.Text = body;
 		_resultOverlay.Visible = true;
-		_state = title == "Victory" ? PuzzleState.Completed : PuzzleState.Failed;
-		
+
+		_pendingResult = pendingResult; // true for victory, null for gameover (or false if you want)
+
+		// Lock play input while overlay is open
+		_state = PuzzleState.Idle;
+
 		UpdateUndoButton();
 	}
 	private void HideResultOverlay()
@@ -588,8 +602,9 @@ public partial class HanoiPuzzle : Control
 			GD.Print("game won, with minmoves");
 			ShowResultOverlay(
 				"Victory",
-				$"Perfect! You solved it in {_moveCount} moves (minimum for {DiskCount} disks." )
-				;
+				$"Perfect! You solved it in {_moveCount} moves (minimum for {DiskCount} disks).",
+				pendingResult: true
+			);
 			EmitSignal(SignalName.PuzzleFinished, true);
 		}
 		else
@@ -597,8 +612,10 @@ public partial class HanoiPuzzle : Control
 			GD.Print("game won, witout minmoves");
 			ShowResultOverlay(
 				"Game Over",
-				$"You solved it in {_moveCount}, but the minimum is {_minMoves}. \n"+
-				"Use Undo to optimize, or press Restart to try again.");
+				$"You solved it in {_moveCount} moves, but the minimum is {_minMoves}.",
+				pendingResult: null // restart required
+			);
+
 		}
 		
 	}
