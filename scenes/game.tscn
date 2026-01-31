@@ -424,6 +424,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
-PuzzleCatalog = [SubResource("Resource_ir15t"), SubResource("Resource_ca42v")]
+PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
