@@ -63,7 +63,7 @@ public partial class PuzzleTerminal2D : Area2D
 		if (!_playerInside) return;
 		if (_busy) return;
 		if (OneTime && _solved) return;
-
+		GD.Print("interacted with the terminal");
 		_busy = true;
 		if (_hintLabel != null) _hintLabel.Visible = false;
 		_host.OpenChimpPuzzle(success =>

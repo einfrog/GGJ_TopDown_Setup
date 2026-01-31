@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ceqdt0gehucwl"]
+[gd_scene format=4 uid="uid://ceqdt0gehucwl"]
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
@@ -208,3 +208,5 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
+ChimpPuzzleScene = ExtResource("10_vtaks")
+PlayerPath = NodePath("../../../Player")
