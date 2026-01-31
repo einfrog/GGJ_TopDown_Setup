@@ -3,7 +3,7 @@ using Godot;
 
 namespace GGJ_2026.scripts.puzzles.core;
 
-public partial class PuzzleTerminal2D : Area2D, IInteractable
+public partial class PuzzleTerminal2D : Interactable
 {
     [Export] public NodePath PuzzleHostPath;
     [Export] public string PuzzleId = "chimp";
@@ -57,6 +57,7 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
     {
         base.OnPlayerEntered();
         _playerInside = true;
+
         if (!(OneTime && _solved))
             _hintLabel?.Show();
     }
