@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvrg2mquj2afg"]
 
-[ext_resource type="Script" uid="uid://bpyup5vgvf562" path="res://scripts/HanoiPuzzle.cs" id="1_h3y0y"]
+[ext_resource type="Script" uid="uid://bceqytjcwddhq" path="res://scripts/HanoiPuzzle.cs" id="1_h3y0y"]
+[ext_resource type="PackedScene" uid="uid://2bk8pr1ncur1" path="res://scenes/disk_ui.tscn" id="2_0hni5"]
 
 [node name="HanoiPuzzle" type="Control" unique_id=366759373]
 layout_mode = 3
@@ -10,6 +11,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h3y0y")
+DiskScene = ExtResource("2_0hni5")
+StatusLabelPath = NodePath("Center/Panel/VBox/Status")
+ResetButtonPath = NodePath("Center/Panel/VBox/Buttons/ResetButton")
+CloseButtonPath = NodePath("Center/Panel/VBox/Buttons/CloseButton")
+PegAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA")
+PegBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB")
+PegCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC")
+StackAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA/StackRoot")
+StackBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB/StackRoot")
+StackCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC/StackRoot")
 
 [node name="Dimmer" type="ColorRect" parent="." unique_id=236129223]
 layout_mode = 0
