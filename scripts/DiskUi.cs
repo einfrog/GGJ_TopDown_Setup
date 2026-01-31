@@ -1,5 +1,6 @@
 ﻿using Godot;
-using System;
+
+namespace GGJ_2026.scripts;
 
 public partial class DiskUi : Panel
 {

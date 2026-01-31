@@ -1,7 +1,8 @@
-﻿using Godot;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Godot;
+
+namespace GGJ_2026.scripts.puzzles;
 
 /// <summary>
 /// Chimp test puzzle logic.

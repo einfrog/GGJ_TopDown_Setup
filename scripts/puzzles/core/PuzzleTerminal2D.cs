@@ -1,5 +1,6 @@
 using Godot;
-using System;
+
+namespace GGJ_2026.scripts.puzzles.core;
 
 public partial class PuzzleTerminal2D : Area2D
 {
