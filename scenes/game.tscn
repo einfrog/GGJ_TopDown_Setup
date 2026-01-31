@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -124,6 +125,39 @@ point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
+atlas = ExtResource("18_ssvqc")
+region = Rect2(0, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kice"]
+atlas = ExtResource("18_ssvqc")
+region = Rect2(64, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5newe"]
+atlas = ExtResource("18_ssvqc")
+region = Rect2(128, 0, 64, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_37s47"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_264po")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kice")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5newe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bt5mj"]
+radius = 25.5
+height = 77.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
@@ -279,6 +313,18 @@ shape = SubResource("RectangleShape2D_dinhu")
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
 position = Vector2(-737, 312)
+
+[node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
+scale = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CryoCapsule" unique_id=1660591052]
+position = Vector2(-112.25, 61.5)
+sprite_frames = SubResource("SpriteFrames_37s47")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CryoCapsule" unique_id=1229194712]
+position = Vector2(-113, 55)
+shape = SubResource("CapsuleShape2D_bt5mj")
 
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
