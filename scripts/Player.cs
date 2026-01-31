@@ -29,6 +29,8 @@ public partial class Player : CharacterBody2D
     public static Player Instance { get; private set; }
 
     public event Action Died;
+    
+    public event Action<float> HealthChanged;
 
     public override void _EnterTree()
     {
@@ -60,7 +62,7 @@ public partial class Player : CharacterBody2D
         float x = Input.GetAxis("move_left", "move_right");
         float y = Input.GetAxis("move_up", "move_down");
         var direction = new Vector2(x, y).Normalized();
-
+        
         if (direction.IsZeroApprox())
         {
             Velocity = Vector2.Zero;
@@ -89,12 +91,17 @@ public partial class Player : CharacterBody2D
             damage = Mask.Filter(damage);
         }
 
-        if (Health - damage <= 0 && Health > 0)
+        Health -= damage;
+        Health = Mathf.Max(Health, 0);
+
+        HealthChanged?.Invoke(Health);
+
+        if (Health <= 0)
         {
             Died?.Invoke();
         }
 
-        Health -= damage;
     }
+    
 
 }

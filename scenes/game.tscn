@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
+[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -91,7 +92,6 @@ texture_region_size = Vector2i(32, 32)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:3/0 = 0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16, -16, -15.596977)
 0:4/0 = 0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
@@ -198,6 +198,26 @@ _limits = [0.0, 10.0, 0.0, 30.0]
 _data = [Vector2(0, 3.4432592), 0.0, 0.0, 0, 0, Vector2(30, 3.8635626), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
+shader = ExtResource("6_u5sy4")
+shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
+shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
+
+[sub_resource type="Resource" id="Resource_ir15t"]
+script = ExtResource("11_trtic")
+Id = "chimp"
+Scene = ExtResource("10_vtaks")
+metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
+
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("11_trtic")
+Id = "hanoi"
+Scene = ExtResource("13_ir15t")
+metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
+size = Vector2(256, 168)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
 region = Rect2(0, 0, 64, 96)
 
@@ -241,26 +261,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
-size = Vector2(256, 168)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
-shader = ExtResource("6_u5sy4")
-shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
-shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
-
-[sub_resource type="Resource" id="Resource_ir15t"]
-script = ExtResource("11_trtic")
-Id = "chimp"
-Scene = ExtResource("10_vtaks")
-metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
-
-[sub_resource type="Resource" id="Resource_ca42v"]
-script = ExtResource("11_trtic")
-Id = "hanoi"
-Scene = ExtResource("13_ir15t")
-metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
@@ -347,6 +347,25 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 position = Vector2(40, -480)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
+[node name="HealthBar" parent="UI" unique_id=1075518257 instance=ExtResource("12_trtic")]
+offset_left = 320.0
+offset_top = -84.0
+offset_right = 320.0
+offset_bottom = -84.0
+scale = Vector2(4, 4)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1446716266]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=313759922]
+z_index = -1
+position = Vector2(-726, -153)
+scale = Vector2(4, 4)
+texture = ExtResource("12_kvuet")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=411975384]
+position = Vector2(-726, -109)
+shape = SubResource("RectangleShape2D_dinhu")
+
 [node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
 position = Vector2(-406, 210)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
@@ -377,14 +396,14 @@ position = Vector2(1024, -2496)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_264po")
 
-[node name="CraftingTable" type="StaticBody2D" parent="." unique_id=1446716266]
+[node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
 
-[node name="Sprite2D" type="Sprite2D" parent="CraftingTable" unique_id=313759922]
+[node name="Sprite2D" type="Sprite2D" parent="CraftingTable" unique_id=295216946]
 position = Vector2(-726, -153)
 scale = Vector2(4, 4)
 texture = ExtResource("12_kvuet")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingTable" unique_id=411975384]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingTable" unique_id=193445280]
 position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")
 
