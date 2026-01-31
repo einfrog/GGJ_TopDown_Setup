@@ -11,7 +11,9 @@
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
+[ext_resource type="Script" uid="uid://db0tr5q0wcouw" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
+[ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -130,17 +132,31 @@ shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
 shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
 
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("11_trtic")
+Id = "chimp"
+Scene = ExtResource("10_vtaks")
+metadata/_custom_type_script = "uid://dnba1ap70tp4e"
+
+[sub_resource type="Resource" id="Resource_rysoc"]
+script = ExtResource("11_trtic")
+Id = "hanoi"
+Scene = ExtResource("13_ir15t")
+metadata/_custom_type_script = "uid://dnba1ap70tp4e"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
 
 [node name="Game" type="Node2D" unique_id=1014954538]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1913619694]
-zoom = Vector2(0.5, 0.5)
-
 [node name="Player" parent="." unique_id=1240282193 groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(7, -203)
 motion_mode = 1
+MovementSpeed = 350.0
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1913619694]
+position = Vector2(-7, 203)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")
@@ -220,7 +236,7 @@ polygon = PackedVector2Array(-196.28455, 23.205719, -211.00595, -374.19183, -515
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
 [node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(565, 160)
+position = Vector2(-137, 294)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
@@ -247,7 +263,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
-ChimpPuzzleScene = ExtResource("10_vtaks")
+PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ca42v"), SubResource("Resource_rysoc")])
+PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1446716266]
@@ -261,3 +278,8 @@ texture = ExtResource("12_kvuet")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=411975384]
 position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")
+
+[node name="PuzzleTerminal2D2" parent="." unique_id=828141489 instance=ExtResource("4_p57ef")]
+position = Vector2(-406, 210)
+PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+PuzzleId = "hanoi"
