@@ -88,6 +88,7 @@ offset_left = 16.0
 offset_top = 3.0
 offset_right = 216.0
 offset_bottom = 303.0
+mouse_filter = 2
 
 [node name="PegC" type="Panel" parent="Center/Panel/VBox/PlayArea/PegRow" unique_id=924376843]
 custom_minimum_size = Vector2(200, 300)
@@ -99,6 +100,7 @@ custom_minimum_size = Vector2(200, 300)
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="PegLabels" type="HBoxContainer" parent="Center/Panel/VBox" unique_id=686038028]
 layout_mode = 2
