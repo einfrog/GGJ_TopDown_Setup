@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://b2304ia2mrux1"]
+[gd_scene format=3 uid="uid://dt0es7t2m522x"]
 
-[ext_resource type="Script" uid="uid://qsp7gr6ma1r7" path="res://scripts/ChimpPuzzle.cs" id="1_murav"]
+[ext_resource type="Script" uid="uid://qsp7gr6ma1r7" path="res://scripts/puzzles/ChimpPuzzle.cs" id="1_murav"]
 
 [node name="ChimpPuzzle" type="Control" unique_id=724518441]
 layout_mode = 3

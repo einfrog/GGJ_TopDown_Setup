@@ -9,15 +9,14 @@ public partial class Player : CharacterBody2D
     private AnimatedSprite2D Sprite { get; set; }
 
     [Export]
-    public GasMask Mask { get; set; }
-    
-    [Export]
     public float MovementSpeed { get; set; } = 500;
 
     [Export]
     public float MaxHealth { get; set; } = 100;
-    
+
     public float Health { get; set; }
+
+    public GasMask Mask { get; set; }
 
     public override void _Ready()
     {
@@ -55,7 +54,7 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
-        Health -= Mask.Mitigate(damage);
+        Health -= Mask.Filter(damage);
     }
 
     public void SetInputEnabled(bool enabled)

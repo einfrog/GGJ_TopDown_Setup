@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://2bk8pr1ncur1"]
+
+[ext_resource type="Script" uid="uid://bfpdf6fiqfooq" path="res://scripts/DiskUi.cs" id="1_kxiyw"]
+
+[node name="DiskUI" type="Panel" unique_id=308686218]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_kxiyw")
+
+[node name="Label" type="Label" parent="." unique_id=1970524493]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+vertical_alignment = 1

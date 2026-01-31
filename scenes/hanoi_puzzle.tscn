@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://dvrg2mquj2afg"]
+
+[ext_resource type="Script" uid="uid://bceqytjcwddhq" path="res://scripts/HanoiPuzzle.cs" id="1_h3y0y"]
+[ext_resource type="PackedScene" uid="uid://2bk8pr1ncur1" path="res://scenes/disk_ui.tscn" id="2_0hni5"]
+
+[node name="HanoiPuzzle" type="Control" unique_id=366759373]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h3y0y")
+DiskScene = ExtResource("2_0hni5")
+StatusLabelPath = NodePath("Center/Panel/VBox/Status")
+ResetButtonPath = NodePath("Center/Panel/VBox/Buttons/ResetButton")
+CloseButtonPath = NodePath("Center/Panel/VBox/Buttons/CloseButton")
+PegAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA")
+PegBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB")
+PegCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC")
+StackAPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegA/StackRoot")
+StackBPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegB/StackRoot")
+StackCPath = NodePath("Center/Panel/VBox/PlayArea/PegRow/PegC/StackRoot")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=236129223]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=396037965]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1415206758]
+custom_minimum_size = Vector2(700, 520)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1533489144]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Center/Panel/VBox" unique_id=662178284]
+layout_mode = 2
+text = "Tower of Hanoi"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Center/Panel/VBox" unique_id=1138296507]
+layout_mode = 2
+text = "Moves: 0 | Target: X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayArea" type="Control" parent="Center/Panel/VBox" unique_id=1878268689]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PegRow" type="HBoxContainer" parent="Center/Panel/VBox/PlayArea" unique_id=1186838125]
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 300.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="PegA" type="Panel" parent="Center/Panel/VBox/PlayArea/PegRow" unique_id=1276376063]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StackRoot" type="Control" parent="Center/Panel/VBox/PlayArea/PegRow/PegA" unique_id=660338067]
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="PegB" type="Panel" parent="Center/Panel/VBox/PlayArea/PegRow" unique_id=621095239]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StackRoot" type="Control" parent="Center/Panel/VBox/PlayArea/PegRow/PegB" unique_id=1100573837]
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 3.0
+offset_right = 216.0
+offset_bottom = 303.0
+
+[node name="PegC" type="Panel" parent="Center/Panel/VBox/PlayArea/PegRow" unique_id=924376843]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StackRoot" type="Control" parent="Center/Panel/VBox/PlayArea/PegRow/PegC" unique_id=1567472489]
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PegLabels" type="HBoxContainer" parent="Center/Panel/VBox" unique_id=686038028]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="LabelA" type="Label" parent="Center/Panel/VBox/PegLabels" unique_id=1186110492]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "A"
+horizontal_alignment = 1
+
+[node name="LabelB" type="Label" parent="Center/Panel/VBox/PegLabels" unique_id=1659565992]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "B"
+horizontal_alignment = 1
+
+[node name="LabelC" type="Label" parent="Center/Panel/VBox/PegLabels" unique_id=77603189]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "C"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Center/Panel/VBox" unique_id=244477282]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=1809461576]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="CloseButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=1417626119]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
