@@ -255,14 +255,10 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 [node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
 position = Vector2(128, -720)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_264po")
-SolvedTexture = ExtResource("7_1kice")
 
 [node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
-position = Vector2(640, -1696)
+position = Vector2(632, -1696)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_264po")
-SolvedTexture = ExtResource("7_1kice")
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
