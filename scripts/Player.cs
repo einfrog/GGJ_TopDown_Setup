@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace GGJ_2026.scripts;
@@ -56,25 +57,19 @@ public partial class Player : CharacterBody2D
 
         if (direction.IsZeroApprox())
         {
+            Velocity = Vector2.Zero;
             Sprite.Animation = "Maks_Idle";
-            Velocity = Velocity.MoveToward(Vector2.Zero, MovementSpeed);
         }
         else
         {
             Velocity = direction * MovementSpeed;
 
-            if (direction.Y < 0)
+            Sprite.Animation = direction.Y switch
             {
-                Sprite.Animation = "Maks_Backward";
-            }
-            else if (direction.Y > 0)
-            {
-                Sprite.Animation = "Maks_Forward";
-            }
-            else
-            {
-                Sprite.Animation = "Maks_Walk_Left_Right";
-            }
+                < 0 => "Maks_Backward",
+                > 0 => "Maks_Forward",
+                _ => "Maks_Walk_Left_Right"
+            };
         }
 
         Sprite.FlipH = direction.X > 0;
@@ -90,4 +85,5 @@ public partial class Player : CharacterBody2D
     {
         _inputEnabled = enabled;
     }
+
 }
