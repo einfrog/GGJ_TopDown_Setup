@@ -5,7 +5,7 @@ namespace GGJ_2026.scripts;
 public partial class PlayerInteractor : Node2D
 {
 
-    private IInteractable _currentInteractable;
+    private Interactable _currentInteractable;
 
     [Export]
     public string InteractAction = "interact";
@@ -20,12 +20,12 @@ public partial class PlayerInteractor : Node2D
         _currentInteractable?.Interact();
     }
 
-    public void SetCurrentInteractable(IInteractable interactable)
+    public void SetCurrentInteractable(Interactable interactable)
     {
         _currentInteractable = interactable;
     }
 
-    public void ClearCurrentInteractable(IInteractable interactable)
+    public void ClearCurrentInteractable(Interactable interactable)
     {
         if (_currentInteractable == interactable)
         {
