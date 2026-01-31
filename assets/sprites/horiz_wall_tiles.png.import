@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bekiiuhduagg5"
-path="res://.godot/imported/walls.png-14d7c61a1c757b66fb36f63b20901dee.ctex"
+uid="uid://v7b01pq6h4p7"
+path="res://.godot/imported/horiz_wall_tiles.png-dcf8f056e016140903b4ae295630be19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/walls.png"
-dest_files=["res://.godot/imported/walls.png-14d7c61a1c757b66fb36f63b20901dee.ctex"]
+source_file="res://assets/sprites/horiz_wall_tiles.png"
+dest_files=["res://.godot/imported/horiz_wall_tiles.png-dcf8f056e016140903b4ae295630be19.ctex"]
 
 [params]
 
