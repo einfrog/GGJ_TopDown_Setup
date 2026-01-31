@@ -1,7 +1,6 @@
 [gd_scene format=4 uid="uid://ceqdt0gehucwl"]
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
-[ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
 [ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteractor.cs" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
@@ -12,11 +11,11 @@
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
-[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
-[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
+[ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
-[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -248,7 +247,6 @@ PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
 
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
-
 TerminalPath = NodePath("../../PuzzleTerminal2D")
 
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
