@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdpnattf4wp82" path="res://scenes/player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="2_p57ef"]
-[ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteract2D.cs" id="2_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://bekiiuhduagg5" path="res://assets/sprites/walls.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://f8l25rbd2kah" path="res://scripts/PlayerInteractor.cs" id="9_dinhu"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
@@ -193,7 +194,13 @@ sources/0 = SubResource("TileSetAtlasSource_kvuet")
 sources/1 = SubResource("TileSetAtlasSource_ca42v")
 sources/2 = SubResource("TileSetAtlasSource_rysoc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
+size = Vector2(256, 168)
+
 [sub_resource type="Curve" id="Curve_lbhrr"]
+_limits = [0.0, 10.0, 0.0, 30.0]
+_data = [Vector2(0, 3.4432592), 0.0, 0.0, 0, 0, Vector2(30, 3.8635626), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
@@ -281,20 +288,37 @@ scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAD3/+f/AgAAAAMAADD3/+j/AgAAAAMAADD3/+n/AgAAAAMAADD3/+r/AgAAAAMAADD3/+v/AgAAAAEAADD3/+z/AgAAAAMAADD3/+3/AgAAAAMAADD3/+7/AgAAAAMAADD3/+//AgAAAAMAADD3//D/AgAAAAMAADD3//H/AgAAAAEAADD3//L/AgAAAAMAADD3//P/AgAAAAMAADD3//T/AgAAAAMAADD3//X/AgAAAAMAADD3//b/AgAAAAMAADD4/+v/AgAAAAMAAFD4//H/AgAAAAMAAFD4//b/AgAAAAMAAFD5/+v/AgAAAAMAAFD5//H/AgAAAAQAAFD5//b/AgAAAAQAAFD6/+v/AgAAAAMAAFD6//H/AgAAAAQAAGD7/+r/AgAAAAIAADD7/+v/AgAAAAIAAAD7//H/AgAAAAQAAFD7//b/AgAAAAQAAGD8/+r/AgAAAAMAAFD8//H/AgAAAAQAAGD8//b/AgAAAAMAAFD9/+r/AgAAAAQAAFD9//H/AgAAAAMAAGD9//b/AgAAAAMAAFD+/+r/AgAAAAQAAGD+//H/AgAAAAMAAGD+//b/AgAAAAIAAGD//+r/AgAAAAQAAFD///H/AgAAAAMAAGD///b/AgAAAAQAAGAAAOr/AgAAAAQAAGAAAPH/AgAAAAMAAGAAAPb/AgAAAAQAAFABAOr/AgAAAAEAAGABAO7/AgAAAAMAADABAO//AgAAAAMAADABAPD/AgAAAAMAADABAPH/AgAAAAEAAFABAPb/AgAAAAIAADACAOr/AgAAAAMAAGACAPH/AgAAAAQAAFACAPb/AgAAAAMAAGADAOr/AgAAAAMAAGADAPH/AgAAAAQAAGADAPb/AgAAAAMAAGAEAOr/AgAAAAMAAGAEAPH/AgAAAAQAAFAEAPb/AgAAAAMAAGAFAOr/AgAAAAEAAGAFAO7/AgAAAAMAAAAFAO//AgAAAAMAAAAFAPD/AgAAAAMAAAAFAPH/AgAAAAMAAAAFAPX/AgAAAAMAAAAFAPb/AgAAAAEAAFAGAOr/AgAAAAQAAFAGAPb/AgAAAAMAAGAHAOr/AgAAAAQAAGAHAPb/AgAAAAMAAGAIAOr/AgAAAAQAAFAIAPb/AgAAAAMAAGAJAOr/AgAAAAQAAGAJAPb/AgAAAAMAAGAKAOf/AgAAAAMAAAAKAOj/AgAAAAMAAAAKAOn/AgAAAAMAAAAKAOr/AgAAAAEAAAAKAO7/AgAAAAMAAAAKAO//AgAAAAMAAAAKAPD/AgAAAAMAAAAKAPH/AgAAAAMAAAAKAPL/AgAAAAMAAAAKAPP/AgAAAAMAAAAKAPT/AgAAAAMAAAAKAPX/AgAAAAMAAAAKAPb/AgAAAAIAAAABAOv/AgAAAAMAADABAOz/AgAAAAMAADABAO3/AgAAAAMAADAFAOv/AgAAAAMAAAAFAOz/AgAAAAMAAAAFAO3/AgAAAAMAAAAKAOv/AgAAAAMAAAAKAOz/AgAAAAMAAAAKAO3/AgAAAAMAAAAFAPL/AgAAAAMAAAAFAPP/AgAAAAMAAAAFAPT/AgAAAAMAAAD3/+P/AgAAAAIAADD3/+T/AgAAAAMAADD3/+X/AgAAAAMAADD3/+b/AgAAAAMAADD4/+P/AgAAAAMAAFD5/+P/AgAAAAMAAFD6/+P/AgAAAAMAAFD7/+P/AgAAAAMAAFD8/+P/AgAAAAMAAFD9/+P/AgAAAAMAAFD+/+P/AgAAAAMAAFD//+P/AgAAAAMAAFAAAOP/AgAAAAMAAFABAOP/AgAAAAMAAFACAOP/AgAAAAMAAFADAOP/AgAAAAMAAFAEAOP/AgAAAAMAAFAFAOP/AgAAAAMAAFAGAOP/AgAAAAMAAFAHAOP/AgAAAAMAAFAIAOP/AgAAAAMAAFAJAOP/AgAAAAMAAFAKAOP/AgAAAAIAAGAKAOT/AgAAAAMAAAAKAOX/AgAAAAMAAAAKAOb/AgAAAAMAAAD3//f/AgAAAAMAADD3//j/AgAAAAMAADD3//n/AgAAAAMAADD3//r/AgAAAAMAADD3//v/AgAAAAEAADD3//z/AgAAAAMAADD3//3/AgAAAAMAADD3//7/AgAAAAMAADD3////AgAAAAMAADD3/wAAAgAAAAMAADD3/wEAAgAAAAMAADD3/wIAAgAAAAMAADD3/wMAAgAAAAMAADD3/wQAAgAAAAIAAFD4//v/AgAAAAMAAFD4/wQAAgAAAAMAAFD5//v/AgAAAAMAAFD5/wQAAgAAAAMAAFD6//v/AgAAAAMAAFD6/wQAAgAAAAMAAFD7//v/AgAAAAMAAFD7/wQAAgAAAAMAAFD8//v/AgAAAAMAAFD8/wQAAgAAAAMAAFD9//v/AgAAAAMAAFD9/wQAAgAAAAMAAFD+//f/AgAAAAMAAAD+//j/AgAAAAMAAAD+//n/AgAAAAMAAAD+//r/AgAAAAMAAAD+//v/AgAAAAIAAAD+/wQAAgAAAAMAAFD//wQAAgAAAAMAAFAAAAQAAgAAAAMAAFABAPf/AgAAAAMAADABAPj/AgAAAAMAADABAPr/AgAAAAMAADABAPv/AgAAAAMAADABAPz/AgAAAAMAADABAP3/AgAAAAMAADABAP7/AgAAAAMAADABAP//AgAAAAMAADABAAAAAgAAAAMAADABAAEAAgAAAAMAADABAAIAAgAAAAMAADABAAMAAgAAAAMAADABAAQAAgAAAAIAAAA=")
 tile_set = SubResource("TileSet_ssvqc")
 
+[node name="Interactables" type="Node2D" parent="." unique_id=1185453800]
+
+[node name="PuzzleTerminal2D" parent="Interactables" unique_id=598227121 node_paths=PackedStringArray("PuzzleHost") instance=ExtResource("4_p57ef")]
+position = Vector2(565, 160)
+PuzzleHost = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+
+[node name="CraftingTable" type="StaticBody2D" parent="Interactables" unique_id=1446716266]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactables/CraftingTable" unique_id=411975384]
+position = Vector2(-726, -109)
+shape = SubResource("RectangleShape2D_dinhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Interactables/CraftingTable" unique_id=313759922]
+position = Vector2(-726, -153)
+scale = Vector2(4, 4)
+texture = ExtResource("12_kvuet")
+
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
 visible = false
 
-[node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
+[node name="ContaminatedZone1" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
 DamageCurve = SubResource("Curve_lbhrr")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone" unique_id=1303028849]
-position = Vector2(-415.99997, -1120)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone1" unique_id=1303028849]
+position = Vector2(-430, -1120)
 scale = Vector2(1.630286, 2.7579436)
 polygon = PackedVector2Array(651.41943, -41.697754, 664.914, -265.77777, -374.78088, -261.0641, -380.3014, -39.884796, -371.71393, 174.4053, 47.230957, 171.142, 48.457733, -38.43445)
 
-[node name="Timer" type="Timer" parent="Zones/ContaminatedZone" unique_id=1227960839]
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone1" unique_id=1227960839]
 
 [node name="ContaminatedZone2" type="Area2D" parent="Zones" unique_id=675318557 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
@@ -343,10 +367,19 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 [node name="PuzzleTerminal2D" parent="." unique_id=598227121 instance=ExtResource("4_p57ef")]
 position = Vector2(40, -480)
 PuzzleHostPath = NodePath("../UI/PuzzleLayer/PuzzleHost")
+[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
+motion_mode = 1
+Interactor = NodePath("Interactor")
+
+[node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
+script = ExtResource("9_dinhu")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1913619694]
+zoom = Vector2(0.5, 0.5)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 
-[node name="ColorRect" type="ColorRect" parent="UI" unique_id=1212999955]
+[node name="Vapor" type="ColorRect" parent="UI" unique_id=1212999955]
 visible = false
 material = SubResource("ShaderMaterial_p57ef")
 anchors_preset = 15
@@ -363,10 +396,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PuzzleHost" type="Control" parent="UI/PuzzleLayer" unique_id=2094422790]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PuzzleHost" type="Control" parent="UI/PuzzleLayer" unique_id=1333203380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("9_0tnpc")
 PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
