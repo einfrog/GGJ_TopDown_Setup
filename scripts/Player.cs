@@ -26,6 +26,8 @@ public partial class Player : CharacterBody2D
 
     public GasMask Mask { get; set; }
 
+    private bool Masked => Mask != null;
+
     public static Player Instance { get; private set; }
 
     public event Action Died;
@@ -66,17 +68,17 @@ public partial class Player : CharacterBody2D
         if (direction.IsZeroApprox())
         {
             Velocity = Vector2.Zero;
-            Sprite.Animation = "Maks_Idle";
+            Sprite.Animation = Masked ? "Maks_Idle_Masked" : "Maks_Idle";
         }
         else
         {
             Velocity = direction * MovementSpeed;
-
+            
             Sprite.Animation = direction.Y switch
             {
-                < 0 => "Maks_Backward",
-                > 0 => "Maks_Forward",
-                _ => "Maks_Walk_Left_Right"
+                < 0 => Masked ? "Maks_Backward_Masked" : "Maks_Backward",
+                > 0 => Masked ? "Maks_Forward_Masked" : "Maks_Forward",
+                _   => Masked ? "Maks_Walk_Left_Right_Masked" : "Maks_Walk_Left_Right"
             };
         }
 

@@ -12,10 +12,11 @@
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
-[ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
+[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="12_kvuet"]
-[ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
+[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -188,50 +189,6 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kvuet"]
-region = Rect2(0, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trtic"]
-region = Rect2(64, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ir15t"]
-region = Rect2(128, 0, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ca42v"]
-region = Rect2(0, 96, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rysoc"]
-region = Rect2(64, 96, 64, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ssvqc"]
-region = Rect2(128, 96, 64, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_264po"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kvuet")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_trtic")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ir15t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ca42v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rysoc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ssvqc")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
@@ -250,10 +207,6 @@ Scene = ExtResource("13_ir15t")
 metadata/_custom_type_script = "uid://cmp5yhunkqfnr"
 
 [node name="Game" type="Node2D" unique_id=1014954538]
-
-[node name="GasMask" type="Node2D" parent="." unique_id=1749282028]
-script = ExtResource("2_p57ef")
-metadata/_custom_type_script = "uid://d4hdeedtuc7dl"
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=792315830]
 scale = Vector2(4, 4)
@@ -356,26 +309,6 @@ PuzzleId = "hanoi"
 [node name="Door" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
 position = Vector2(0, -960)
 
-[node name="Door3" type="AnimatedSprite2D" parent="Doors" unique_id=961376434]
-position = Vector2(-640, -1600)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door4" type="AnimatedSprite2D" parent="Doors" unique_id=1544599286]
-position = Vector2(514, -1600)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door5" type="AnimatedSprite2D" parent="Doors" unique_id=966359549]
-position = Vector2(-128, -2496)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
-[node name="Door6" type="AnimatedSprite2D" parent="Doors" unique_id=1622030186]
-position = Vector2(1024, -2496)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_264po")
-
 [node name="CraftingTable" type="StaticBody2D" parent="." unique_id=873039462]
 
 [node name="Sprite2D" type="Sprite2D" parent="CraftingTable" unique_id=295216946]
@@ -386,6 +319,9 @@ texture = ExtResource("12_kvuet")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftingTable" unique_id=193445280]
 position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")
+
+[node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
+position = Vector2(-737, 312)
 
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
 motion_mode = 1
@@ -424,6 +360,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0tnpc")
-PuzzleCatalog = [SubResource("Resource_ir15t"), SubResource("Resource_ca42v")]
+PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
