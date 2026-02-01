@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cwo64uuk5kpus"]
+[gd_scene format=3 uid="uid://3q8b6supoovy"]
 
-[ext_resource type="Script" path="res://scripts/Menu.cs" id="1_vjb58"]
+[ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="1_vjb58"]
 [ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="2_con2f"]
 [ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackground.png" id="3_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://df0ohqmt76m35" path="res://assets/sprites/PlayerSpritesheet_Original.png" id="3_con2f"]
@@ -155,7 +155,6 @@ animations = [{
 }]
 
 [node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_aliveBackgroundSprite", "_deadBackgroundSprite", "_aliveMaksSprite", "_deadMaksSprite", "_gameWon", "PlayButton", "QuitButton", "CreditsButton")]
-[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_aliveBackgroundSprite", "_deadBackgroundSprite", "_aliveMaksSprite", "_deadMaksSprite", "PlayButton", "QuitButton", "CreditsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,7 +187,6 @@ sprite_frames = SubResource("SpriteFrames_i6lef")
 autoplay = "default"
 
 [node name="AliveMaks" type="AnimatedSprite2D" parent="." unique_id=1554760714]
-visible = false
 position = Vector2(265, 333)
 scale = Vector2(8.5, 8.5)
 sprite_frames = SubResource("SpriteFrames_4h3mk")
@@ -202,6 +200,7 @@ sprite_frames = SubResource("SpriteFrames_70i5f")
 autoplay = "default"
 
 [node name="GameWon" type="AnimatedSprite2D" parent="." unique_id=633891209]
+visible = false
 position = Vector2(288, 344.00003)
 scale = Vector2(5.7792397, 5.7792397)
 sprite_frames = SubResource("SpriteFrames_6cdou")
