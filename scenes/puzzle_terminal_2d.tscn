@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="2_bkg5w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t6fd"]
-size = Vector2(144.5, 192)
+size = Vector2(144.5, 304)
 
 [node name="PuzzleTerminal2D" type="Area2D" unique_id=598227121]
 script = ExtResource("1_bkg5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840212345]
-position = Vector2(-30.75, 18)
+position = Vector2(-30.75, 74)
 shape = SubResource("RectangleShape2D_6t6fd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631113298]

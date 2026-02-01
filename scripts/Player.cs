@@ -31,9 +31,11 @@ public partial class Player : CharacterBody2D
 
     public bool InputDisabled { get; set; }
 
-    public GasMask Mask { get; set; }
+    public GasMaskResource MaskResource { get; set; }
 
-    private bool Masked => Mask != null;
+    private bool Masked => MaskResource != null;
+    
+    public PlayerInventory Inventory { get; set; }
 
     public static Player Instance { get; private set; }
 
@@ -73,11 +75,31 @@ public partial class Player : CharacterBody2D
 
         _wasMasked = Masked;
         UpdateBreathing(force: true);
+        Died += () => GD.Print("Player died");
     }
 
 
     public override void _PhysicsProcess(double delta)
     {
+        var deltaPosition = Position - _previousPosition;
+        GD.Print(deltaPosition);
+        Sprite.FlipH = deltaPosition.X > 0;
+        _previousPosition = Position;
+        
+        if (deltaPosition.IsZeroApprox())
+        {
+            Sprite.Animation = Masked ? "Maks_Idle_Masked" : "Maks_Idle";
+        }
+        else
+        {
+            Sprite.Animation = deltaPosition.Y switch
+            {
+                < 0 => Masked ? "Maks_Backward_Masked" : "Maks_Backward",
+                > 0 => Masked ? "Maks_Forward_Masked" : "Maks_Forward",
+                _   => Masked ? "Maks_Walk_Left_Right_Masked" : "Maks_Walk_Left_Right"
+            };
+        }
+
         // If input is disabled (puzzle open), stop movement
         if (InputDisabled)
         {
@@ -87,36 +109,18 @@ public partial class Player : CharacterBody2D
         }
 
         UpdateBreathing();
+        
         float x = Input.GetAxis("move_left", "move_right");
         float y = Input.GetAxis("move_up", "move_down");
-        var direction = new Vector2(x, y).Normalized();
-        
-        if (direction.IsZeroApprox())
-        {
-            Velocity = Vector2.Zero;
-            Sprite.Animation = Masked ? "Maks_Idle_Masked" : "Maks_Idle";
-        }
-        else
-        {
-            Velocity = direction * MovementSpeed;
-            
-            Sprite.Animation = direction.Y switch
-            {
-                < 0 => Masked ? "Maks_Backward_Masked" : "Maks_Backward",
-                > 0 => Masked ? "Maks_Forward_Masked" : "Maks_Forward",
-                _   => Masked ? "Maks_Walk_Left_Right_Masked" : "Maks_Walk_Left_Right"
-            };
-        }
-
-        Sprite.FlipH = direction.X > 0;
+        Velocity = MovementSpeed * new Vector2(x, y).Normalized();
         MoveAndSlide();
     }
 
     public void Hurt(float damage)
     {
-        if (Mask is not null)
+        if (MaskResource is not null)
         {
-            damage = Mask.Filter(damage);
+            damage = MaskResource.Filter(damage);
         }
 
         if (Health - damage <= 0 && Health > 0)

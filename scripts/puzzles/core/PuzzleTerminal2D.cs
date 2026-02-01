@@ -3,7 +3,7 @@ using Godot;
 
 namespace GGJ_2026.scripts.puzzles.core;
 
-public partial class PuzzleTerminal2D : Area2D, IInteractable
+public partial class PuzzleTerminal2D : Interactable
 {
     [Export] public NodePath PuzzleHostPath;
     [Export] public string PuzzleId = "chimp";
@@ -27,6 +27,7 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
 
     public override void _Ready()
     {
+        base._Ready();
         _host = GetNodeOrNull<PuzzleHost>(PuzzleHostPath);
         if (_host == null)
             GD.PushError($"PuzzleTerminal2D: PuzzleHost not found at path '{PuzzleHostPath}'.");
@@ -40,9 +41,6 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
 
         _sprite = GetNodeOrNull<Sprite2D>("Sprite2D");
         ApplyVisual(false);
-
-        BodyEntered += OnBodyEntered;
-        BodyExited += OnBodyExited;
     }
 
     private void ApplyVisual(bool solved)
@@ -55,27 +53,23 @@ public partial class PuzzleTerminal2D : Area2D, IInteractable
             _sprite.Texture = TerminalTexture;
     }
 
-    private void OnBodyEntered(Node body)
+    protected override void OnPlayerEntered()
     {
-        if (body is not Player player) return;
-
+        base.OnPlayerEntered();
         _playerInside = true;
+
         if (!(OneTime && _solved))
             _hintLabel?.Show();
-
-        player.Interactor.SetCurrentInteractable(this);
     }
 
-    private void OnBodyExited(Node body)
+    protected override void OnPlayerExited()
     {
-        if (body is not Player player) return;
-
+        base.OnPlayerExited();
         _playerInside = false;
         _hintLabel?.Hide();
-        player.Interactor.ClearCurrentInteractable(this);
     }
 
-    public void Interact()
+    public override void Interact()
     {
         if (!_playerInside) return;
         if (_busy) return;
