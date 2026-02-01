@@ -33,8 +33,16 @@ public partial class Crafting : Control
             GD.PushWarning("Crafting: PuzzleHost not found (group 'puzzle_host'). Add PuzzleHost to that group.");
 
         SelectTab(false);
-        CraftTabButton.Pressed += () => SelectTab(true);
-        UpgradeTabButton.Pressed += () => SelectTab(false);
+        CraftTabButton.Pressed += () =>
+        {
+            GD.Print("Craft tab button pressed");
+            SelectTab(true);
+        };
+        UpgradeTabButton.Pressed += () =>
+        {
+            GD.Print("Upgrade tab button pressed");
+            SelectTab(false);
+        };
 
         ActionButton.Pressed += OnActionPressed;
     }

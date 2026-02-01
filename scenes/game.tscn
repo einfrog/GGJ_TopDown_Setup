@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_5newe"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
-[ext_resource type="PackedScene" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c18s2q03mmwtp" path="res://scripts/GasMaskResource.cs" id="9_rysoc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
@@ -613,7 +613,7 @@ zoom = Vector2(0.5, 0.5)
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="Player" unique_id=1430805690]
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1989584860]
-position = Vector2(0, 60)
+position = Vector2(-9, 138)
 blend_mode = 1
 shadow_enabled = true
 shadow_color = Color(1, 1, 1, 1)
@@ -635,14 +635,6 @@ grow_vertical = 2
 
 [node name="HealthBar" parent="UI" unique_id=146498960 instance=ExtResource("12_trtic")]
 
-[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Inventory" parent="UI" unique_id=498756310 instance=ExtResource("24_sww3w")]
 
 [node name="PuzzleLayer" type="Control" parent="UI" unique_id=1344310281]
@@ -661,6 +653,14 @@ script = ExtResource("9_0tnpc")
 PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
+
+[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1858374447]
 stream = ExtResource("32_wljb1")
