@@ -18,17 +18,14 @@ public partial class InventoryUi : Control
     {
         Player.Instance.Inventory.ItemCollected += item =>
         {
-            if (_itemUis.TryGetValue(item.Item, out var ui))
-            {
-                ui.ItemCount++;
-            }
-            else
+            if (!_itemUis.TryGetValue(item.Item, out var ui))
             {
                 ui = _itemUiScene.Instantiate<InventoryItemUi>();
                 _itemUiParent.AddChild(ui);
                 _itemUis[item.Item] = ui;
             }
 
+            ui.ItemCount++;
             ui.Texture = item.Sprite.Texture;
         };
     }

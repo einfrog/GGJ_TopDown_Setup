@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 
 namespace GGJ_2026.scripts;
 
@@ -20,8 +19,6 @@ public class PlayerInventory
 
     public event Action<InventoryItemCollectible> ItemCollected;
 
-    public int this[InventoryItem item] => _itemCounts[item];
-
     public void Collect(InventoryItemCollectible item)
     {
         _itemCounts[item.Item]++;
@@ -31,6 +28,7 @@ public class PlayerInventory
     public void UpgradeMask()
     {
         _itemCounts[InventoryItem.MaskUpgradePart]--;
+        Player.Instance.MaskResource.Level++;
     }
 
     public bool CanUpgradeMask()
@@ -44,6 +42,8 @@ public class PlayerInventory
         {
             _itemCounts[itemCount.Key] -= itemCount.Value;
         }
+
+        // TODO: make Radio Trainsceiver appear large on screen
     }
 
     public bool CanCraftRadioTransceiver()
@@ -53,7 +53,12 @@ public class PlayerInventory
 
     public bool HasEnoughForRadioTransceiver(InventoryItem item)
     {
-        return _itemCounts[item] >= RadioTransceiverRecipe[item];
+        return _itemCounts[item] >= RadioTransceiverRecipe.GetValueOrDefault(item, 0);
+    }
+
+    public static int GetNecessaryAmountForCraftingRadioTransceiver(InventoryItem item)
+    {
+        return RadioTransceiverRecipe.GetValueOrDefault(item, 0);
     }
 
 }
