@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://fb6vtnv5utvc"]
+
+[ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackgroundAlt.png" id="1_0bpdh"]
+[ext_resource type="Script" uid="uid://c8r8og66qr001" path="res://scripts/Credits.cs" id="1_0ctdu"]
+[ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_2ckv8"]
+[ext_resource type="PackedScene" uid="uid://3q8b6supoovy" path="res://scenes/menu.tscn" id="2_2fbfq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lgdl"]
+atlas = ExtResource("1_0bpdh")
+region = Rect2(0, 0, 120, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6kru"]
+atlas = ExtResource("1_0bpdh")
+region = Rect2(0, 68, 120, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ckv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lgdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6kru")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Credits" type="Control" unique_id=1157538173 node_paths=PackedStringArray("BackButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ctdu")
+BackButton = NodePath("Button")
+MenuScene = ExtResource("2_2fbfq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=240010523]
+position = Vector2(580, 326.99997)
+scale = Vector2(9.799999, 9.67647)
+sprite_frames = SubResource("SpriteFrames_2ckv8")
+autoplay = "default"
+frame_progress = 0.19211043
+
+[node name="Title" type="Node2D" parent="." unique_id=1642627504]
+
+[node name="Shade" type="Label" parent="Title" unique_id=1922926252]
+offset_left = 423.0
+offset_top = 90.0
+offset_right = 768.0
+offset_bottom = 196.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 88
+text = "Credits"
+
+[node name="White" type="Label" parent="Title" unique_id=925255492]
+offset_left = 416.0
+offset_top = 88.0
+offset_right = 760.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 88
+text = "Credits"
+
+[node name="Name" type="Node2D" parent="." unique_id=1018722407]
+
+[node name="Shade" type="Label" parent="Name" unique_id=181442377]
+offset_left = 455.0
+offset_top = 458.0
+offset_right = 790.0
+offset_bottom = 526.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Emilio Zottel"
+
+[node name="White" type="Label" parent="Name" unique_id=1462105773]
+offset_left = 448.0
+offset_top = 456.0
+offset_right = 783.0
+offset_bottom = 524.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Emilio Zottel"
+
+[node name="Name2" type="Node2D" parent="." unique_id=1283309126]
+
+[node name="Shade" type="Label" parent="Name2" unique_id=359261309]
+offset_left = 135.0
+offset_top = 202.0
+offset_right = 524.0
+offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Jan Dragutan"
+
+[node name="White" type="Label" parent="Name2" unique_id=1928051234]
+offset_left = 128.0
+offset_top = 200.0
+offset_right = 517.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Jan Dragutan"
+
+[node name="Name3" type="Node2D" parent="." unique_id=1189382211]
+
+[node name="Shade" type="Label" parent="Name3" unique_id=1521067851]
+offset_left = 447.0
+offset_top = 290.0
+offset_right = 1043.0
+offset_bottom = 358.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Ksawery Kochanowicz"
+
+[node name="White" type="Label" parent="Name3" unique_id=13665386]
+offset_left = 440.0
+offset_top = 288.0
+offset_right = 1036.0
+offset_bottom = 356.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Ksawery Kochanowicz"
+
+[node name="Name4" type="Node2D" parent="." unique_id=817133014]
+
+[node name="Shade" type="Label" parent="Name4" unique_id=2110882704]
+offset_left = 135.0
+offset_top = 370.0
+offset_right = 524.0
+offset_bottom = 438.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Johanna Mayr"
+
+[node name="White" type="Label" parent="Name4" unique_id=632746805]
+offset_left = 128.0
+offset_top = 368.0
+offset_right = 517.0
+offset_bottom = 436.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 56
+text = "Johanna Mayr"
+
+[node name="Button" type="Button" parent="." unique_id=1778449693]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 464.0
+offset_top = 552.0
+offset_right = 696.0
+offset_bottom = 599.0
+theme_override_fonts/font = ExtResource("2_2ckv8")
+theme_override_font_sizes/font_size = 32
+text = "Back to Menu"
