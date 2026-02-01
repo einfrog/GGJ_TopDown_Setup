@@ -27,8 +27,18 @@ public partial class InventoryItemUi : Control
         set
         {
             field = value;
-            _label.Text = value.ToString();
+            _label.Text = $"{value} / {PlayerInventory.GetNecessaryAmountForCraftingRadioTransceiver(Item)}";
         }
-    } = 1;
+    }
+
+    public InventoryItem Item
+    {
+        get;
+        set
+        {
+            field = value;
+            _label.Text = $"{ItemCount} / {PlayerInventory.GetNecessaryAmountForCraftingRadioTransceiver(value)}";
+        }
+    }
 
 }

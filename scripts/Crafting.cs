@@ -33,7 +33,7 @@ public partial class Crafting : Control
 
     public override void _Ready()
     {
-        SelectTab(true);
+        SelectTab(false);
         CraftTabButton.Pressed += () => SelectTab(true);
         UpgradeTabButton.Pressed += () => SelectTab(false);
 
@@ -44,7 +44,7 @@ public partial class Crafting : Control
             else
                 Player.Instance.Inventory.UpgradeMask();
 
-            QueueFree();
+            Exit();
         };
     }
 
@@ -52,7 +52,7 @@ public partial class Crafting : Control
     {
         if (@event is InputEventKey { KeyLabel: Key.Escape, Pressed: true })
         {
-            QueueFree();
+            Exit();
         }
     }
 
@@ -72,6 +72,12 @@ public partial class Crafting : Control
             UpgradeTabButton.TextureNormal = PressedButtonTexture;
             ActionButton.Disabled = !Player.Instance.Inventory.CanUpgradeMask();
         }
+    }
+
+    private void Exit()
+    {
+        Player.Instance.InputDisabled = false;
+        QueueFree();
     }
 
 }

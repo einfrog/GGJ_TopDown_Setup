@@ -13,6 +13,7 @@ public partial class CraftingTable : Interactable
 
     public override void Interact()
     {
+        Player.Instance.InputDisabled = true;
         _craftingSceneParent.AddChild(_craftingScene.Instantiate());
     }
 

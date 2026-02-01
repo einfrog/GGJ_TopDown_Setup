@@ -43,10 +43,10 @@ metadata/_edit_use_anchors_ = true
 [node name="ArrowUpgrade" type="TextureRect" parent="." unique_id=430390303]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.46961805
-anchor_top = 0.36728394
-anchor_right = 0.672743
-anchor_bottom = 0.6635802
+anchor_left = 0.4314236
+anchor_top = 0.47685185
+anchor_right = 0.63454854
+anchor_bottom = 0.7731481
 offset_right = -194.99994
 offset_bottom = -159.99997
 grow_horizontal = 2
@@ -55,25 +55,16 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_6veh8")
 metadata/_edit_use_anchors_ = true
 
-[node name="CraftTab" type="Control" parent="." unique_id=1995334548]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="UpgradeTab" type="Control" parent="." unique_id=1776458551]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Input" type="Control" parent="." unique_id=166803571]
 anchors_preset = 0
-offset_left = -391.0
-offset_top = -277.0
-offset_right = -351.0
-offset_bottom = -237.0
+offset_left = -381.0
+offset_top = -211.0
+offset_right = -341.0
+offset_bottom = -171.0
 
 [node name="MaskLvlPreview" type="TextureRect" parent="Input" unique_id=15145642]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 15.25
 anchor_top = 12.5
 anchor_right = 19.25
@@ -113,10 +104,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Output" type="Control" parent="." unique_id=2026158630]
 anchors_preset = 0
-offset_left = -358.0
-offset_top = -250.0
-offset_right = -318.0
-offset_bottom = -210.0
+offset_left = -417.0
+offset_top = -204.0
+offset_right = -377.0
+offset_bottom = -164.0
 
 [node name="MaskLvlPreview" type="TextureRect" parent="Output" unique_id=1549776931]
 layout_mode = 0
@@ -159,10 +150,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Craft" type="Control" parent="." unique_id=1521424638]
 anchors_preset = 0
-offset_left = -162.0
-offset_top = -81.0
-offset_right = -122.0
-offset_bottom = -41.0
+offset_left = -99.0
+offset_top = 9.0
+offset_right = -59.0
+offset_bottom = 49.0
 
 [node name="Button" type="TextureButton" parent="Craft" unique_id=415691316]
 layout_mode = 1
@@ -175,7 +166,7 @@ offset_left = 214.43752
 offset_top = 135.77777
 offset_right = 311.5625
 offset_bottom = 156.0
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture_normal = ExtResource("3_arrsk")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
@@ -183,36 +174,35 @@ metadata/_edit_use_anchors_ = true
 [node name="Label2" type="Label" parent="Craft" unique_id=1826358520]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 8.050001
-anchor_top = 3.0500002
-anchor_right = 40.76625
-anchor_bottom = 16.385624
+anchor_left = 7.975
+anchor_top = 3.65
+anchor_right = 40.69125
+anchor_bottom = 16.985622
 offset_right = 244.34998
 offset_bottom = 100.575
-scale = Vector2(0.325, 0.325)
-theme_override_font_sizes/font_size = 277
+theme_override_font_sizes/font_size = 47
 text = "Craft"
 metadata/_edit_use_anchors_ = true
 
 [node name="Upgrade" type="Control" parent="." unique_id=139082791]
 anchors_preset = 0
-offset_left = -387.0
-offset_top = -89.0
-offset_right = -347.0
-offset_bottom = -49.0
+offset_left = -433.0
+offset_top = 18.0
+offset_right = -393.0
+offset_bottom = 58.0
 
 [node name="Button" type="TextureButton" parent="Upgrade" unique_id=308557097]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.54583335
-anchor_top = 0.1388889
-anchor_right = 0.89270836
-anchor_bottom = 0.28333333
+anchor_left = 1.2208344
+anchor_top = -0.28611106
+anchor_right = 1.5677093
+anchor_bottom = -0.1416668
 offset_left = 1026.1666
 offset_top = 144.44444
 offset_right = 1123.2916
 offset_bottom = 164.66667
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture_normal = ExtResource("3_arrsk")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
@@ -220,11 +210,11 @@ metadata/_edit_use_anchors_ = true
 [node name="Label3" type="Label" parent="Upgrade" unique_id=842299004]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 27.525
-anchor_top = 3.625
-anchor_right = 39.8
-anchor_bottom = 7.25
-theme_override_font_sizes/font_size = 81
+anchor_left = 28.525
+anchor_top = 3.4
+anchor_right = 40.8
+anchor_bottom = 7.025
+theme_override_font_sizes/font_size = 47
 text = "Upgrade"
 metadata/_edit_use_anchors_ = true
 
@@ -238,15 +228,15 @@ offset_bottom = 502.0
 [node name="Button" type="TextureButton" parent="Action" unique_id=1596362690]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.33072916
-anchor_top = 0.70555556
-anchor_right = 0.67760414
-anchor_bottom = 0.85
+anchor_left = 1.405729
+anchor_top = 1.5305555
+anchor_right = 1.7526041
+anchor_bottom = 1.675
 offset_left = -13.229166
 offset_top = -28.222221
 offset_right = 83.895836
 offset_bottom = -8.0
-scale = Vector2(6, 6)
+scale = Vector2(4, 4)
 texture_normal = ExtResource("6_r0bq6")
 texture_disabled = ExtResource("3_arrsk")
 stretch_mode = 5
@@ -255,14 +245,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Label4" type="Label" parent="Action" unique_id=1009243809]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 23.15
-anchor_top = 18.8
-anchor_right = 25.025
-anchor_bottom = 22.925
+anchor_left = 21.975
+anchor_top = 19.875
+anchor_right = 23.85
+anchor_bottom = 24.0
 offset_left = -635.0
 offset_top = -762.0
 offset_right = -635.0
 offset_bottom = -762.0
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 73
 text = "X"
 metadata/_edit_use_anchors_ = true

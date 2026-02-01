@@ -12,8 +12,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qw0r6")
 _itemUiScene = ExtResource("2_hj2ta")
-_itemUiParent = NodePath("HBoxContainer")
+_itemUiParent = NodePath("MarginContainer/HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2108808117]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=982914512]
 layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2108808117]
+layout_mode = 2
 theme_override_constants/separation = 250
+
+[node name="InventoryItem" parent="MarginContainer/HBoxContainer" unique_id=305579426 instance=ExtResource("2_hj2ta")]
+layout_mode = 2
+
+[node name="InventoryItem2" parent="MarginContainer/HBoxContainer" unique_id=1011161508 instance=ExtResource("2_hj2ta")]
+layout_mode = 2
