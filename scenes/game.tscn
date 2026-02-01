@@ -5,10 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
-[ext_resource type="Texture2D" uid="uid://dudx1hn30x0qa" path="res://assets/sprites/DorrTerminalUnsolved.png" id="6_1kice"]
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/horiz_wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
-[ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_5newe"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
 [ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
@@ -20,13 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="Texture2D" uid="uid://b2n4qamn5km72" path="res://assets/sprites/metalScrap.png" id="13_37s47"]
-[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
-[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
-[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="15_e1j6l"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -128,11 +123,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_rysoc")
 
-[sub_resource type="Curve" id="Curve_lbhrr"]
-_limits = [0.0, 10.0, 0.0, 30.0]
-_data = [Vector2(0, 3.4432592), 0.0, 0.0, 0, 0, Vector2(30, 3.8635626), 0.0, 0.0, 0, 0]
-point_count = 2
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
 atlas = ExtResource("18_ssvqc")
 region = Rect2(0, 0, 64, 100)
@@ -208,12 +198,11 @@ tile_map_data = PackedByteArray("AAD///b/AgAAAAMAAFAAAPb/AgAAAAMAAFAFAO7/AgAAAAE
 tile_set = SubResource("TileSet_ssvqc")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
-visible = false
 
 [node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
+visible = false
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
-DamageCurve = SubResource("Curve_lbhrr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone" unique_id=1303028849]
 position = Vector2(-415.99997, -1120)
@@ -271,14 +260,10 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 [node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
 position = Vector2(128, -720)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
 
 [node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
 position = Vector2(632, -1696)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
@@ -306,7 +291,6 @@ texture = ExtResource("8_rysoc")
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
 position = Vector2(-898, -1674)
-Strength = 1.0
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
 scale = Vector2(4, 4)

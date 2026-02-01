@@ -29,7 +29,6 @@ UpgradeTabButton = NodePath("Upgrade/Button")
 ActionButton = NodePath("Action/Button")
 PressedButtonTexture = ExtResource("6_r0bq6")
 DisabledButtonTexture = ExtResource("3_arrsk")
-EnabledButtonTexture = ExtResource("6_r0bq6")
 
 [node name="CraftingInterface" type="TextureRect" parent="." unique_id=1383773162]
 layout_mode = 1
