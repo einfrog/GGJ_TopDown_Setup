@@ -554,9 +554,8 @@ PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), S
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=2023490927]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1858374447]
 stream = ExtResource("32_wljb1")
-autoplay = true
 script = ExtResource("33_v2yb1")
 
 [editable path="Iems/MaskUpgradePart1"]
