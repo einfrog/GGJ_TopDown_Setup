@@ -34,9 +34,9 @@
 [ext_resource type="AudioStream" uid="uid://sopahm1ppsi" path="res://assets/sounds/step_3.ogg" id="23_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
 [ext_resource type="PackedScene" uid="uid://dtdcnyridfaqa" path="res://scenes/inventory.tscn" id="24_sww3w"]
-[ext_resource type="PackedScene" uid="uid://cho2qjdx3838u" path="res://scenes/table_middle.tscn" id="27_qnb83"]
-[ext_resource type="PackedScene" uid="uid://c5fc2ieakqdos" path="res://scenes/table_right.tscn" id="27_suyxu"]
-[ext_resource type="PackedScene" uid="uid://ubbaam3g4c7a" path="res://scenes/table_side.tscn" id="27_sww3w"]
+[ext_resource type="PackedScene" path="res://scenes/table_middle.tscn" id="27_qnb83"]
+[ext_resource type="PackedScene" path="res://scenes/table_right.tscn" id="27_suyxu"]
+[ext_resource type="PackedScene" path="res://scenes/table_side.tscn" id="27_sww3w"]
 [ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
 [ext_resource type="Script" uid="uid://bl24ojw5iatc" path="res://scripts/GasMaskLevel.cs" id="33_m4url"]
 [ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
@@ -173,16 +173,12 @@ gradient = SubResource("Gradient_wljb1")
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ool0"]
-atlas = ExtResource("13_7025r")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4url"]
 atlas = ExtResource("13_7025r")
 
 [sub_resource type="Resource" id="Resource_qnb83"]
 script = ExtResource("9_rysoc")
 Texture = SubResource("AtlasTexture_m4url")
-NextLevelTexture = SubResource("AtlasTexture_8ool0")
 metadata/_custom_type_script = "uid://c18s2q03mmwtp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
@@ -356,6 +352,19 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone2" unique_id=1180351973]
 
+[node name="HealthZone" type="Area2D" parent="Zones" unique_id=334971736 node_paths=PackedStringArray("DamageTimer")]
+position = Vector2(-299, -255)
+script = ExtResource("4_lbhrr")
+DamagePerHit = -10.0
+DamageTimer = NodePath("Timer")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/HealthZone" unique_id=770506699]
+position = Vector2(-248, 459)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(412.19763, -485.50665, 258.2369, -485.50665, 258.2657, -267.2898, -297.4938, -258.16336, -297.4938, 109.86447, 417.10474, 108.41411)
+
+[node name="Timer" type="Timer" parent="Zones/HealthZone" unique_id=1051596930]
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door1" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
@@ -410,10 +419,6 @@ texture = ExtResource("8_rysoc")
 
 [node name="Terminals" type="Node2D" parent="." unique_id=881508662]
 
-[node name="PuzzleTerminal2D" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-PuzzleId = "hanoi"
-
 [node name="Terminal1" parent="Terminals" unique_id=1893637548 instance=ExtResource("4_p57ef")]
 position = Vector2(136, -720)
 PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
@@ -452,7 +457,6 @@ _craftingScene = ExtResource("11_suyxu")
 occluder = SubResource("OccluderPolygon2D_wljb1")
 
 [node name="PointLight2D" type="PointLight2D" parent="CraftingTable" unique_id=1999966425]
-visible = false
 position = Vector2(-724, -240)
 blend_mode = 1
 shadow_enabled = true
@@ -461,7 +465,7 @@ texture = SubResource("GradientTexture2D_wljb1")
 texture_scale = 5.0
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
-position = Vector2(27, -362)
+position = Vector2(-945, -1605)
 MaskResource = SubResource("Resource_qnb83")
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
@@ -604,7 +608,7 @@ position = Vector2(-768, -3520)
 [node name="TableMiddle3" parent="." unique_id=1350075394 instance=ExtResource("27_qnb83")]
 position = Vector2(-640, -3520)
 
-[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor", "RegenerationTimer") groups=["player"] instance=ExtResource("1_80nbo")]
+[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
@@ -613,7 +617,6 @@ MaskBreathingLoop = ExtResource("20_qouja")
 FootstepClips = [ExtResource("21_qouja"), ExtResource("22_wljb1"), ExtResource("23_v2yb1"), ExtResource("24_js0lu")]
 StepIntervalSeconds = 0.5
 FootstepBaseVolumeDb = -12.0
-RegenerationTimer = NodePath("Timer")
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")

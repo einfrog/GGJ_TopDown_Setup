@@ -26,7 +26,7 @@ public partial class ContaminatedZone : Area2D
         if (body is Player)
         {
             DamageTimer.Paused = false;
-            Player.Instance.RegenerationTimer.Paused = true;
+            // Player.Instance.RegenerationTimer.Paused = true;
         }
     }
 
@@ -35,7 +35,7 @@ public partial class ContaminatedZone : Area2D
         if (body is Player)
         {
             DamageTimer.Paused = true;
-            Player.Instance.RegenerationTimer.Paused = false;
+            // Player.Instance.RegenerationTimer.Paused = false;
         }
     }
 

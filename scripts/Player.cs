@@ -75,8 +75,8 @@ public partial class Player : CharacterBody2D
 
     public event Action<float> HealthChanged;
     
-    [Export]
-    public Timer RegenerationTimer { get; set; }
+    // [Export]
+    // public Timer RegenerationTimer { get; set; }
     
     public static bool RunEndedInDeath { get; set; }
 
@@ -132,14 +132,14 @@ public partial class Player : CharacterBody2D
             _footsteps.Autoplay = false;
             _footsteps.VolumeDb = FootstepBaseVolumeDb;
         }
-
-        RegenerationTimer.Paused = true;
-        RegenerationTimer.Timeout += () =>
-        {
-            Health = Mathf.Min(MaxHealth, Health + 10);
-            HealthChanged?.Invoke(Health);
-        };
-        RegenerationTimer.Start();
+        //
+        // RegenerationTimer.Paused = true;
+        // RegenerationTimer.Timeout += () =>
+        // {
+        //     Health = Mathf.Min(MaxHealth, Health + 10);
+        //     HealthChanged?.Invoke(Health);
+        // };
+        // RegenerationTimer.Start();
 
         _stepTimer = 0;
     }
@@ -199,12 +199,13 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
-        if (MaskResource is not null)
+        if (MaskResource is not null && damage > 0)
         {
             damage = MaskResource.Filter(damage);
+            
         }
         
-        Health = Mathf.Max(0, Health - damage);
+        Health = Mathf.Clamp(Health - damage, 0, MaxHealth);
         HealthChanged?.Invoke(Health);
 
         if (Health <= 0)
@@ -213,6 +214,7 @@ public partial class Player : CharacterBody2D
             Died?.Invoke();
             GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
         }
+        GD.Print(Health);
     }
 
     private void UpdateBreathing(bool force = false)
