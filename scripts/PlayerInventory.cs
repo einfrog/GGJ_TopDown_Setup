@@ -6,8 +6,8 @@ namespace GGJ_2026.scripts;
 
 public class PlayerInventory
 {
-    
-    public static bool GameWon = false;
+
+    public static bool GameWon { get; set; }
 
     private static readonly Dictionary<InventoryItem, int> RadioTransceiverRecipe = new()
     {
@@ -21,6 +21,8 @@ public class PlayerInventory
 
     public event Action<InventoryItemCollectible> ItemCollected;
 
+    public event Action<InventoryItem, int> ItemConsumed;
+
     public void Collect(InventoryItemCollectible item)
     {
         _itemCounts[item.Item]++;
@@ -31,6 +33,7 @@ public class PlayerInventory
     {
         _itemCounts[InventoryItem.MaskUpgradePart]--;
         Player.Instance.MaskResource.Level++;
+        ItemConsumed?.Invoke(InventoryItem.MaskUpgradePart, 1);
     }
 
     public bool CanUpgradeMask()
@@ -43,8 +46,9 @@ public class PlayerInventory
         foreach (var itemCount in RadioTransceiverRecipe)
         {
             _itemCounts[itemCount.Key] -= itemCount.Value;
+            ItemConsumed?.Invoke(itemCount.Key, itemCount.Value);
         }
-        
+
         GameWon = true;
 
         // TODO: make Radio Trainsceiver appear large on screen

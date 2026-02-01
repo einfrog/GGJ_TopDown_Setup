@@ -29,6 +29,31 @@ public partial class InventoryUi : Control
             ui.Texture = item.Sprite.Texture;
             ui.UpdateUi();
         };
+
+        Player.Instance.Inventory.ItemConsumed += (item, count) =>
+        {
+            if (!_itemUis.TryGetValue(item, out var ui))
+            {
+                GD.PushWarning($"Consumed an item that wasn't in inventory ({count}x{item})");
+                return;
+            }
+
+            int newCount = ui.ItemCount - count;
+
+            switch (newCount)
+            {
+                case 0:
+                    _itemUis.Remove(item);
+                    ui.QueueFree();
+                    break;
+                case > 0:
+                    ui.ItemCount = newCount;
+                    break;
+                case < 0:
+                    GD.PushWarning($"Consumed more items than in inventory ({count}x{item})");
+                    break;
+            }
+        };
     }
 
 }
