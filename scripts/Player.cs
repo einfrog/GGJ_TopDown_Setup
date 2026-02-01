@@ -19,14 +19,34 @@ public partial class Player : CharacterBody2D
 
     [Export]
     public float MaxHealth { get; set; } = 100;
-
+    // Breathing
     [Export] public NodePath BreathingPlayerPath = "Breathing";
     [Export] public AudioStream MaskBreathingLoop;
     [Export] public float BreathingFadeSeconds = 0.15f;
     
+    // Footsteps
+    [Export] public NodePath FootstepsPlayerPath = "Footsteps";
+    [Export] public AudioStream[] FootstepClips = Array.Empty<AudioStream>();
+
+    [Export] public float StepIntervalSeconds = 0.32f;
+
+    [Export] public float FootstepPitchMin = 0.95f;
+    [Export] public float FootstepPitchMax = 1.05f;
+
+    [Export] public float FootstepVolumeJitterDb = 1.5f; // +/- dB
+    [Export] public float FootstepBaseVolumeDb = -6f;
+    
+    
     private AudioStreamPlayer2D _breathing;
     private Tween _breathingTween;
     private bool _wasMasked;
+    
+    
+    private AudioStreamPlayer2D _footsteps;
+    private double _stepTimer;
+    private readonly RandomNumberGenerator _stepRng = new();
+    private int _lastFootstepIndex = -1;
+    
     public float Health { get; set; }
 
     public bool InputDisabled { get; set; }
@@ -37,7 +57,7 @@ public partial class Player : CharacterBody2D
 
     private float MovementSpeedThreshold => MovementSpeed / 2;
 
-    public PlayerInventory Inventory { get; set; }
+    public PlayerInventory Inventory { get; } = new();
 
     public static Player Instance { get; private set; }
 
@@ -78,6 +98,21 @@ public partial class Player : CharacterBody2D
 
         _wasMasked = Masked;
         UpdateBreathing(force: true);
+        
+        _stepRng.Randomize();
+
+        _footsteps = GetNodeOrNull<AudioStreamPlayer2D>(FootstepsPlayerPath);
+        if (_footsteps == null)
+        {
+            GD.PushWarning("Player: Footsteps AudioStreamPlayer not found. Add a child named 'Footsteps' or set FootstepsPlayerPath.");
+        }
+        else
+        {
+            _footsteps.Autoplay = false;
+            _footsteps.VolumeDb = FootstepBaseVolumeDb;
+        }
+
+        _stepTimer = 0;
     }
 
 
@@ -104,16 +139,30 @@ public partial class Player : CharacterBody2D
         Sprite.Animation = (Masked) ? animation + "_Masked" : animation;
         Sprite.FlipH = deltaPosition.X > MovementSpeedThreshold;
         UpdateBreathing();
+        
+        float x = 0f;
+        float y = 0f;
 
+        if (!InputDisabled)
+        {
+            x = Input.GetAxis("move_left", "move_right");
+            y = Input.GetAxis("move_up", "move_down");
+        }
+
+        Vector2 inputDir = new Vector2(x, y);
+        bool wantsToMove = !InputDisabled && !inputDir.IsZeroApprox();
+
+        // --- footsteps: use input intent (stable), not deltaPosition (jittery) ---
+        UpdateFootsteps(delta, wantsToMove);
+
+        // --- existing movement code ---
         if (InputDisabled)
         {
             Velocity = Vector2.Zero;
         }
         else
         {
-            float x = Input.GetAxis("move_left", "move_right");
-            float y = Input.GetAxis("move_up", "move_down");
-            Velocity = MovementSpeed * new Vector2(x, y).Normalized();
+            Velocity = MovementSpeed * inputDir.Normalized();
         }
 
         MoveAndSlide();
@@ -170,6 +219,53 @@ public partial class Player : CharacterBody2D
             _breathingTween.TweenProperty(_breathing, "volume_db", -80f, BreathingFadeSeconds);
             _breathingTween.TweenCallback(Callable.From(() => _breathing?.Stop()));
         }
+    }
+
+    private void UpdateFootsteps(double delta, bool wantFootsteps)
+    {
+        if (_footsteps == null)
+            return;
+
+        if (!wantFootsteps)
+        {
+            _stepTimer = 0;
+            return;
+        }
+
+        if (FootstepClips == null || FootstepClips.Length == 0)
+            return;
+
+        _stepTimer -= delta;
+        if (_stepTimer > 0)
+            return;
+
+        PlayRandomFootstep();
+        _stepTimer = StepIntervalSeconds;
+    }
+
+
+
+    private void PlayRandomFootstep()
+    {
+        int count = FootstepClips.Length;
+        int index = _stepRng.RandiRange(0, count - 1);
+        if (count > 1 && index == _lastFootstepIndex)
+            index = (index + 1) % count;
+
+        _lastFootstepIndex = index;
+
+        var clip = FootstepClips[index];
+        if (clip == null)
+            return;
+
+        _footsteps.Stream = clip;
+
+        _footsteps.PitchScale = _stepRng.RandfRange(FootstepPitchMin, FootstepPitchMax);
+
+        float volJitter = _stepRng.RandfRange(-FootstepVolumeJitterDb, FootstepVolumeJitterDb);
+        _footsteps.VolumeDb = FootstepBaseVolumeDb + volJitter;
+
+        _footsteps.Play();
     }
 
 }

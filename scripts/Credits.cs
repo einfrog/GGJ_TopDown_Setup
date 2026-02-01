@@ -8,12 +8,9 @@ public partial class Credits : Control
     [Export]
     public Button BackButton { get; set; }
 
-    [Export]
-    public PackedScene MenuScene { get; set; }
-
     public override void _Ready()
     {
-        BackButton.Pressed += () => GetTree().ChangeSceneToPacked(MenuScene);
+        BackButton.Pressed += () => GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
     }
 
 }

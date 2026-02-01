@@ -5,6 +5,17 @@ namespace GGJ_2026.scripts;
 public partial class Crafting : Control
 {
 
+    private bool _craftingTabSelected;
+
+    [Export]
+    private VBoxContainer _craftingInput;
+
+    [Export]
+    private TextureRect _craftingOutput;
+
+    [Export]
+    public TextureButton UpgradeTab { get; set; }
+
     [Export]
     public TextureButton CraftTabButton { get; set; }
 
@@ -22,21 +33,45 @@ public partial class Crafting : Control
 
     public override void _Ready()
     {
-        CraftTabButton.Pressed += () =>
+        SelectTab(true);
+        CraftTabButton.Pressed += () => SelectTab(true);
+        UpgradeTabButton.Pressed += () => SelectTab(false);
+
+        ActionButton.Pressed += () =>
+        {
+            if (_craftingTabSelected)
+                Player.Instance.Inventory.CraftRadioTransceiver();
+            else
+                Player.Instance.Inventory.UpgradeMask();
+
+            QueueFree();
+        };
+    }
+
+    public override void _UnhandledKeyInput(InputEvent @event)
+    {
+        if (@event is InputEventKey { KeyLabel: Key.Escape, Pressed: true })
+        {
+            QueueFree();
+        }
+    }
+
+    private void SelectTab(bool craftingTab)
+    {
+        _craftingTabSelected = craftingTab;
+
+        if (craftingTab)
         {
             CraftTabButton.TextureNormal = PressedButtonTexture;
             UpgradeTabButton.TextureNormal = DisabledButtonTexture;
             ActionButton.Disabled = !Player.Instance.Inventory.CanCraftRadioTransceiver();
-        };
-
-        UpgradeTabButton.Pressed += () =>
+        }
+        else
         {
             CraftTabButton.TextureNormal = DisabledButtonTexture;
             UpgradeTabButton.TextureNormal = PressedButtonTexture;
-            ActionButton.Disabled = !Player.Instance.Inventory.CanCraftRadioTransceiver();
-        };
-
-        ActionButton.Pressed += () => { };
+            ActionButton.Disabled = !Player.Instance.Inventory.CanUpgradeMask();
+        }
     }
 
 }

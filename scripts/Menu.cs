@@ -17,14 +17,11 @@ public partial class Menu : Control
 	[Export]
 	public PackedScene GameScene { get; set; }
 
-	[Export]
-	public PackedScene CreditsScene { get; set; }
-
 	public override void _Ready()
 	{
 		PlayButton.Pressed += () => GetTree().ChangeSceneToPacked(GameScene);
 		QuitButton.Pressed += () => GetTree().Quit();
-		CreditsButton.Pressed += () => GetTree().ChangeSceneToPacked(CreditsScene);
+		CreditsButton.Pressed += () => GetTree().ChangeSceneToFile("res://scenes/credits.tscn");
 	}
 
 }

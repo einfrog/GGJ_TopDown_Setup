@@ -3,112 +3,24 @@
 [ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackgroundAlt.png" id="1_0bpdh"]
 [ext_resource type="Script" uid="uid://c8r8og66qr001" path="res://scripts/Credits.cs" id="1_0ctdu"]
 [ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_2ckv8"]
-[ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="2_mah5v"]
-[ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="3_kyhnv"]
-[ext_resource type="Texture2D" uid="uid://df0ohqmt76m35" path="res://assets/sprites/PlayerSpritesheet_Original.png" id="5_ooihk"]
+[ext_resource type="PackedScene" uid="uid://3q8b6supoovy" path="res://scenes/menu.tscn" id="2_2fbfq"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3dmrc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lgdl"]
 atlas = ExtResource("1_0bpdh")
 region = Rect2(0, 0, 120, 68)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_81l6r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6kru"]
 atlas = ExtResource("1_0bpdh")
 region = Rect2(0, 68, 120, 68)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rsfmq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3dmrc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_81l6r")
-}],
-"loop": true,
-"name": &"default",
-"speed": 2.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mhnvy"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(0, 256, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ytvr"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(48, 256, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3eks"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(96, 256, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v86rl"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(144, 256, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_13sgg"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(0, 320, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6lef"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(48, 320, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70i5f"]
-atlas = ExtResource("5_ooihk")
-region = Rect2(96, 320, 48, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_4h3mk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mhnvy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ytvr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3eks")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v86rl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_13sgg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i6lef")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_70i5f")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="PackedScene" id="PackedScene_ih6pn"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Menu", "Control", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "script", "PlayButton", "QuitButton", "CreditsButton", "GameScene", "CreditsScene", "AnimatedSprite2D", "AnimatedSprite2D", "position", "scale", "sprite_frames", "autoplay", "frame_progress", "MaksSprite", "AnimatedSprite2D", "position", "scale", "sprite_frames", "autoplay", "VBoxContainer", "VBoxContainer", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_right", "offset_bottom", "size_flags_horizontal", "alignment", "metadata/_edit_use_anchors_", "MarginContainer", "MarginContainer", "layout_mode", "theme_override_constants/margin_bottom", "Button", "Button", "custom_minimum_size", "layout_mode", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "MarginContainer2", "MarginContainer", "layout_mode", "theme_override_constants/margin_bottom", "Button2", "Button", "layout_mode", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "MarginContainer3", "MarginContainer", "layout_mode", "Button3", "Button", "layout_mode", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "Title", "Node2D", "Shade", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_colors/font_color", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text", "White", "Label", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_fonts/font", "theme_override_font_sizes/font_size", "text"),
-"node_count": 13,
-"node_ids": PackedInt32Array(909434982, 1238332360, 1554760714, 686536614, 711653912, 1691959057, 1663957710, 2686264, 927172667, 1041141328, 108802047, 1001375922, 1625424399),
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/MarginContainer"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/MarginContainer2"), NodePath("./VBoxContainer"), NodePath("./VBoxContainer/MarginContainer3"), NodePath("."), NodePath("./Title"), NodePath("./Title")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 12, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 1073741833, 7, 1073741834, 8, 1073741835, 9, 12, 10, 13, 11, 0, 1073741824, 0, 15, 14, -1, 5, 16, 12, 17, 13, 18, 14, 19, 15, 20, 16, 0, 1073741825, 0, 22, 21, -1, 4, 23, 17, 24, 18, 25, 19, 26, 20, 0, 1073741826, 0, 28, 27, -1, 11, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 0, 1073741827, 0, 41, 40, -1, 2, 42, 32, 43, 33, 0, 1073741828, 0, 45, 44, -1, 5, 46, 34, 47, 35, 48, 36, 49, 37, 50, 38, 0, 1073741829, 0, 52, 51, -1, 2, 53, 39, 54, 40, 0, 1073741830, 0, 56, 55, -1, 4, 57, 41, 58, 42, 59, 43, 60, 44, 0, 1073741831, 0, 62, 61, -1, 1, 63, 45, 0, 1073741832, 0, 65, 64, -1, 4, 66, 46, 67, 47, 68, 48, 69, 49, 0, 1073741833, 0, 71, 70, -1, 0, 0, 1073741834, 0, 73, 72, -1, 8, 74, 50, 75, 51, 76, 52, 77, 53, 78, 54, 79, 55, 80, 56, 81, 57, 0, 1073741835, 0, 83, 82, -1, 7, 84, 58, 85, 59, 86, 60, 87, 61, 88, 62, 89, 63, 90, 64, 0),
-"variants": [3, 15, 1.0, 1.0, 2, 2, ExtResource("2_mah5v"), NodePath("VBoxContainer/MarginContainer/Button"), NodePath("VBoxContainer/MarginContainer2/Button2"), NodePath("VBoxContainer/MarginContainer3/Button3"), ExtResource("3_kyhnv"), null, Vector2(580, 326.99997), Vector2(9.799999, 9.67647), SubResource("SpriteFrames_rsfmq"), "default", 0.5357116, Vector2(265, 333), Vector2(8.5, 8.5), SubResource("SpriteFrames_4h3mk"), "default", 1, -1, 0.5069444, 0.2962963, 1.1770834, 1.3410494, -299.99994, -384.0, 3, 1, true, 2, 16, Vector2(200, 0), 2, ExtResource("2_2ckv8"), 48, "Play", 2, 16, 2, ExtResource("2_2ckv8"), 48, "Quit", 2, 2, ExtResource("2_2ckv8"), 48, "Credits", 375.0, 74.0, 853.0, 180.0, Color(0.14901961, 0.15686275, 0.15294118, 1), ExtResource("2_2ckv8"), 88, "\"Just Breathe\"", 368.0, 72.0, 846.0, 178.0, ExtResource("2_2ckv8"), 88, "\"Just Breathe\""],
-"version": 3
-}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2ckv8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3dmrc")
+"texture": SubResource("AtlasTexture_7lgdl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_81l6r")
+"texture": SubResource("AtlasTexture_c6kru")
 }],
 "loop": true,
 "name": &"default",
@@ -124,14 +36,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ctdu")
 BackButton = NodePath("Button")
-MenuScene = SubResource("PackedScene_ih6pn")
+MenuScene = ExtResource("2_2fbfq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=240010523]
 position = Vector2(580, 326.99997)
 scale = Vector2(9.799999, 9.67647)
 sprite_frames = SubResource("SpriteFrames_2ckv8")
 autoplay = "default"
-frame_progress = 0.53701794
+frame_progress = 0.19211043
 
 [node name="Title" type="Node2D" parent="." unique_id=1642627504]
 
