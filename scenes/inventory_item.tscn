@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cdse33pyoipxs"]
+
+[ext_resource type="Script" uid="uid://dx8moyqtcj2nv" path="res://scripts/InventoryItemUi.cs" id="1_u4rwp"]
+[ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="2_letey"]
+
+[node name="InventoryItem" type="Control" unique_id=305579426 node_paths=PackedStringArray("_textureRect", "_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 0.4020481
+offset_bottom = 0.425766
+script = ExtResource("1_u4rwp")
+_textureRect = NodePath("MarginContainer/CenterContainer/HBoxContainer/TextureRect")
+_label = NodePath("MarginContainer/CenterContainer/HBoxContainer/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=914916368]
+layout_mode = 1
+offset_right = 142.0
+offset_bottom = 128.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=1224656780]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer" unique_id=1273744551]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/HBoxContainer" unique_id=1009840475]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_letey")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/HBoxContainer" unique_id=349264112]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "1"
+metadata/_edit_use_anchors_ = true

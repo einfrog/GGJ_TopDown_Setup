@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dtdcnyridfaqa"]
+
+[ext_resource type="Script" uid="uid://bk6bkyg4ygttl" path="res://scripts/InventoryUi.cs" id="1_qw0r6"]
+[ext_resource type="PackedScene" uid="uid://cdse33pyoipxs" path="res://scenes/inventory_item.tscn" id="2_hj2ta"]
+
+[node name="Inventory" type="Control" unique_id=498756310 node_paths=PackedStringArray("_itemUiParent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qw0r6")
+_itemUiScene = ExtResource("2_hj2ta")
+_itemUiParent = NodePath("HBoxContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2108808117]
+layout_mode = 1
+theme_override_constants/separation = 250

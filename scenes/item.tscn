@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://d2l3u3rt33fup"]
 
-[node name="Item" type="StaticBody2D" unique_id=1864732831]
+[ext_resource type="Script" path="res://scripts/InventoryItemCollectible.cs" id="1_4gq7n"]
+
+[node name="Item" type="Area2D" unique_id=744416043]
+script = ExtResource("1_4gq7n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1476346419]
 
