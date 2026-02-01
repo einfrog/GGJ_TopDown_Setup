@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://fmaxkeqe77xa"]
 
 [ext_resource type="Texture2D" uid="uid://cmooc7bq8cuk7" path="res://assets/sprites/Mask_Collectible.png" id="1_2cyho"]
-[ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMask.cs" id="1_aho7v"]
+[ext_resource type="Script" path="res://scripts/GasMaskCollectible.cs" id="1_aho7v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aho7v"]
 radius = 75.36

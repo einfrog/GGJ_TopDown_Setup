@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cho2qjdx3838u"]
+
+[ext_resource type="Texture2D" uid="uid://c28487t0fyt5w" path="res://assets/sprites/drawersMiddle.png" id="1_k7rn3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7rn3"]
+size = Vector2(128, 103)
+
+[node name="TableMiddle" type="StaticBody2D" unique_id=539342009]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1205331551]
+scale = Vector2(4, 4)
+texture = ExtResource("1_k7rn3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=424121962]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_k7rn3")

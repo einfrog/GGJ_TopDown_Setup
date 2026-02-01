@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b3ci5m8scphwn" path="res://assets/sprites/Door.png" id="1_hpvv5"]
 [ext_resource type="Script" uid="uid://c1vr7ew4spr5r" path="res://scripts/Door.cs" id="1_uvdjg"]
+[ext_resource type="AudioStream" uid="uid://dvuj1il67tjuy" path="res://assets/sounds/doors_open.ogg" id="3_83dcw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uvdjg"]
 atlas = ExtResource("1_hpvv5")
@@ -68,10 +69,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgbum"]
 size = Vector2(64, 96)
 
-[node name="Door" type="StaticBody2D" unique_id=890238121 node_paths=PackedStringArray("Sprite", "Collision")]
+[node name="Door" type="StaticBody2D" unique_id=890238121 node_paths=PackedStringArray("Sprite", "Collision", "DoorSfx")]
 script = ExtResource("1_uvdjg")
 Sprite = NodePath("Sprite")
 Collision = NodePath("Collision")
+DoorSfx = NodePath("DoorSfx")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1538560516]
 scale = Vector2(4, 4)
@@ -81,3 +83,6 @@ animation = &"open"
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2145161717]
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_kgbum")
+
+[node name="DoorSfx" type="AudioStreamPlayer2D" parent="." unique_id=379882541]
+stream = ExtResource("3_83dcw")

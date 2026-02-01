@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://ubbaam3g4c7a"]
+
+[ext_resource type="Texture2D" uid="uid://kd04wxtegbp2" path="res://assets/sprites/drawersRight.png" id="1_7bhvr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtqa2"]
+atlas = ExtResource("1_7bhvr")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt3is"]
+atlas = ExtResource("1_7bhvr")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6347y"]
+atlas = ExtResource("1_7bhvr")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e4mbb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtqa2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt3is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6347y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfmkx"]
+size = Vector2(32.25, 47.75)
+
+[node name="Tableleft" type="StaticBody2D" unique_id=686930759]
+scale = Vector2(4, 4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=703317936]
+sprite_frames = SubResource("SpriteFrames_e4mbb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749780951]
+position = Vector2(0.125, 7.875)
+shape = SubResource("RectangleShape2D_dfmkx")
