@@ -6,5 +6,5 @@ just to be faced with a world filled with poisonous gas, that made the air unbre
 
 ##
 ### Instructions
-Explore the lab, in order to collect all **radio parts** and **mask upgrades**. Then use your skills and logic to craft the final product.
+Explore the lab, in order to collect all **radio parts**. Use **mask upgrade parts** to extend the strength of your mask, then use your skills and logic to craft the final product.
 ##
