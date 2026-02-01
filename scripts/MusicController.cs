@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class MusicController : AudioStreamPlayer2D
+public partial class MusicController : AudioStreamPlayer
 {
-	[Export] public float MusicVolumeDb = -18f;
+	[Export] public float MusicVolumeDb = -25f;
 	[Export] public float FadeSeconds = 0.3f;
 	[Export] public bool StartEnabled = true;
 
