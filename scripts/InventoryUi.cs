@@ -26,6 +26,7 @@ public partial class InventoryUi : Control
             }
 
             ui.ItemCount++;
+            ui.Item = item.Item;
             ui.Texture = item.Sprite.Texture;
             ui.UpdateUi();
         };
