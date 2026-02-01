@@ -173,7 +173,7 @@ fill_to = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_qnb83"]
 script = ExtResource("9_rysoc")
-Level = 5
+Level = 1
 metadata/_custom_type_script = "uid://c18s2q03mmwtp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
@@ -589,7 +589,7 @@ position = Vector2(-768, -3520)
 [node name="TableMiddle3" parent="." unique_id=1350075394 instance=ExtResource("27_qnb83")]
 position = Vector2(-640, -3520)
 
-[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
+[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor", "RegenerationTimer") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
@@ -598,6 +598,7 @@ MaskBreathingLoop = ExtResource("20_qouja")
 FootstepClips = [ExtResource("21_qouja"), ExtResource("22_wljb1"), ExtResource("23_v2yb1"), ExtResource("24_js0lu")]
 StepIntervalSeconds = 0.5
 FootstepBaseVolumeDb = -12.0
+RegenerationTimer = NodePath("Timer")
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")
@@ -616,6 +617,8 @@ shadow_enabled = true
 shadow_color = Color(1, 1, 1, 1)
 texture = SubResource("GradientTexture2D_v2yb1")
 texture_scale = 5.0
+
+[node name="Timer" type="Timer" parent="Player" unique_id=837013466]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 

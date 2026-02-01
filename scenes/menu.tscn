@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpco0o2ud6hel" path="res://assets/sprites/DeathBackground .png" id="4_v86rl"]
 [ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="5_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://c20f8fae4p5na" path="res://assets/sprites/ded maskimillian.png" id="6_13sgg"]
+[ext_resource type="Texture2D" uid="uid://cpdb2pvh0tffs" path="res://assets/sprites/radioo_animation.png" id="7_13sgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dmrc"]
 atlas = ExtResource("3_4ytvr")
@@ -131,7 +132,29 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_deadBackgroundSprite", "_aliveMaksSprite", "_aliveBackgroundSprite", "_deadMaksSprite", "PlayButton", "QuitButton", "CreditsButton")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj5lg"]
+atlas = ExtResource("7_13sgg")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufwb2"]
+atlas = ExtResource("7_13sgg")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cdou"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj5lg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufwb2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_aliveBackgroundSprite", "_deadBackgroundSprite", "_aliveMaksSprite", "_deadMaksSprite", "_gameWon", "PlayButton", "QuitButton", "CreditsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,10 +162,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjb58")
+_aliveBackgroundSprite = NodePath("AliveBackground")
 _deadBackgroundSprite = NodePath("DeadBackground")
 _aliveMaksSprite = NodePath("AliveMaks")
-_aliveBackgroundSprite = NodePath("AliveBackground")
 _deadMaksSprite = NodePath("DeadMaks")
+_gameWon = NodePath("GameWon")
 PlayButton = NodePath("VBoxContainer/MarginContainer/Button")
 QuitButton = NodePath("VBoxContainer/MarginContainer2/Button2")
 CreditsButton = NodePath("VBoxContainer/MarginContainer3/Button3")
@@ -163,6 +187,7 @@ sprite_frames = SubResource("SpriteFrames_i6lef")
 autoplay = "default"
 
 [node name="AliveMaks" type="AnimatedSprite2D" parent="." unique_id=1554760714]
+visible = false
 position = Vector2(265, 333)
 scale = Vector2(8.5, 8.5)
 sprite_frames = SubResource("SpriteFrames_4h3mk")
@@ -174,6 +199,13 @@ position = Vector2(304, 368)
 scale = Vector2(6.0607142, 6.0607142)
 sprite_frames = SubResource("SpriteFrames_70i5f")
 autoplay = "default"
+
+[node name="GameWon" type="AnimatedSprite2D" parent="." unique_id=633891209]
+position = Vector2(288, 344.00003)
+scale = Vector2(5.7792397, 5.7792397)
+sprite_frames = SubResource("SpriteFrames_6cdou")
+autoplay = "default"
+frame_progress = 0.7856956
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=686536614]
 layout_mode = 1
@@ -221,20 +253,20 @@ text = "Credits"
 [node name="Title" type="Node2D" parent="." unique_id=108802047]
 
 [node name="Shade" type="Label" parent="Title" unique_id=1001375922]
-offset_left = 375.0
+offset_left = 455.0
 offset_top = 74.0
-offset_right = 853.0
+offset_right = 1094.0
 offset_bottom = 180.0
 theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
 theme_override_fonts/font = ExtResource("5_4ytvr")
 theme_override_font_sizes/font_size = 88
-text = "\"Just Breathe\""
+text = "'Just Breathe'"
 
 [node name="White" type="Label" parent="Title" unique_id=1625424399]
-offset_left = 368.0
+offset_left = 448.0
 offset_top = 72.0
-offset_right = 846.0
+offset_right = 1087.0
 offset_bottom = 178.0
 theme_override_fonts/font = ExtResource("5_4ytvr")
 theme_override_font_sizes/font_size = 88
-text = "\"Just Breathe\""
+text = "'Just Breathe'"
