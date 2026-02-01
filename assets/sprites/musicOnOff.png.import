@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dllm3m4l6j4eq"
-path="res://.godot/imported/MenuBackgroundAlt.png-25279c4f948e7d4d39c3491b7ba26c6b.ctex"
+uid="uid://oi2yu6fk8jrd"
+path="res://.godot/imported/musicOnOff.png-bc20c191bdec5d6fa2171dd610f2bf62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/MenuBackgroundAlt.png"
-dest_files=["res://.godot/imported/MenuBackgroundAlt.png-25279c4f948e7d4d39c3491b7ba26c6b.ctex"]
+source_file="res://assets/sprites/musicOnOff.png"
+dest_files=["res://.godot/imported/musicOnOff.png-bc20c191bdec5d6fa2171dd610f2bf62.ctex"]
 
 [params]
 

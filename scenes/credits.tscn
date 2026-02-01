@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://fb6vtnv5utvc"]
 
-[ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackgroundAlt.png" id="1_0bpdh"]
+[ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackground.png" id="1_0bpdh"]
 [ext_resource type="Script" uid="uid://c8r8og66qr001" path="res://scripts/Credits.cs" id="1_0ctdu"]
 [ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_2ckv8"]
-[ext_resource type="PackedScene" uid="uid://3q8b6supoovy" path="res://scenes/menu.tscn" id="2_2fbfq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lgdl"]
 atlas = ExtResource("1_0bpdh")
@@ -36,7 +35,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ctdu")
 BackButton = NodePath("Button")
-MenuScene = ExtResource("2_2fbfq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=240010523]
 position = Vector2(580, 326.99997)

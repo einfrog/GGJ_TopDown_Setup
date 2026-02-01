@@ -64,6 +64,8 @@ public partial class Player : CharacterBody2D
     public event Action Died;
 
     public event Action<float> HealthChanged;
+    
+    public static bool RunEndedInDeath { get; set; }
 
     public override void _EnterTree()
     {
@@ -74,6 +76,12 @@ public partial class Player : CharacterBody2D
         }
 
         Instance = this;
+    }
+    
+    public override void _ExitTree()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 
     public override void _Ready()
@@ -170,18 +178,14 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
-        if (MaskResource is not null)
-        {
-            damage = MaskResource.Filter(damage);
-        }
-
-        if (Health - damage <= 0 && Health > 0)
-        {
-            Died?.Invoke();
-        }
-
         Health = Mathf.Max(0, Health - damage);
         HealthChanged?.Invoke(Health);
+
+        if (Health <= 0)
+        {
+            RunEndedInDeath = true;
+            GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
+        }
     }
 
     private void UpdateBreathing(bool force = false)

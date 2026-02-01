@@ -16,11 +16,11 @@
 [ext_resource type="Script" uid="uid://c18s2q03mmwtp" path="res://scripts/GasMaskResource.cs" id="9_rysoc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://d2l3u3rt33fup" path="res://scenes/item.tscn" id="11_264po"]
-[ext_resource type="PackedScene" uid="uid://dk1wggupafllj" path="res://scenes/crafting.tscn" id="11_suyxu"]
+[ext_resource type="PackedScene" path="res://scenes/crafting.tscn" id="11_suyxu"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="Texture2D" uid="uid://cosp3jntag7wo" path="res://assets/sprites/MaskUpgradePart.png" id="12_5newe"]
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
-[ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
+[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="Texture2D" uid="uid://b2n4qamn5km72" path="res://assets/sprites/metalScrap.png" id="13_37s47"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
@@ -32,10 +32,10 @@
 [ext_resource type="AudioStream" uid="uid://dqlu0a45vpqxn" path="res://assets/sounds/step_2.ogg" id="22_wljb1"]
 [ext_resource type="AudioStream" uid="uid://sopahm1ppsi" path="res://assets/sounds/step_3.ogg" id="23_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
-[ext_resource type="PackedScene" path="res://scenes/inventory.tscn" id="24_sww3w"]
-[ext_resource type="PackedScene" path="res://scenes/table_middle.tscn" id="27_qnb83"]
-[ext_resource type="PackedScene" path="res://scenes/table_right.tscn" id="27_suyxu"]
-[ext_resource type="PackedScene" path="res://scenes/table_side.tscn" id="27_sww3w"]
+[ext_resource type="PackedScene" uid="uid://dtdcnyridfaqa" path="res://scenes/inventory.tscn" id="24_sww3w"]
+[ext_resource type="PackedScene" uid="uid://cho2qjdx3838u" path="res://scenes/table_middle.tscn" id="27_qnb83"]
+[ext_resource type="PackedScene" uid="uid://c5fc2ieakqdos" path="res://scenes/table_right.tscn" id="27_suyxu"]
+[ext_resource type="PackedScene" uid="uid://ubbaam3g4c7a" path="res://scenes/table_side.tscn" id="27_sww3w"]
 [ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
 [ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
 
@@ -217,10 +217,10 @@ tile_map_data = PackedByteArray("AAD///b/AgAAAAMAAFAAAPb/AgAAAAMAAFAFAO7/AgAAAAE
 tile_set = SubResource("TileSet_ssvqc")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
-visible = false
 
 [node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
+DamagePerHit = 10.0
 DamageTimer = NodePath("Timer")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone" unique_id=1303028849]
@@ -365,6 +365,7 @@ _craftingScene = ExtResource("11_suyxu")
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
 position = Vector2(27, -362)
 MaskResource = SubResource("Resource_qnb83")
+EquipSound = null
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
 scale = Vector2(4, 4)
