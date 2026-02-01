@@ -34,7 +34,9 @@ public partial class Player : CharacterBody2D
     public GasMaskResource MaskResource { get; set; }
 
     private bool Masked => MaskResource != null;
-    
+
+    private float MovementSpeedThreshold => MovementSpeed / 2;
+
     public PlayerInventory Inventory { get; set; }
 
     public static Player Instance { get; private set; }
@@ -60,6 +62,7 @@ public partial class Player : CharacterBody2D
         Health = MaxHealth;
 
         _breathing = GetNodeOrNull<AudioStreamPlayer2D>(BreathingPlayerPath);
+
         if (_breathing == null)
         {
             GD.PushWarning("Player: Breathing AudioStreamPlayer not found. Add a child node named 'Breathing' or set BreathingPlayerPath.");
@@ -80,37 +83,39 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        var deltaPosition = Position - _previousPosition;
-        GD.Print(deltaPosition);
-        Sprite.FlipH = deltaPosition.X > 0;
+        string animation;
+        var deltaPosition = (Position - _previousPosition) / (float) delta;
         _previousPosition = Position;
-        
+
         if (deltaPosition.IsZeroApprox())
         {
-            Sprite.Animation = Masked ? "Maks_Idle_Masked" : "Maks_Idle";
+            animation = "Maks_Idle";
         }
         else
         {
-            Sprite.Animation = deltaPosition.Y switch
-            {
-                < 0 => Masked ? "Maks_Backward_Masked" : "Maks_Backward",
-                > 0 => Masked ? "Maks_Forward_Masked" : "Maks_Forward",
-                _   => Masked ? "Maks_Walk_Left_Right_Masked" : "Maks_Walk_Left_Right"
-            };
+            if (deltaPosition.Y < -MovementSpeedThreshold)
+                animation = "Maks_Backward";
+            else if (deltaPosition.Y > MovementSpeedThreshold)
+                animation = "Maks_Forward";
+            else
+                animation = "Maks_Walk_Left_Right";
         }
 
-        // If input is disabled (puzzle open), stop movement
+        Sprite.Animation = (Masked) ? animation + "_Masked" : animation;
+        Sprite.FlipH = deltaPosition.X > MovementSpeedThreshold;
+        UpdateBreathing();
+
         if (InputDisabled)
         {
             Velocity = Vector2.Zero;
-            MoveAndSlide();
-            return;
+        }
+        else
+        {
+            float x = Input.GetAxis("move_left", "move_right");
+            float y = Input.GetAxis("move_up", "move_down");
+            Velocity = MovementSpeed * new Vector2(x, y).Normalized();
         }
 
-        UpdateBreathing();
-        float x = Input.GetAxis("move_left", "move_right");
-        float y = Input.GetAxis("move_up", "move_down");
-        Velocity = MovementSpeed * new Vector2(x, y).Normalized();
         MoveAndSlide();
     }
 
@@ -129,6 +134,7 @@ public partial class Player : CharacterBody2D
         Health = Mathf.Max(0, Health - damage);
         HealthChanged?.Invoke(Health);
     }
+
     private void UpdateBreathing(bool force = false)
     {
         if (_breathing == null)
@@ -162,12 +168,8 @@ public partial class Player : CharacterBody2D
             // Fade out then stop
             _breathingTween = CreateTween();
             _breathingTween.TweenProperty(_breathing, "volume_db", -80f, BreathingFadeSeconds);
-            _breathingTween.TweenCallback(Callable.From(() =>
-            {
-                _breathing?.Stop();
-            }));
+            _breathingTween.TweenCallback(Callable.From(() => _breathing?.Stop()));
         }
     }
-
 
 }

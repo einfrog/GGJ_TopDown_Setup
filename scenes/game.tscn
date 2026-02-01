@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
 [ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
+[ext_resource type="Script" uid="uid://c18s2q03mmwtp" path="res://scripts/GasMaskResource.cs" id="9_rysoc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://d2l3u3rt33fup" path="res://scenes/item.tscn" id="11_264po"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
@@ -21,13 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="Texture2D" uid="uid://b2n4qamn5km72" path="res://assets/sprites/metalScrap.png" id="13_37s47"]
-[ext_resource type="PackedScene" path="res://scenes/door.tscn" id="12_dinhu"]
-[ext_resource type="PackedScene" uid="uid://0owa7rdltofs" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="15_e1j6l"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -128,6 +126,11 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_rysoc")
+
+[sub_resource type="Resource" id="Resource_qnb83"]
+script = ExtResource("9_rysoc")
+Strength = 1.0
+metadata/_custom_type_script = "uid://c18s2q03mmwtp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
 atlas = ExtResource("18_ssvqc")
@@ -348,7 +351,7 @@ SolvedTexture = ExtResource("7_5newe")
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
 position = Vector2(-898, -1674)
-Strength = 1.0
+MaskResource = SubResource("Resource_qnb83")
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
 scale = Vector2(4, 4)
