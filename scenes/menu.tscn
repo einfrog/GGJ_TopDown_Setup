@@ -1,43 +1,65 @@
-[gd_scene format=3 uid="uid://chnh2csf5ixqd"]
+[gd_scene format=3 uid="uid://3q8b6supoovy"]
 
 [ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="1_vjb58"]
-[ext_resource type="Texture2D" uid="uid://d1agek5e3sehh" path="res://assets/sprites/PlayerSpritesheet.png" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="2_con2f"]
+[ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackgroundAlt.png" id="3_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://df0ohqmt76m35" path="res://assets/sprites/PlayerSpritesheet_Original.png" id="3_con2f"]
+[ext_resource type="PackedScene" uid="uid://fb6vtnv5utvc" path="res://scenes/credits.tscn" id="3_g3eks"]
+[ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="5_4ytvr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_con2f"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(0, 256, 48, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dmrc"]
+atlas = ExtResource("3_4ytvr")
+region = Rect2(0, 0, 120, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81l6r"]
+atlas = ExtResource("3_4ytvr")
+region = Rect2(0, 68, 120, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rsfmq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dmrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81l6r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhnvy"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(48, 256, 48, 64)
+atlas = ExtResource("3_con2f")
+region = Rect2(0, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ytvr"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(96, 256, 48, 64)
+atlas = ExtResource("3_con2f")
+region = Rect2(48, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3eks"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(144, 256, 48, 64)
+atlas = ExtResource("3_con2f")
+region = Rect2(96, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v86rl"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(0, 320, 48, 64)
+atlas = ExtResource("3_con2f")
+region = Rect2(144, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_13sgg"]
-atlas = ExtResource("1_yqeox")
-region = Rect2(48, 320, 48, 64)
+atlas = ExtResource("3_con2f")
+region = Rect2(0, 320, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6lef"]
-atlas = ExtResource("1_yqeox")
+atlas = ExtResource("3_con2f")
+region = Rect2(48, 320, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70i5f"]
+atlas = ExtResource("3_con2f")
 region = Rect2(96, 320, 48, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4h3mk"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_con2f")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mhnvy")
 }, {
@@ -55,6 +77,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i6lef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70i5f")
 }],
 "loop": true,
 "name": &"default",
@@ -69,50 +94,85 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjb58")
-PlayButton = NodePath("VBoxContainer/Button")
-QuitButton = NodePath("VBoxContainer/Button2")
-CreditsButton = NodePath("VBoxContainer/Button3")
+PlayButton = NodePath("VBoxContainer/MarginContainer/Button")
+QuitButton = NodePath("VBoxContainer/MarginContainer2/Button2")
+CreditsButton = NodePath("VBoxContainer/MarginContainer3/Button3")
 GameScene = ExtResource("2_con2f")
+CreditsScene = ExtResource("3_g3eks")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=318595503]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 1, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1238332360]
+position = Vector2(580, 326.99997)
+scale = Vector2(9.799999, 9.67647)
+sprite_frames = SubResource("SpriteFrames_rsfmq")
+autoplay = "default"
+frame_progress = 0.5357116
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1554760714]
-position = Vector2(265, 308)
+[node name="MaksSprite" type="AnimatedSprite2D" parent="." unique_id=1554760714]
+position = Vector2(265, 333)
 scale = Vector2(8.5, 8.5)
 sprite_frames = SubResource("SpriteFrames_4h3mk")
 autoplay = "default"
-frame_progress = 0.37230554
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=686536614]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4435764
-anchor_top = -0.06635802
-anchor_right = 0.8776042
-anchor_bottom = 0.9212963
+anchor_left = 0.5069444
+anchor_top = 0.2962963
+anchor_right = 1.1770834
+anchor_bottom = 1.3410494
 offset_right = -299.99994
 offset_bottom = -384.0
-scale = Vector2(3, 3)
 size_flags_horizontal = 3
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1691959057]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=711653912]
+layout_mode = 2
+theme_override_constants/margin_bottom = 16
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer" unique_id=1691959057]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 48
 text = "Play"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=2686264]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1663957710]
 layout_mode = 2
+theme_override_constants/margin_bottom = 16
+
+[node name="Button2" type="Button" parent="VBoxContainer/MarginContainer2" unique_id=2686264]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 48
 text = "Quit"
 
-[node name="Button3" type="Button" parent="VBoxContainer" unique_id=1041141328]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer" unique_id=927172667]
 layout_mode = 2
+
+[node name="Button3" type="Button" parent="VBoxContainer/MarginContainer3" unique_id=1041141328]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 48
 text = "Credits"
+
+[node name="Title" type="Node2D" parent="." unique_id=108802047]
+
+[node name="Shade" type="Label" parent="Title" unique_id=1001375922]
+offset_left = 375.0
+offset_top = 74.0
+offset_right = 853.0
+offset_bottom = 180.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 88
+text = "\"Just Breathe\""
+
+[node name="White" type="Label" parent="Title" unique_id=1625424399]
+offset_left = 368.0
+offset_top = 72.0
+offset_right = 846.0
+offset_bottom = 178.0
+theme_override_fonts/font = ExtResource("5_4ytvr")
+theme_override_font_sizes/font_size = 88
+text = "\"Just Breathe\""
