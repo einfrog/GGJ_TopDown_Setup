@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://fmaxkeqe77xa"]
 
 [ext_resource type="Texture2D" uid="uid://cmooc7bq8cuk7" path="res://assets/sprites/Mask_Collectible.png" id="1_2cyho"]
-[ext_resource type="Script" path="res://scripts/GasMaskCollectible.cs" id="1_aho7v"]
+[ext_resource type="Script" uid="uid://d4hdeedtuc7dl" path="res://scripts/GasMaskCollectible.cs" id="1_aho7v"]
+[ext_resource type="AudioStream" uid="uid://c4wqdtgc01fr" path="res://assets/sounds/mask_equip.ogg" id="3_mknlj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aho7v"]
 radius = 75.36
 
 [node name="MaskCollectible" type="Area2D" unique_id=760889427]
 script = ExtResource("1_aho7v")
+EquipSound = ExtResource("3_mknlj")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1443222432]
 position = Vector2(3, 0)
