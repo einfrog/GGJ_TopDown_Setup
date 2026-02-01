@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 
 namespace GGJ_2026.scripts;
 
@@ -46,7 +47,9 @@ public class PlayerInventory
         }
         
         GameWon = true;
-
+        GD.Print(GameWon);
+        
+         Player.Instance.GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
         // TODO: make Radio Trainsceiver appear large on screen
     }
 

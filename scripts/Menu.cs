@@ -73,6 +73,7 @@ public partial class Menu : Control
 		else 
 		{
 			_aliveBackgroundSprite.Visible = alive;
+			_aliveMaksSprite.Visible = false;
 			_gameWon.Visible = true;
 		}
 	}
