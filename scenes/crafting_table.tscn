@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://deiu63g154rqj"]
 
+[ext_resource type="Script" uid="uid://wujebix15sou" path="res://scripts/CraftingTable.cs" id="1_4xt1u"]
 [ext_resource type="Texture2D" uid="uid://duyp6cbcpx2d4" path="res://assets/sprites/Workbench.png" id="1_87o7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_87o7u"]
+size = Vector2(256, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
 size = Vector2(256, 168)
 
-[node name="CraftingTable" type="StaticBody2D" unique_id=1490553515]
+[node name="CraftingTable" type="Area2D" unique_id=37234595]
+script = ExtResource("1_4xt1u")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=810407857]
 position = Vector2(-726, -153)
@@ -13,5 +18,11 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_87o7u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=812547484]
+position = Vector2(-726, 26)
+shape = SubResource("RectangleShape2D_87o7u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1490553515]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=946961880]
 position = Vector2(-726, -109)
 shape = SubResource("RectangleShape2D_dinhu")

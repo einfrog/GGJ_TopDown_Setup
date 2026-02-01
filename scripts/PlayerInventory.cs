@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
 
 namespace GGJ_2026.scripts;
 
@@ -17,9 +18,24 @@ public class PlayerInventory
     private readonly Dictionary<InventoryItem, int> _itemCounts = Enum.GetValues<InventoryItem>()
         .ToDictionary(item => item, _ => 0);
 
-    public void Collect(InventoryItem item)
+    public event Action<InventoryItemCollectible> ItemCollected;
+
+    public int this[InventoryItem item] => _itemCounts[item];
+
+    public void Collect(InventoryItemCollectible item)
     {
-        _itemCounts[item]++;
+        _itemCounts[item.Item]++;
+        ItemCollected?.Invoke(item);
+    }
+
+    public void UpgradeMask()
+    {
+        _itemCounts[InventoryItem.MaskUpgradePart]--;
+    }
+
+    public bool CanUpgradeMask()
+    {
+        return _itemCounts[InventoryItem.MaskUpgradePart] > 0;
     }
 
     public void CraftRadioTransceiver()
