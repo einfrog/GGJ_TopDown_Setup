@@ -33,7 +33,6 @@ public partial class Menu : Control
 
 	public override void _Ready()
 	{
-		
 		PlayButton.Pressed += () =>
 		{
 			Player.RunEndedInDeath = false;
@@ -41,12 +40,6 @@ public partial class Menu : Control
 		};
 		QuitButton.Pressed += () => GetTree().Quit();
 		CreditsButton.Pressed += () => GetTree().ChangeSceneToFile("res://scenes/credits.tscn");
-
-		var player = Player.Instance;
-		if (player != null)
-		{
-			player.Died += () => GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
-		}
 
 		bool alive = !Player.RunEndedInDeath;
 
@@ -76,7 +69,8 @@ public partial class Menu : Control
 			_deadMaksSprite.Visible = !alive;
 			_deadBackgroundSprite.Visible = !alive;
 			_gameWon.Visible = false;
-		} else 
+		}
+		else 
 		{
 			_aliveBackgroundSprite.Visible = alive;
 			_gameWon.Visible = true;
