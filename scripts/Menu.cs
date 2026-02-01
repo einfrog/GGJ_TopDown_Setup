@@ -58,18 +58,29 @@ public partial class Menu : Control
 			titleShade.Text = "'You died.'";
 			titleLight.Text = "'You died.'";
 		}
+		else if (PlayerInventory.GameWon)
+		{
+			titleShade.Text = "'You won.'";
+			titleLight.Text = "'You won.'";
+		}
 		else
 		{
 			titleShade.Text = "'Just breathe'";
 			titleLight.Text = "'Just breathe'";
 		}
 
-		_aliveMaksSprite.Visible = alive;
-		_aliveBackgroundSprite.Visible = alive;
-		_deadMaksSprite.Visible = !alive;
-		_deadBackgroundSprite.Visible = !alive;
-		_gameWon.Visible = false;
-
+		if (!PlayerInventory.GameWon)
+		{
+			_aliveMaksSprite.Visible = alive;
+			_aliveBackgroundSprite.Visible = alive;
+			_deadMaksSprite.Visible = !alive;
+			_deadBackgroundSprite.Visible = !alive;
+			_gameWon.Visible = false;
+		} else 
+		{
+			_aliveBackgroundSprite.Visible = alive;
+			_gameWon.Visible = true;
+		}
 	}
 
 }
