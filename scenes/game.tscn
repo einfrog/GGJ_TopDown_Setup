@@ -34,9 +34,9 @@
 [ext_resource type="AudioStream" uid="uid://sopahm1ppsi" path="res://assets/sounds/step_3.ogg" id="23_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
 [ext_resource type="PackedScene" uid="uid://dtdcnyridfaqa" path="res://scenes/inventory.tscn" id="24_sww3w"]
-[ext_resource type="PackedScene" path="res://scenes/table_middle.tscn" id="27_qnb83"]
-[ext_resource type="PackedScene" path="res://scenes/table_right.tscn" id="27_suyxu"]
-[ext_resource type="PackedScene" path="res://scenes/table_side.tscn" id="27_sww3w"]
+[ext_resource type="PackedScene" uid="uid://cho2qjdx3838u" path="res://scenes/table_middle.tscn" id="27_qnb83"]
+[ext_resource type="PackedScene" uid="uid://c5fc2ieakqdos" path="res://scenes/table_right.tscn" id="27_suyxu"]
+[ext_resource type="PackedScene" uid="uid://ubbaam3g4c7a" path="res://scenes/table_side.tscn" id="27_sww3w"]
 [ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
 [ext_resource type="Script" uid="uid://bl24ojw5iatc" path="res://scripts/GasMaskLevel.cs" id="33_m4url"]
 [ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
@@ -173,12 +173,16 @@ gradient = SubResource("Gradient_wljb1")
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ool0"]
+atlas = ExtResource("13_7025r")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4url"]
 atlas = ExtResource("13_7025r")
 
 [sub_resource type="Resource" id="Resource_qnb83"]
 script = ExtResource("9_rysoc")
 Texture = SubResource("AtlasTexture_m4url")
+NextLevelTexture = SubResource("AtlasTexture_8ool0")
 metadata/_custom_type_script = "uid://c18s2q03mmwtp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
@@ -457,6 +461,7 @@ _craftingScene = ExtResource("11_suyxu")
 occluder = SubResource("OccluderPolygon2D_wljb1")
 
 [node name="PointLight2D" type="PointLight2D" parent="CraftingTable" unique_id=1999966425]
+visible = false
 position = Vector2(-724, -240)
 blend_mode = 1
 shadow_enabled = true
