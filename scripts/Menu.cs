@@ -17,6 +17,8 @@ public partial class Menu : Control
 	[Export]
 	private AnimatedSprite2D _deadMaksSprite;
 
+	[Export] private AnimatedSprite2D _gameWon;
+
 	[Export]
 	public Button PlayButton { get; set; }
 
@@ -48,11 +50,37 @@ public partial class Menu : Control
 
 		bool alive = !Player.RunEndedInDeath;
 
-		_aliveMaksSprite.Visible = alive;
-		_aliveBackgroundSprite.Visible = alive;
-		_deadMaksSprite.Visible = !alive;
-		_deadBackgroundSprite.Visible = !alive;
+		var titleShade = GetNode<Label>("Title/Shade");
+		var titleLight = GetNode<Label>("Title/White");
 
+		if (!alive)
+		{
+			titleShade.Text = "'You died.'";
+			titleLight.Text = "'You died.'";
+		}
+		else if (PlayerInventory.GameWon)
+		{
+			titleShade.Text = "'You won.'";
+			titleLight.Text = "'You won.'";
+		}
+		else
+		{
+			titleShade.Text = "'Just breathe'";
+			titleLight.Text = "'Just breathe'";
+		}
+
+		if (!PlayerInventory.GameWon)
+		{
+			_aliveMaksSprite.Visible = alive;
+			_aliveBackgroundSprite.Visible = alive;
+			_deadMaksSprite.Visible = !alive;
+			_deadBackgroundSprite.Visible = !alive;
+			_gameWon.Visible = false;
+		} else 
+		{
+			_aliveBackgroundSprite.Visible = alive;
+			_gameWon.Visible = true;
+		}
 	}
 
 }
