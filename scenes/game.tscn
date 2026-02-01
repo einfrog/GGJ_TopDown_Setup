@@ -24,13 +24,15 @@
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="15_e1j6l"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 [ext_resource type="AudioStream" uid="uid://gp41a50sfe5y" path="res://assets/sounds/breathing.ogg" id="20_qouja"]
 [ext_resource type="AudioStream" uid="uid://efmbxhsmwcea" path="res://assets/sounds/step_1.ogg" id="21_qouja"]
 [ext_resource type="AudioStream" uid="uid://dqlu0a45vpqxn" path="res://assets/sounds/step_2.ogg" id="22_wljb1"]
 [ext_resource type="AudioStream" uid="uid://sopahm1ppsi" path="res://assets/sounds/step_3.ogg" id="23_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
+[ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
+[ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -469,6 +471,7 @@ MovementSpeed = 350.0
 MaskBreathingLoop = ExtResource("20_qouja")
 FootstepClips = [ExtResource("21_qouja"), ExtResource("22_wljb1"), ExtResource("23_v2yb1"), ExtResource("24_js0lu")]
 StepIntervalSeconds = 0.5
+FootstepBaseVolumeDb = -12.0
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")
@@ -509,6 +512,11 @@ script = ExtResource("9_0tnpc")
 PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
+
+[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=2023490927]
+stream = ExtResource("32_wljb1")
+autoplay = true
+script = ExtResource("33_v2yb1")
 
 [editable path="Iems/MaskUpgradePart1"]
 [editable path="Iems/MaskUpgradePart2"]
