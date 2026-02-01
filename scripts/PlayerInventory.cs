@@ -14,8 +14,21 @@ public class PlayerInventory
         [InventoryItem.ScrapMetal] = 3,
     };
 
-    private readonly Dictionary<InventoryItem, int> _itemCount = Enum.GetValues<InventoryItem>()
+    private readonly Dictionary<InventoryItem, int> _itemCounts = Enum.GetValues<InventoryItem>()
         .ToDictionary(item => item, _ => 0);
+
+    public void Collect(InventoryItem item)
+    {
+        _itemCounts[item]++;
+    }
+
+    public void CraftRadioTransceiver()
+    {
+        foreach (var itemCount in RadioTransceiverRecipe)
+        {
+            _itemCounts[itemCount.Key] -= itemCount.Value;
+        }
+    }
 
     public bool CanCraftRadioTransceiver()
     {
@@ -24,12 +37,7 @@ public class PlayerInventory
 
     public bool HasEnoughForRadioTransceiver(InventoryItem item)
     {
-        return _itemCount[item] >= RadioTransceiverRecipe[item];
-    }
-
-    public void Collect(InventoryItem item)
-    {
-        _itemCount[item]++;
+        return _itemCounts[item] >= RadioTransceiverRecipe[item];
     }
 
 }
