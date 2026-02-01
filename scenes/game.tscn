@@ -256,6 +256,16 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
+[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
+
+[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(128, -720)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+
+[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
+position = Vector2(632, -1696)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door1" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
@@ -265,18 +275,6 @@ TerminalPath = NodePath("../../Terminals/Terminal1")
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
 position = Vector2(512, -1984)
 TerminalPath = NodePath("../../Terminals/Terminal2")
-
-[node name="Door3" parent="Doors" unique_id=701372730 instance=ExtResource("12_dinhu")]
-position = Vector2(-640, -1984)
-TerminalPath = NodePath("../../Terminals/Terminal3")
-
-[node name="Door4" parent="Doors" unique_id=1725138290 instance=ExtResource("12_dinhu")]
-position = Vector2(-128, -2752)
-TerminalPath = NodePath("../../Terminals/Terminal4")
-
-[node name="Door5" parent="Doors" unique_id=411809449 instance=ExtResource("12_dinhu")]
-position = Vector2(1024, -2752)
-TerminalPath = NodePath("../../Terminals/Terminal5")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
@@ -289,56 +287,6 @@ z_index = 1
 position = Vector2(512, -1984)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
-
-[node name="Doorframe3" type="Sprite2D" parent="Doors" unique_id=2084856230]
-z_index = 1
-position = Vector2(-640, -1984)
-scale = Vector2(4, 4)
-texture = ExtResource("8_rysoc")
-
-[node name="Doorframe4" type="Sprite2D" parent="Doors" unique_id=1699828457]
-z_index = 1
-position = Vector2(-128, -2752)
-scale = Vector2(4, 4)
-texture = ExtResource("8_rysoc")
-
-[node name="Doorframe5" type="Sprite2D" parent="Doors" unique_id=474925726]
-z_index = 1
-position = Vector2(1024, -2752)
-scale = Vector2(4, 4)
-texture = ExtResource("8_rysoc")
-
-[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
-
-[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(136, -720)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
-
-[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
-position = Vector2(640, -1728)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
-
-[node name="Terminal3" parent="Terminals" unique_id=256495665 instance=ExtResource("4_p57ef")]
-position = Vector2(-800, -1976)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
-
-[node name="Terminal4" parent="Terminals" unique_id=1840127232 instance=ExtResource("4_p57ef")]
-position = Vector2(56, -2736)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
-
-[node name="Terminal5" parent="Terminals" unique_id=1517112199 instance=ExtResource("4_p57ef")]
-position = Vector2(1280, -3176)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-TerminalTexture = ExtResource("6_1kice")
-SolvedTexture = ExtResource("7_5newe")
 
 [node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
