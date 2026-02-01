@@ -6,7 +6,8 @@ public partial class CollectibleInventoryItem : Interactable
 {
     
     [Export]
-    public InventoryItem Item { get; private set; }
+    public InventoryItem 
+        Item { get; private set; }
 
     public override void Interact()
     {
