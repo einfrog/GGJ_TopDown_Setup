@@ -15,9 +15,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="TopDownSetup"
-run/main_scene="uid://ceqdt0gehucwl"
+run/main_scene="uid://3q8b6supoovy"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout.custom=""
 
 [dotnet]
 
