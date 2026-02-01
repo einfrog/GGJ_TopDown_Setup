@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://d2l3u3rt33fup"]
 
-[ext_resource type="Script" path="res://scripts/InventoryItemCollectible.cs" id="1_4gq7n"]
+[ext_resource type="Script" uid="uid://lg6m3rm77j34" path="res://scripts/InventoryItemCollectible.cs" id="1_4gq7n"]
+[ext_resource type="AudioStream" uid="uid://n7avbgv2x06l" path="res://assets/sounds/pickup.ogg" id="2_s8enn"]
 
 [node name="Item" type="Area2D" unique_id=744416043]
 script = ExtResource("1_4gq7n")
+PickupSound = ExtResource("2_s8enn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1476346419]
 

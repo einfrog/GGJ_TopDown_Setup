@@ -10,8 +10,8 @@ public partial class GasMaskCollectible : Interactable
 
     public override void Interact()
     {
+        
         Player.Instance.MaskResource = MaskResource;
-
         if (EquipSound != null)
         {
             var p = new AudioStreamPlayer2D
@@ -25,7 +25,7 @@ public partial class GasMaskCollectible : Interactable
             p.Finished += () => p.QueueFree();
             p.Play();
         }
-
+        
         QueueFree();
     }
 }

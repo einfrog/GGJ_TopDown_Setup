@@ -15,7 +15,7 @@ public class PlayerInventory
     };
 
     private readonly Dictionary<InventoryItem, int> _itemCounts = Enum.GetValues<InventoryItem>()
-        .ToDictionary(item => item, _ => 0);
+        .ToDictionary(item => item, _ => 3);
 
     public event Action<InventoryItemCollectible> ItemCollected;
 
