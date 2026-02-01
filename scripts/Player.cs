@@ -136,7 +136,7 @@ public partial class Player : CharacterBody2D
         RegenerationTimer.Paused = true;
         RegenerationTimer.Timeout += () =>
         {
-            Health = Mathf.Min(MaxHealth, Health + 1);
+            Health = Mathf.Min(MaxHealth, Health + 10);
             HealthChanged?.Invoke(Health);
         };
         RegenerationTimer.Start();

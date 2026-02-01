@@ -22,8 +22,8 @@ public partial class ChimpPuzzle : Control
     // DIFFICULTY / PROGRESSION SETTINGS
     // ============================================================
 
-    [Export] public int StartN = 8;   // First round size
-    [Export] public int MaxN = 8;     // Final round size
+    [Export] public int StartN =2 ;   // First round size
+    [Export] public int MaxN = 2;     // Final round size
 
     // ============================================================
     // GRID / VISUAL SETTINGS
