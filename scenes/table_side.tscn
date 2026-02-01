@@ -32,7 +32,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfmkx"]
-size = Vector2(32.25, 47.75)
+size = Vector2(32.25, 34.25)
 
 [node name="Tableleft" type="StaticBody2D" unique_id=686930759]
 scale = Vector2(4, 4)
@@ -41,5 +41,5 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_e4mbb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=749780951]
-position = Vector2(0.125, 7.875)
+position = Vector2(0.125, 1.125)
 shape = SubResource("RectangleShape2D_dfmkx")

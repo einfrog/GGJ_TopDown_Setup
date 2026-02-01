@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://cedo0hsn05rpv"]
+
+[ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="1_mr0a8"]
+[ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="2_f78ek"]
+[ext_resource type="Texture2D" uid="uid://bpco0o2ud6hel" path="res://assets/sprites/DeathBackground .png" id="3_mr0a8"]
+[ext_resource type="Texture2D" uid="uid://c20f8fae4p5na" path="res://assets/sprites/ded maskimillian.png" id="4_mr0a8"]
+[ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="5_taitq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skiwu"]
+atlas = ExtResource("3_mr0a8")
+region = Rect2(0, 0, 120, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_taitq"]
+atlas = ExtResource("3_mr0a8")
+region = Rect2(0, 68, 120, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rsfmq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skiwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_taitq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f78ek"]
+atlas = ExtResource("4_mr0a8")
+region = Rect2(0, 0, 70, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufsib"]
+atlas = ExtResource("4_mr0a8")
+region = Rect2(0, 70, 70, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4h3mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f78ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufsib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="DeathScene" type="Control" unique_id=909434982 node_paths=PackedStringArray("PlayButton", "QuitButton", "CreditsButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mr0a8")
+PlayButton = NodePath("VBoxContainer/MarginContainer/Button")
+QuitButton = NodePath("VBoxContainer/MarginContainer2/Button2")
+CreditsButton = NodePath("VBoxContainer/MarginContainer3/Button3")
+GameScene = ExtResource("2_f78ek")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1238332360]
+position = Vector2(580, 326.99997)
+scale = Vector2(9.799999, 9.67647)
+sprite_frames = SubResource("SpriteFrames_rsfmq")
+autoplay = "default"
+frame_progress = 0.098298736
+
+[node name="MaksSprite" type="AnimatedSprite2D" parent="." unique_id=1554760714]
+position = Vector2(304, 368)
+scale = Vector2(6.0607142, 6.0607142)
+sprite_frames = SubResource("SpriteFrames_4h3mk")
+autoplay = "default"
+frame_progress = 0.76907754
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=686536614]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5069444
+anchor_top = 0.2962963
+anchor_right = 1.1770834
+anchor_bottom = 1.3410494
+offset_right = -299.99994
+offset_bottom = -384.0
+size_flags_horizontal = 3
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=711653912]
+layout_mode = 2
+theme_override_constants/margin_bottom = 16
+
+[node name="Button" type="Button" parent="VBoxContainer/MarginContainer" unique_id=1691959057]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_taitq")
+theme_override_font_sizes/font_size = 48
+text = "Play Again"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1663957710]
+layout_mode = 2
+theme_override_constants/margin_bottom = 16
+
+[node name="Button2" type="Button" parent="VBoxContainer/MarginContainer2" unique_id=2686264]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_taitq")
+theme_override_font_sizes/font_size = 48
+text = "Quit"
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer" unique_id=927172667]
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="VBoxContainer/MarginContainer3" unique_id=1041141328]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_taitq")
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
+[node name="Title" type="Node2D" parent="." unique_id=108802047]
+
+[node name="Shade" type="Label" parent="Title" unique_id=1001375922]
+offset_left = 423.0
+offset_top = 66.0
+offset_right = 901.0
+offset_bottom = 172.0
+theme_override_colors/font_color = Color(0.14901961, 0.15686275, 0.15294118, 1)
+theme_override_fonts/font = ExtResource("5_taitq")
+theme_override_font_sizes/font_size = 88
+text = "You died."
+
+[node name="White" type="Label" parent="Title" unique_id=1625424399]
+offset_left = 416.0
+offset_top = 64.0
+offset_right = 894.0
+offset_bottom = 170.0
+theme_override_fonts/font = ExtResource("5_taitq")
+theme_override_font_sizes/font_size = 88
+text = "You died."

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dllm3m4l6j4eq"
-path="res://.godot/imported/MenuBackground.png-037e7b6f38123c8f190895a898b22079.ctex"
+uid="uid://c20f8fae4p5na"
+path="res://.godot/imported/ded maskimillian.png-4bf78dfe199d81dfd0baafe1198393bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/MenuBackground.png"
-dest_files=["res://.godot/imported/MenuBackground.png-037e7b6f38123c8f190895a898b22079.ctex"]
+source_file="res://assets/sprites/ded maskimillian.png"
+dest_files=["res://.godot/imported/ded maskimillian.png-4bf78dfe199d81dfd0baafe1198393bf.ctex"]
 
 [params]
 
