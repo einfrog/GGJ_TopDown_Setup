@@ -6,6 +6,8 @@ namespace GGJ_2026.scripts;
 
 public class PlayerInventory
 {
+    
+    public static bool GameWon = false;
 
     private static readonly Dictionary<InventoryItem, int> RadioTransceiverRecipe = new()
     {
@@ -42,6 +44,8 @@ public class PlayerInventory
         {
             _itemCounts[itemCount.Key] -= itemCount.Value;
         }
+        
+        GameWon = true;
 
         // TODO: make Radio Trainsceiver appear large on screen
     }
