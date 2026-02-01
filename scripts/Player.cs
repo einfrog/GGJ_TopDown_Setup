@@ -65,6 +65,9 @@ public partial class Player : CharacterBody2D
 
     public event Action<float> HealthChanged;
     
+    [Export]
+    public Timer RegenerationTimer { get; set; }
+    
     public static bool RunEndedInDeath { get; set; }
 
     public override void _EnterTree()
@@ -120,6 +123,14 @@ public partial class Player : CharacterBody2D
             _footsteps.VolumeDb = FootstepBaseVolumeDb;
         }
 
+        RegenerationTimer.Paused = true;
+        RegenerationTimer.Timeout += () =>
+        {
+            Health = Mathf.Min(MaxHealth, Health + 1);
+            HealthChanged?.Invoke(Health);
+        };
+        RegenerationTimer.Start();
+
         _stepTimer = 0;
     }
 
@@ -172,7 +183,7 @@ public partial class Player : CharacterBody2D
         {
             Velocity = MovementSpeed * inputDir.Normalized();
         }
-
+        
         MoveAndSlide();
     }
 

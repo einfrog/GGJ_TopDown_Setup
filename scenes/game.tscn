@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_5newe"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
-[ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
+[ext_resource type="PackedScene" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://c18s2q03mmwtp" path="res://scripts/GasMaskResource.cs" id="9_rysoc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
@@ -295,53 +295,53 @@ polygon = PackedVector2Array(651.41943, -41.697754, 664.914, -265.77777, -374.78
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone" unique_id=1227960839]
 
-[node name="ContaminatedZone2" type="Area2D" parent="Zones" unique_id=675318557 node_paths=PackedStringArray("DamageTimer")]
-script = ExtResource("4_lbhrr")
-DamagePerHit = 20.0
-DamageTimer = NodePath("Timer")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone2" unique_id=1680150201]
-position = Vector2(1608, -1040.0001)
-scale = Vector2(1.630286, 2.7579436)
-polygon = PackedVector2Array(-191.99084, -78.68176, -186.47034, -638.51917, -544.0763, -633.4429, -535.4889, -77.231384)
-
-[node name="Timer" type="Timer" parent="Zones/ContaminatedZone2" unique_id=917791582]
-
-[node name="ContaminatedZone3" type="Area2D" parent="Zones" unique_id=1838403500 node_paths=PackedStringArray("DamageTimer")]
-script = ExtResource("4_lbhrr")
-DamagePerHit = 50.0
-DamageTimer = NodePath("Timer")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone3" unique_id=706735182]
-position = Vector2(-503.99997, -2736)
-scale = Vector2(1.630286, 2.7579436)
-polygon = PackedVector2Array(-28.829315, 26.468994, -20.241882, -21.75531, 1111.4614, -23.568298, 1109.0078, -310.37616, -334.29718, -316.90277, -320.8026, 25.018677)
-
-[node name="Timer" type="Timer" parent="Zones/ContaminatedZone3" unique_id=795097878]
-
-[node name="ContaminatedZone4" type="Area2D" parent="Zones" unique_id=942502928 node_paths=PackedStringArray("DamageTimer")]
-script = ExtResource("4_lbhrr")
-DamagePerHit = 100.0
-DamageTimer = NodePath("Timer")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone4" unique_id=1639985781]
-position = Vector2(-330.40002, -1919.1998)
-scale = Vector2(1.630286, 2.7579436)
-polygon = PackedVector2Array(295.89902, 6.23645, 298.3526, -305.22748, -112.86365, -319.0783, -107.71115, -230.89673, -432.80746, -221.10687, -432.80746, 9.499756)
-
-[node name="Timer" type="Timer" parent="Zones/ContaminatedZone4" unique_id=1792316255]
-
-[node name="ContaminatedZone5" type="Area2D" parent="Zones" unique_id=561408620 node_paths=PackedStringArray("DamageTimer")]
+[node name="ContaminatedZone5" type="Area2D" parent="Zones" unique_id=675318557 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
 DamagePerHit = 250.0
 DamageTimer = NodePath("Timer")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone5" unique_id=56053599]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone5" unique_id=1680150201]
+position = Vector2(1608, -1040.0001)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(-191.99084, -78.68176, -186.47034, -638.51917, -544.0763, -633.4429, -535.4889, -77.231384)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=917791582]
+
+[node name="ContaminatedZone4" type="Area2D" parent="Zones" unique_id=1838403500 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamagePerHit = 100.0
+DamageTimer = NodePath("Timer")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone4" unique_id=706735182]
+position = Vector2(-503.99997, -2736)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(-28.829315, 26.468994, -20.241882, -21.75531, 1111.4614, -23.568298, 1109.0078, -310.37616, -334.29718, -316.90277, -320.8026, 25.018677)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone4" unique_id=795097878]
+
+[node name="ContaminatedZone3" type="Area2D" parent="Zones" unique_id=942502928 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamagePerHit = 50.0
+DamageTimer = NodePath("Timer")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone3" unique_id=1639985781]
+position = Vector2(-330.40002, -1919.1998)
+scale = Vector2(1.630286, 2.7579436)
+polygon = PackedVector2Array(295.89902, 6.23645, 298.3526, -305.22748, -112.86365, -319.0783, -107.71115, -230.89673, -432.80746, -221.10687, -432.80746, 9.499756)
+
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone3" unique_id=1792316255]
+
+[node name="ContaminatedZone2" type="Area2D" parent="Zones" unique_id=561408620 node_paths=PackedStringArray("DamageTimer")]
+script = ExtResource("4_lbhrr")
+DamagePerHit = 20.0
+DamageTimer = NodePath("Timer")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Zones/ContaminatedZone2" unique_id=56053599]
 position = Vector2(1021.6, -1711.1998)
 scale = Vector2(1.630286, 2.7579436)
 polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515.2471, -374.19183, -489.85266, -65.91876)
 
-[node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
+[node name="Timer" type="Timer" parent="Zones/ContaminatedZone2" unique_id=1180351973]
 
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
