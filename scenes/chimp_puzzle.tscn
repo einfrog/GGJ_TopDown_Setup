@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dt0es7t2m522x"]
 
 [ext_resource type="Script" uid="uid://qsp7gr6ma1r7" path="res://scripts/puzzles/ChimpPuzzle.cs" id="1_murav"]
+[ext_resource type="Texture2D" uid="uid://coocw6641nrvf" path="res://assets/sprites/chimp_game_Interface.png" id="2_5uqie"]
+[ext_resource type="FontFile" uid="uid://bpc7e768fcvkr" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="2_p6tm7"]
 
 [node name="ChimpPuzzle" type="Control" unique_id=724518441]
 layout_mode = 3
@@ -46,7 +48,13 @@ custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Center/Panel" unique_id=972544453]
+visible = false
 layout_mode = 2
+color = Color(0.36078432, 0.31764707, 0.29803923, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Center/Panel" unique_id=1039235763]
+layout_mode = 2
+texture = ExtResource("2_5uqie")
 
 [node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1466498655]
 layout_mode = 2
@@ -54,9 +62,11 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Status" type="Label" parent="Center/Panel/VBox" unique_id=413694161]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_p6tm7")
+theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -78,6 +88,7 @@ alignment = 2
 [node name="RetryButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=283886900]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_p6tm7")
 text = "Retry"
 
 [node name="VSeparator" type="VSeparator" parent="Center/Panel/VBox/Buttons" unique_id=1741593894]
@@ -87,6 +98,7 @@ layout_mode = 2
 [node name="CloseButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=967730851]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_p6tm7")
 text = "Close"
 
 [node name="ResultOverlay" type="ColorRect" parent="." unique_id=1195095539]
@@ -113,16 +125,22 @@ layout_mode = 2
 
 [node name="ResultTitle" type="Label" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=1749630552]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("2_p6tm7")
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResultBody" type="Label" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=919423367]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_p6tm7")
+theme_override_font_sizes/font_size = 23
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=1671462273]
+layout_mode = 2
 
 [node name="ResultButtons" type="HBoxContainer" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox" unique_id=2138800734]
 layout_mode = 2
@@ -130,9 +148,11 @@ layout_mode = 2
 [node name="RestartButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=1461457507]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_p6tm7")
 text = "Restart"
 
 [node name="ContinueButton" type="Button" parent="ResultOverlay/OverlayCenter/OverlayPanel/OverlayVBox/ResultButtons" unique_id=1140532735]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_p6tm7")
 text = "Continue"

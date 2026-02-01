@@ -22,8 +22,8 @@ public partial class ChimpPuzzle : Control
     // DIFFICULTY / PROGRESSION SETTINGS
     // ============================================================
 
-    [Export] public int StartN = 4;   // First round size
-    [Export] public int MaxN = 4;     // Final round size
+    [Export] public int StartN = 8;   // First round size
+    [Export] public int MaxN = 8;     // Final round size
 
     // ============================================================
     // GRID / VISUAL SETTINGS
@@ -393,7 +393,7 @@ public partial class ChimpPuzzle : Control
 
         ShowResultOverlay(
             "Success",
-            "You passed the chimp test!",
+            "You managed to open the door!",
             pendingResult: true
         );
 
