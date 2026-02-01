@@ -178,6 +178,11 @@ public partial class Player : CharacterBody2D
 
     public void Hurt(float damage)
     {
+        if (MaskResource is not null)
+        {
+            damage = MaskResource.Filter(damage);
+        }
+        
         Health = Mathf.Max(0, Health - damage);
         HealthChanged?.Invoke(Health);
 
