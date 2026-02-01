@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://3q8b6supoovy"]
+[gd_scene format=3 uid="uid://cwo64uuk5kpus"]
 
-[ext_resource type="Script" uid="uid://dw84bna4knfc6" path="res://scripts/Menu.cs" id="1_vjb58"]
+[ext_resource type="Script" path="res://scripts/Menu.cs" id="1_vjb58"]
 [ext_resource type="PackedScene" uid="uid://ceqdt0gehucwl" path="res://scenes/game.tscn" id="2_con2f"]
 [ext_resource type="Texture2D" uid="uid://dllm3m4l6j4eq" path="res://assets/sprites/MenuBackground.png" id="3_4ytvr"]
 [ext_resource type="Texture2D" uid="uid://df0ohqmt76m35" path="res://assets/sprites/PlayerSpritesheet_Original.png" id="3_con2f"]
@@ -131,7 +131,7 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_deadBackgroundSprite", "_aliveMaksSprite", "_aliveBackgroundSprite", "_deadMaksSprite", "PlayButton", "QuitButton", "CreditsButton")]
+[node name="Menu" type="Control" unique_id=909434982 node_paths=PackedStringArray("_aliveBackgroundSprite", "_deadBackgroundSprite", "_aliveMaksSprite", "_deadMaksSprite", "PlayButton", "QuitButton", "CreditsButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,9 +139,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vjb58")
+_aliveBackgroundSprite = NodePath("AliveBackground")
 _deadBackgroundSprite = NodePath("DeadBackground")
 _aliveMaksSprite = NodePath("AliveMaks")
-_aliveBackgroundSprite = NodePath("AliveBackground")
 _deadMaksSprite = NodePath("DeadMaks")
 PlayButton = NodePath("VBoxContainer/MarginContainer/Button")
 QuitButton = NodePath("VBoxContainer/MarginContainer2/Button2")

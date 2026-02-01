@@ -632,7 +632,17 @@ grow_vertical = 2
 
 [node name="HealthBar" parent="UI" unique_id=146498960 instance=ExtResource("12_trtic")]
 
+[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Inventory" parent="UI" unique_id=498756310 instance=ExtResource("24_sww3w")]
+mouse_filter = 2
 
 [node name="PuzzleLayer" type="Control" parent="UI" unique_id=1344310281]
 layout_mode = 3
@@ -641,6 +651,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PuzzleHost" type="Control" parent="UI/PuzzleLayer" unique_id=2094422790 groups=["puzzle_host"]]
 anchors_preset = 0
@@ -650,14 +661,6 @@ script = ExtResource("9_0tnpc")
 PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
-
-[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1858374447]
 stream = ExtResource("32_wljb1")
