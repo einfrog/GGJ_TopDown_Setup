@@ -57,7 +57,7 @@ public partial class Player : CharacterBody2D
 
     private float MovementSpeedThreshold => MovementSpeed / 2;
 
-    public PlayerInventory Inventory { get; set; }
+    public PlayerInventory Inventory { get; } = new();
 
     public static Player Instance { get; private set; }
 

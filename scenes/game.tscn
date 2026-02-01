@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://c18s2q03mmwtp" path="res://scripts/GasMaskResource.cs" id="9_rysoc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://d2l3u3rt33fup" path="res://scenes/item.tscn" id="11_264po"]
+[ext_resource type="PackedScene" uid="uid://dk1wggupafllj" path="res://scenes/crafting.tscn" id="11_suyxu"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
 [ext_resource type="Texture2D" uid="uid://cosp3jntag7wo" path="res://assets/sprites/MaskUpgradePart.png" id="12_5newe"]
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
@@ -33,6 +34,10 @@
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
 [ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
 [ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
+[ext_resource type="PackedScene" uid="uid://cho2qjdx3838u" path="res://scenes/table_middle.tscn" id="27_qnb83"]
+[ext_resource type="PackedScene" uid="uid://c5fc2ieakqdos" path="res://scenes/table_right.tscn" id="27_suyxu"]
+[ext_resource type="PackedScene" uid="uid://ubbaam3g4c7a" path="res://scenes/table_side.tscn" id="27_sww3w"]
+[ext_resource type="PackedScene" uid="uid://dtdcnyridfaqa" path="res://scenes/inventory.tscn" id="24_sww3w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("3_lnu2h")
@@ -213,6 +218,7 @@ tile_map_data = PackedByteArray("AAD///b/AgAAAAMAAFAAAPb/AgAAAAMAAFAFAO7/AgAAAAE
 tile_set = SubResource("TileSet_ssvqc")
 
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
+visible = false
 
 [node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
 script = ExtResource("4_lbhrr")
@@ -353,7 +359,9 @@ PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
 TerminalTexture = ExtResource("6_1kice")
 SolvedTexture = ExtResource("7_5newe")
 
-[node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
+[node name="CraftingTable" parent="." unique_id=1490553515 node_paths=PackedStringArray("_craftingSceneParent") instance=ExtResource("8_ssvqc")]
+_craftingSceneParent = NodePath("../UI")
+_craftingScene = ExtResource("11_suyxu")
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
 position = Vector2(27, -362)
@@ -415,6 +423,7 @@ shape = SubResource("CircleShape2D_bt5mj")
 
 [node name="MetalScrap1" parent="Iems" unique_id=1279168899 instance=ExtResource("11_264po")]
 position = Vector2(-323, -700)
+Item = 3
 
 [node name="Sprite2D" parent="Iems/MetalScrap1" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -425,6 +434,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 
 [node name="MetalScrap2" parent="Iems" unique_id=1053910651 instance=ExtResource("11_264po")]
 position = Vector2(566, -2354)
+Item = 3
 
 [node name="Sprite2D" parent="Iems/MetalScrap2" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -435,6 +445,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 
 [node name="MetalScrap3" parent="Iems" unique_id=1425396642 instance=ExtResource("11_264po")]
 position = Vector2(1218, -3384)
+Item = 3
 
 [node name="Sprite2D" parent="Iems/MetalScrap3" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -445,6 +456,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 
 [node name="Battery" parent="Iems" unique_id=1864732831 instance=ExtResource("11_264po")]
 position = Vector2(48, -2455)
+Item = 2
 
 [node name="Sprite2D" parent="Iems/Battery" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -455,6 +467,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 
 [node name="Anthena" parent="Iems" unique_id=910784504 instance=ExtResource("11_264po")]
 position = Vector2(1024, -1495)
+Item = 1
 
 [node name="Sprite2D" parent="Iems/Anthena" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -462,6 +475,33 @@ texture = ExtResource("15_e1j6l")
 
 [node name="CollisionShape2D" parent="Iems/Anthena" index="1" unique_id=163486087]
 shape = SubResource("CircleShape2D_e1j6l")
+
+[node name="tableRight" parent="." unique_id=447850495 instance=ExtResource("27_suyxu")]
+position = Vector2(-320, -1080)
+
+[node name="TableSide" parent="." unique_id=686930759 instance=ExtResource("27_sww3w")]
+position = Vector2(-576, -1080)
+
+[node name="TableMiddle" parent="." unique_id=539342009 instance=ExtResource("27_qnb83")]
+position = Vector2(-448, -1080)
+
+[node name="tableRight2" parent="." unique_id=1505185389 instance=ExtResource("27_suyxu")]
+position = Vector2(-72, -1856)
+
+[node name="TableSide2" parent="." unique_id=650401966 instance=ExtResource("27_sww3w")]
+position = Vector2(-328, -1856)
+
+[node name="TableMiddle2" parent="." unique_id=2046709929 instance=ExtResource("27_qnb83")]
+position = Vector2(-200, -1856)
+
+[node name="tableRight3" parent="." unique_id=1561192697 instance=ExtResource("27_suyxu")]
+position = Vector2(-512, -3520)
+
+[node name="TableSide3" parent="." unique_id=382399984 instance=ExtResource("27_sww3w")]
+position = Vector2(-768, -3520)
+
+[node name="TableMiddle3" parent="." unique_id=1350075394 instance=ExtResource("27_qnb83")]
+position = Vector2(-640, -3520)
 
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
@@ -495,6 +535,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HealthBar" parent="UI" unique_id=146498960 instance=ExtResource("12_trtic")]
+
+[node name="Inventory" parent="UI" unique_id=498756310 instance=ExtResource("24_sww3w")]
 
 [node name="PuzzleLayer" type="Control" parent="UI" unique_id=1344310281]
 layout_mode = 3
