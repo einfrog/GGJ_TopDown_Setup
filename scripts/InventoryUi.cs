@@ -53,6 +53,8 @@ public partial class InventoryUi : Control
                     GD.PushWarning($"Consumed more items than in inventory ({count}x{item})");
                     break;
             }
+
+            ui.UpdateUi();
         };
     }
 

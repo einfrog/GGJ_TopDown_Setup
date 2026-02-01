@@ -38,7 +38,8 @@ public class PlayerInventory
 
     public bool CanUpgradeMask()
     {
-        return _itemCounts[InventoryItem.MaskUpgradePart] > 0;
+        return Player.Instance.MaskResource?.Level < Player.Instance.MaskResource?.MaxLevel
+               && _itemCounts[InventoryItem.MaskUpgradePart] > 0;
     }
 
     public void CraftRadioTransceiver()

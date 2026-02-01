@@ -142,22 +142,22 @@ public partial class Crafting : Control
     private void SelectTab(bool craftingTab)
     {
         _craftingTabSelected = craftingTab;
-        _craftingInputTextureRect.Visible = craftingTab;
-        _craftingOutputTextureRect.Visible = craftingTab;
 
         if (craftingTab)
         {
             CraftTabButton.TextureNormal = PressedButtonTexture;
             UpgradeTabButton.TextureNormal = DisabledButtonTexture;
             ActionButton.Disabled = _openingPuzzle || !Player.Instance.Inventory.CanCraftRadioTransceiver();
-            _craftingInputTextureRect.Texture = Player.Instance.MaskResource.Texture;
+            _craftingInputTextureRect.Texture = null;
+            _craftingOutputTextureRect.Texture = _radioTransmitterTexture;
         }
         else
         {
             CraftTabButton.TextureNormal = DisabledButtonTexture;
             UpgradeTabButton.TextureNormal = PressedButtonTexture;
             ActionButton.Disabled = _openingPuzzle || !Player.Instance.Inventory.CanUpgradeMask();
-            _craftingOutputTextureRect.Texture = _radioTransmitterTexture;
+            _craftingInputTextureRect.Texture = Player.Instance.MaskResource?.Texture;
+            _craftingOutputTextureRect.Texture = Player.Instance.MaskResource?.NextLevelTexture;
         }
     }
 

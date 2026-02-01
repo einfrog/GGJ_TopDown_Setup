@@ -14,10 +14,14 @@ public partial class GasMaskResource : Resource
         set
         {
             field = value;
-            Texture?.Region = new Rect2(32 * (Level % 3), 24 * (Level / 3), 32, 24);
+            UpdateTexture(Texture, value);
+            UpdateTexture(NextLevelTexture, value + 1);
             LevelChanged?.Invoke(value);
         }
-    }
+    } = 1;
+
+    [Export]
+    public int MaxLevel { get; set; } = 5;
 
     [Export]
     public AtlasTexture Texture
@@ -26,8 +30,25 @@ public partial class GasMaskResource : Resource
         private set
         {
             field = value;
-            field?.Region = new Rect2(32 * (Level % 3), 24 * (Level / 3), 32, 24);
+            UpdateTexture(value, Level);
         }
+    }
+
+    [Export]
+    public AtlasTexture NextLevelTexture
+    {
+        get;
+        private set
+        {
+            field = value;
+            UpdateTexture(value, Level + 1);
+        }
+    }
+
+    private void UpdateTexture(AtlasTexture texture, int level)
+    {
+        level %= MaxLevel + 1;
+        texture?.Region = new Rect2(32 * (level % 3), 24 * (level / 3), 32, 24);
     }
 
     public event Action<int> LevelChanged;
