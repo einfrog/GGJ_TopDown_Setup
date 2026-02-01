@@ -5,24 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://d0mwwfrd1d6wy" path="res://assets/sprites/FloorTiles.png" id="3_lnu2h"]
 [ext_resource type="Script" uid="uid://cxtwoq6eigwt1" path="res://scripts/ContaminatedZone.cs" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dwqyxwysjmsd0" path="res://scenes/puzzle_terminal_2d.tscn" id="4_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dudx1hn30x0qa" path="res://assets/sprites/DorrTerminalUnsolved.png" id="6_1kice"]
 [ext_resource type="Texture2D" uid="uid://v7b01pq6h4p7" path="res://assets/sprites/horiz_wall_tiles.png" id="6_dinhu"]
 [ext_resource type="Shader" uid="uid://qistlvpuu28r" path="res://scripts/shaders/contaminated.gdshader" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://tktkrk70m0v8" path="res://assets/sprites/DoorTerminal.png" id="7_5newe"]
 [ext_resource type="Texture2D" uid="uid://jp17vl6tjiv1" path="res://assets/sprites/wall_new.png" id="7_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dgs8oy5xbfce2" path="res://assets/sprites/doorFrameTop.png" id="8_rysoc"]
 [ext_resource type="PackedScene" uid="uid://deiu63g154rqj" path="res://scenes/crafting_table.tscn" id="8_ssvqc"]
 [ext_resource type="Script" uid="uid://k3g6mo4v5ip5" path="res://scripts/puzzles/core/PuzzleHost.cs" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://dt0es7t2m522x" path="res://scenes/chimp_puzzle.tscn" id="10_vtaks"]
-[ext_resource type="PackedScene" uid="uid://d2l3u3rt33fup" path="res://scenes/item.tscn" id="11_264po"]
 [ext_resource type="Script" uid="uid://cmp5yhunkqfnr" path="res://scripts/puzzles/core/PuzzleEntry.cs" id="11_trtic"]
-[ext_resource type="Texture2D" uid="uid://cosp3jntag7wo" path="res://assets/sprites/MaskUpgradePart.png" id="12_5newe"]
-[ext_resource type="AudioStream" uid="uid://d1el0r22w34g7" path="res://assets/sounds/breathing.mp3" id="12_264po"]
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
-[ext_resource type="Texture2D" uid="uid://b2n4qamn5km72" path="res://assets/sprites/metalScrap.png" id="13_37s47"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
-[ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
-[ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="15_e1j6l"]
-[ext_resource type="PackedScene" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
+[ext_resource type="PackedScene" uid="uid://fmaxkeqe77xa" path="res://scenes/mask_collectible.tscn" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://badtsodla63py" path="res://assets/sprites/CryoCapsule.png" id="18_ssvqc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -157,12 +153,6 @@ animations = [{
 radius = 25.5
 height = 77.5
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bt5mj"]
-radius = 38.118237
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e1j6l"]
-radius = 41.04875
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p57ef"]
 shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
@@ -201,7 +191,6 @@ tile_set = SubResource("TileSet_ssvqc")
 [node name="Zones" type="Node2D" parent="." unique_id=1256535488]
 
 [node name="ContaminatedZone" type="Area2D" parent="Zones" unique_id=305362582 node_paths=PackedStringArray("DamageTimer")]
-visible = false
 script = ExtResource("4_lbhrr")
 DamageTimer = NodePath("Timer")
 
@@ -256,16 +245,6 @@ polygon = PackedVector2Array(-211.37393, -59.39215, -211.00595, -374.19183, -515
 
 [node name="Timer" type="Timer" parent="Zones/ContaminatedZone5" unique_id=1180351973]
 
-[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
-
-[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
-position = Vector2(128, -720)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-
-[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
-position = Vector2(632, -1696)
-PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
-
 [node name="Doors" type="Node2D" parent="." unique_id=254462626]
 
 [node name="Door1" parent="Doors" unique_id=890238121 instance=ExtResource("12_dinhu")]
@@ -275,6 +254,18 @@ TerminalPath = NodePath("../../Terminals/Terminal1")
 [node name="Door2" parent="Doors" unique_id=1662600422 instance=ExtResource("12_dinhu")]
 position = Vector2(512, -1984)
 TerminalPath = NodePath("../../Terminals/Terminal2")
+
+[node name="Door3" parent="Doors" unique_id=701372730 instance=ExtResource("12_dinhu")]
+position = Vector2(-640, -1984)
+TerminalPath = NodePath("../../Terminals/Terminal3")
+
+[node name="Door4" parent="Doors" unique_id=1725138290 instance=ExtResource("12_dinhu")]
+position = Vector2(-128, -2752)
+TerminalPath = NodePath("../../Terminals/Terminal4")
+
+[node name="Door5" parent="Doors" unique_id=411809449 instance=ExtResource("12_dinhu")]
+position = Vector2(1024, -2752)
+TerminalPath = NodePath("../../Terminals/Terminal5")
 
 [node name="Doorframe" type="Sprite2D" parent="Doors" unique_id=2139096808]
 z_index = 1
@@ -288,10 +279,60 @@ position = Vector2(512, -1984)
 scale = Vector2(4, 4)
 texture = ExtResource("8_rysoc")
 
+[node name="Doorframe3" type="Sprite2D" parent="Doors" unique_id=2084856230]
+z_index = 1
+position = Vector2(-640, -1984)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rysoc")
+
+[node name="Doorframe4" type="Sprite2D" parent="Doors" unique_id=1699828457]
+z_index = 1
+position = Vector2(-128, -2752)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rysoc")
+
+[node name="Doorframe5" type="Sprite2D" parent="Doors" unique_id=474925726]
+z_index = 1
+position = Vector2(1024, -2752)
+scale = Vector2(4, 4)
+texture = ExtResource("8_rysoc")
+
+[node name="Terminals" type="Node2D" parent="." unique_id=881508662]
+
+[node name="Terminal1" parent="Terminals" unique_id=598227121 instance=ExtResource("4_p57ef")]
+position = Vector2(136, -720)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_1kice")
+SolvedTexture = ExtResource("7_5newe")
+
+[node name="Terminal2" parent="Terminals" unique_id=767677828 instance=ExtResource("4_p57ef")]
+position = Vector2(640, -1728)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_1kice")
+SolvedTexture = ExtResource("7_5newe")
+
+[node name="Terminal3" parent="Terminals" unique_id=256495665 instance=ExtResource("4_p57ef")]
+position = Vector2(-800, -1976)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_1kice")
+SolvedTexture = ExtResource("7_5newe")
+
+[node name="Terminal4" parent="Terminals" unique_id=1840127232 instance=ExtResource("4_p57ef")]
+position = Vector2(56, -2736)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_1kice")
+SolvedTexture = ExtResource("7_5newe")
+
+[node name="Terminal5" parent="Terminals" unique_id=1517112199 instance=ExtResource("4_p57ef")]
+position = Vector2(1280, -3176)
+PuzzleHostPath = NodePath("../../UI/PuzzleLayer/PuzzleHost")
+TerminalTexture = ExtResource("6_1kice")
+SolvedTexture = ExtResource("7_5newe")
+
 [node name="CraftingTable" parent="." unique_id=1490553515 instance=ExtResource("8_ssvqc")]
 
 [node name="MaskCollectible" parent="." unique_id=760889427 instance=ExtResource("17_rysoc")]
-position = Vector2(30, 156)
+position = Vector2(-344, -760)
 
 [node name="CryoCapsule" type="StaticBody2D" parent="." unique_id=597667214]
 scale = Vector2(4, 4)
@@ -305,112 +346,17 @@ autoplay = "default"
 position = Vector2(-113, 55)
 shape = SubResource("CapsuleShape2D_bt5mj")
 
-[node name="Iems" type="Node2D" parent="." unique_id=97567136]
-
-[node name="MaskUpgradePart1" parent="Iems" unique_id=224439973 instance=ExtResource("11_264po")]
-position = Vector2(317, -2496)
-
-[node name="Sprite2D" parent="Iems/MaskUpgradePart1" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("12_5newe")
-
-[node name="CollisionShape2D" parent="Iems/MaskUpgradePart1" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_bt5mj")
-
-[node name="MaskUpgradePart2" parent="Iems" unique_id=1204823136 instance=ExtResource("11_264po")]
-position = Vector2(1193, -2366)
-
-[node name="Sprite2D" parent="Iems/MaskUpgradePart2" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("12_5newe")
-
-[node name="CollisionShape2D" parent="Iems/MaskUpgradePart2" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_bt5mj")
-
-[node name="MaskUpgradePart3" parent="Iems" unique_id=1261254694 instance=ExtResource("11_264po")]
-position = Vector2(-954, -2371)
-
-[node name="Sprite2D" parent="Iems/MaskUpgradePart3" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("12_5newe")
-
-[node name="CollisionShape2D" parent="Iems/MaskUpgradePart3" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_bt5mj")
-
-[node name="MaskUpgradePart4" parent="Iems" unique_id=160198389 instance=ExtResource("11_264po")]
-position = Vector2(-960, -3020)
-
-[node name="Sprite2D" parent="Iems/MaskUpgradePart4" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("12_5newe")
-
-[node name="CollisionShape2D" parent="Iems/MaskUpgradePart4" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_bt5mj")
-
-[node name="MetalScrap1" parent="Iems" unique_id=1279168899 instance=ExtResource("11_264po")]
-position = Vector2(-323, -700)
-
-[node name="Sprite2D" parent="Iems/MetalScrap1" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("13_37s47")
-
-[node name="CollisionShape2D" parent="Iems/MetalScrap1" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_e1j6l")
-
-[node name="MetalScrap2" parent="Iems" unique_id=1053910651 instance=ExtResource("11_264po")]
-position = Vector2(566, -2354)
-
-[node name="Sprite2D" parent="Iems/MetalScrap2" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("13_37s47")
-
-[node name="CollisionShape2D" parent="Iems/MetalScrap2" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_e1j6l")
-
-[node name="MetalScrap3" parent="Iems" unique_id=1425396642 instance=ExtResource("11_264po")]
-position = Vector2(1218, -3384)
-
-[node name="Sprite2D" parent="Iems/MetalScrap3" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("13_37s47")
-
-[node name="CollisionShape2D" parent="Iems/MetalScrap3" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_e1j6l")
-
-[node name="Battery" parent="Iems" unique_id=1864732831 instance=ExtResource("11_264po")]
-position = Vector2(48, -2455)
-
-[node name="Sprite2D" parent="Iems/Battery" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("14_bt5mj")
-
-[node name="CollisionShape2D" parent="Iems/Battery" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_e1j6l")
-
-[node name="Anthena" parent="Iems" unique_id=910784504 instance=ExtResource("11_264po")]
-position = Vector2(1024, -1495)
-
-[node name="Sprite2D" parent="Iems/Anthena" index="0" unique_id=1476346419]
-scale = Vector2(4, 4)
-texture = ExtResource("15_e1j6l")
-
-[node name="CollisionShape2D" parent="Iems/Anthena" index="1" unique_id=163486087]
-shape = SubResource("CircleShape2D_e1j6l")
-
 [node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
 MovementSpeed = 350.0
-MaskBreathingLoop = ExtResource("12_264po")
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1913619694]
 zoom = Vector2(0.5, 0.5)
-
-[node name="Breathing" type="AudioStreamPlayer2D" parent="Player" unique_id=695359429]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 
@@ -441,13 +387,3 @@ script = ExtResource("9_0tnpc")
 PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), SubResource("Resource_ca42v")])
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
-
-[editable path="Iems/MaskUpgradePart1"]
-[editable path="Iems/MaskUpgradePart2"]
-[editable path="Iems/MaskUpgradePart3"]
-[editable path="Iems/MaskUpgradePart4"]
-[editable path="Iems/MetalScrap1"]
-[editable path="Iems/MetalScrap2"]
-[editable path="Iems/MetalScrap3"]
-[editable path="Iems/Battery"]
-[editable path="Iems/Anthena"]
