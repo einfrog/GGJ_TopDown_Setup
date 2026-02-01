@@ -51,7 +51,15 @@ public partial class Player : CharacterBody2D
 
     public bool InputDisabled { get; set; }
 
-    public GasMaskResource MaskResource { get; set; }
+    public GasMaskResource MaskResource
+    {
+        get;
+        set
+        {
+            field = value;
+            MaskEquipped?.Invoke(value);
+        }
+    }
 
     private bool Masked => MaskResource != null;
 
@@ -62,6 +70,8 @@ public partial class Player : CharacterBody2D
     public static Player Instance { get; private set; }
 
     public event Action Died;
+
+    public event Action<GasMaskResource> MaskEquipped;
 
     public event Action<float> HealthChanged;
     
@@ -200,6 +210,7 @@ public partial class Player : CharacterBody2D
         if (Health <= 0)
         {
             RunEndedInDeath = true;
+            Died?.Invoke();
             GetTree().ChangeSceneToFile("res://scenes/menu.tscn");
         }
     }

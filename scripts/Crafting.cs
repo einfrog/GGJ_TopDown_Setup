@@ -7,9 +7,10 @@ public partial class Crafting : Control
 {
     private bool _craftingTabSelected;
 
-    [Export] private VBoxContainer _craftingInput;
-    [Export] private TextureRect _craftingOutput;
+    [Export] private TextureRect _craftingInputTextureRect;
 
+    [Export]
+    private TextureRect _craftingOutputTextureRect;
     [Export] public TextureButton UpgradeTab { get; set; }
     [Export] public TextureButton CraftTabButton { get; set; }
     [Export] public TextureButton UpgradeTabButton { get; set; }
@@ -24,6 +25,9 @@ public partial class Crafting : Control
 
     private PuzzleHost _puzzleHost;
     private bool _openingPuzzle;
+
+    [Export]
+    private Texture2D _radioTransmitterTexture;
 
     public override void _Ready()
     {
@@ -138,18 +142,22 @@ public partial class Crafting : Control
     private void SelectTab(bool craftingTab)
     {
         _craftingTabSelected = craftingTab;
+        _craftingInputTextureRect.Visible = craftingTab;
+        _craftingOutputTextureRect.Visible = craftingTab;
 
         if (craftingTab)
         {
             CraftTabButton.TextureNormal = PressedButtonTexture;
             UpgradeTabButton.TextureNormal = DisabledButtonTexture;
             ActionButton.Disabled = _openingPuzzle || !Player.Instance.Inventory.CanCraftRadioTransceiver();
+            _craftingInputTextureRect.Texture = Player.Instance.MaskResource.Texture;
         }
         else
         {
             CraftTabButton.TextureNormal = DisabledButtonTexture;
             UpgradeTabButton.TextureNormal = PressedButtonTexture;
             ActionButton.Disabled = _openingPuzzle || !Player.Instance.Inventory.CanUpgradeMask();
+            _craftingOutputTextureRect.Texture = _radioTransmitterTexture;
         }
     }
 

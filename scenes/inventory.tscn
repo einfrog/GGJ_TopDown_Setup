@@ -19,14 +19,16 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 100
+theme_override_constants/margin_left = 200
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2108808117]
 layout_mode = 2
 theme_override_constants/separation = 250
 
 [node name="InventoryItem" parent="MarginContainer/HBoxContainer" unique_id=305579426 instance=ExtResource("2_hj2ta")]
+visible = false
 layout_mode = 2
 
 [node name="InventoryItem2" parent="MarginContainer/HBoxContainer" unique_id=1011161508 instance=ExtResource("2_hj2ta")]
+visible = false
 layout_mode = 2

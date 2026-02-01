@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://6x2qs6uko7jn" path="res://scenes/door.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bxx4s6mycqfb" path="res://scenes/healthBar.tscn" id="12_trtic"]
 [ext_resource type="Texture2D" uid="uid://b2n4qamn5km72" path="res://assets/sprites/metalScrap.png" id="13_37s47"]
+[ext_resource type="Texture2D" uid="uid://bmns80j6wsm02" path="res://assets/sprites/maskLevelOverlay.png" id="13_7025r"]
 [ext_resource type="PackedScene" uid="uid://dvrg2mquj2afg" path="res://scenes/hanoi_puzzle.tscn" id="13_ir15t"]
 [ext_resource type="Texture2D" uid="uid://inmo24x7wdop" path="res://assets/sprites/battery.png" id="14_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://lqolqju57mr1" path="res://assets/sprites/anthen.png" id="15_e1j6l"]
@@ -32,11 +33,12 @@
 [ext_resource type="AudioStream" uid="uid://dqlu0a45vpqxn" path="res://assets/sounds/step_2.ogg" id="22_wljb1"]
 [ext_resource type="AudioStream" uid="uid://sopahm1ppsi" path="res://assets/sounds/step_3.ogg" id="23_v2yb1"]
 [ext_resource type="AudioStream" uid="uid://d2ifw66f53bqp" path="res://assets/sounds/step_4.ogg" id="24_js0lu"]
-[ext_resource type="PackedScene" path="res://scenes/inventory.tscn" id="24_sww3w"]
-[ext_resource type="PackedScene" path="res://scenes/table_middle.tscn" id="27_qnb83"]
-[ext_resource type="PackedScene" path="res://scenes/table_right.tscn" id="27_suyxu"]
-[ext_resource type="PackedScene" path="res://scenes/table_side.tscn" id="27_sww3w"]
+[ext_resource type="PackedScene" uid="uid://dtdcnyridfaqa" path="res://scenes/inventory.tscn" id="24_sww3w"]
+[ext_resource type="PackedScene" uid="uid://cho2qjdx3838u" path="res://scenes/table_middle.tscn" id="27_qnb83"]
+[ext_resource type="PackedScene" uid="uid://c5fc2ieakqdos" path="res://scenes/table_right.tscn" id="27_suyxu"]
+[ext_resource type="PackedScene" uid="uid://ubbaam3g4c7a" path="res://scenes/table_side.tscn" id="27_sww3w"]
 [ext_resource type="AudioStream" uid="uid://clk533x8rrxpy" path="res://assets/sounds/music.ogg" id="32_wljb1"]
+[ext_resource type="Script" uid="uid://bl24ojw5iatc" path="res://scripts/GasMaskLevel.cs" id="33_m4url"]
 [ext_resource type="Script" uid="uid://3e13rvae2g1b" path="res://scripts/MusicController.cs" id="33_v2yb1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -171,9 +173,13 @@ gradient = SubResource("Gradient_wljb1")
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4url"]
+atlas = ExtResource("13_7025r")
+
 [sub_resource type="Resource" id="Resource_qnb83"]
 script = ExtResource("9_rysoc")
 Level = 1
+Texture = SubResource("AtlasTexture_m4url")
 metadata/_custom_type_script = "uid://c18s2q03mmwtp"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_264po"]
@@ -231,6 +237,10 @@ fill_to = Vector2(0, 0)
 shader = ExtResource("6_u5sy4")
 shader_parameter/gas_color = Color(0.24313726, 0.21568628, 0, 1)
 shader_parameter/vapor_color = Color(0.20392157, 0.19607843, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7025r"]
+atlas = ExtResource("13_7025r")
+region = Rect2(0, 0, 32, 24)
 
 [sub_resource type="Resource" id="Resource_ir15t"]
 script = ExtResource("11_trtic")
@@ -471,6 +481,7 @@ occluder = SubResource("OccluderPolygon2D_v2yb1")
 
 [node name="MaskUpgradePart1" parent="Iems" unique_id=224439973 instance=ExtResource("11_264po")]
 position = Vector2(317, -2496)
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MaskUpgradePart1" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -481,6 +492,7 @@ shape = SubResource("CircleShape2D_bt5mj")
 
 [node name="MaskUpgradePart2" parent="Iems" unique_id=1204823136 instance=ExtResource("11_264po")]
 position = Vector2(1193, -2366)
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MaskUpgradePart2" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -491,6 +503,7 @@ shape = SubResource("CircleShape2D_bt5mj")
 
 [node name="MaskUpgradePart3" parent="Iems" unique_id=1261254694 instance=ExtResource("11_264po")]
 position = Vector2(-954, -2371)
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MaskUpgradePart3" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -501,6 +514,7 @@ shape = SubResource("CircleShape2D_bt5mj")
 
 [node name="MaskUpgradePart4" parent="Iems" unique_id=160198389 instance=ExtResource("11_264po")]
 position = Vector2(-960, -3020)
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MaskUpgradePart4" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -512,6 +526,7 @@ shape = SubResource("CircleShape2D_bt5mj")
 [node name="MetalScrap1" parent="Iems" unique_id=1279168899 instance=ExtResource("11_264po")]
 position = Vector2(-323, -700)
 Item = 3
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MetalScrap1" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -523,6 +538,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 [node name="MetalScrap2" parent="Iems" unique_id=1053910651 instance=ExtResource("11_264po")]
 position = Vector2(566, -2354)
 Item = 3
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MetalScrap2" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -534,6 +550,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 [node name="MetalScrap3" parent="Iems" unique_id=1425396642 instance=ExtResource("11_264po")]
 position = Vector2(1218, -3384)
 Item = 3
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/MetalScrap3" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -545,6 +562,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 [node name="Battery" parent="Iems" unique_id=1864732831 instance=ExtResource("11_264po")]
 position = Vector2(48, -2455)
 Item = 2
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/Battery" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -556,6 +574,7 @@ shape = SubResource("CircleShape2D_e1j6l")
 [node name="Anthena" parent="Iems" unique_id=910784504 instance=ExtResource("11_264po")]
 position = Vector2(1024, -1495)
 Item = 1
+PickupSound = null
 
 [node name="Sprite2D" parent="Iems/Anthena" index="0" unique_id=1476346419]
 scale = Vector2(4, 4)
@@ -591,7 +610,7 @@ position = Vector2(-768, -3520)
 [node name="TableMiddle3" parent="." unique_id=1350075394 instance=ExtResource("27_qnb83")]
 position = Vector2(-640, -3520)
 
-[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor") groups=["player"] instance=ExtResource("1_80nbo")]
+[node name="Player" parent="." unique_id=1240282193 node_paths=PackedStringArray("Interactor", "RegenerationTimer") groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-184, 32)
 motion_mode = 1
 Interactor = NodePath("Interactor")
@@ -600,6 +619,7 @@ MaskBreathingLoop = ExtResource("20_qouja")
 FootstepClips = [ExtResource("21_qouja"), ExtResource("22_wljb1"), ExtResource("23_v2yb1"), ExtResource("24_js0lu")]
 StepIntervalSeconds = 0.5
 FootstepBaseVolumeDb = -12.0
+RegenerationTimer = NodePath("Timer")
 
 [node name="Interactor" type="Node2D" parent="Player" unique_id=175824916]
 script = ExtResource("2_u5sy4")
@@ -618,6 +638,9 @@ shadow_enabled = true
 shadow_color = Color(1, 1, 1, 1)
 texture = SubResource("GradientTexture2D_v2yb1")
 texture_scale = 5.0
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="Player" unique_id=1544730590]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1993261319]
 
@@ -631,6 +654,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HealthBar" parent="UI" unique_id=146498960 instance=ExtResource("12_trtic")]
+
+[node name="GasMaskLevel" type="Control" parent="UI" unique_id=967004270 node_paths=PackedStringArray("_textureRect")]
+layout_mode = 3
+anchor_right = 0.034722224
+anchor_bottom = 0.061728396
+offset_right = 103.0
+offset_bottom = 103.0
+script = ExtResource("33_m4url")
+_textureRect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="UI/GasMaskLevel" unique_id=964679854]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.3706294
+anchor_bottom = 1.0769231
+offset_right = -1.5258789e-05
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7025r")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Inventory" parent="UI" unique_id=498756310 instance=ExtResource("24_sww3w")]
 
@@ -651,7 +704,7 @@ PuzzleCatalog = Array[ExtResource("11_trtic")]([SubResource("Resource_ir15t"), S
 PuzzleLayerPath = NodePath("..")
 PlayerPath = NodePath("../../../Player")
 
-[node name="Crafting" type="Control" parent="UI" unique_id=1713225620]
+[node name="Crafting2" type="Control" parent="UI" unique_id=2126734052]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

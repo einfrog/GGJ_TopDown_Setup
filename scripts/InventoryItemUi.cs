@@ -21,24 +21,14 @@ public partial class InventoryItemUi : Control
         }
     }
 
-    public int ItemCount
-    {
-        get;
-        set
-        {
-            field = value;
-            _label.Text = $"{value} / {PlayerInventory.GetNecessaryAmountForCraftingRadioTransceiver(Item)}";
-        }
-    }
+    public int ItemCount { get; set; }
 
-    public InventoryItem Item
+    public InventoryItem Item { get; set; }
+
+    public void UpdateUi()
     {
-        get;
-        set
-        {
-            field = value;
-            _label.Text = $"{ItemCount} / {PlayerInventory.GetNecessaryAmountForCraftingRadioTransceiver(value)}";
-        }
+        int necessary = PlayerInventory.GetNecessaryAmountForCraftingRadioTransceiver(Item);
+        _label.Text = (necessary == 0) ? ItemCount.ToString() : $"{ItemCount} / {necessary}";
     }
 
 }
